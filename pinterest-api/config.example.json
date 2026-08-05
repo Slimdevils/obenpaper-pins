@@ -1,0 +1,14 @@
+{
+  "client_id": "PASTE_PINTEREST_CLIENT_ID",
+  "client_secret": "PASTE_PINTEREST_CLIENT_SECRET",
+  "redirect_uri": "http://localhost:8085/callback",
+
+  "github_token": "PASTE_FINE_GRAINED_PAT",
+  "github_owner": "slimdevils",
+  "github_repo": "obenpaper-pins",
+  "github_branch": "main",
+  "github_path": "pins",
+  "images_dir": "./images",
+
+  "max_posts_per_run": 4
+}
