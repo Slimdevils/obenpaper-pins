@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TEST-1",
+    "product": "API test",
+    "category": "scratch",
+    "image_file": "test-pin.png",
+    "image_url": "",
+    "title": "API test pin",
+    "description": "Disposable test pin for Pinterest API verification.",
+    "alt_text": "Cream background with the word TEST.",
+    "link": "",
+    "scheduled_at": "2026-08-05T12:00:00"
+  }
+]

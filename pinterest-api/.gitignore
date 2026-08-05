@@ -1,0 +1,9 @@
+config.json
+token.json
+posted_ids.json
+pins_export.json
+images/
+__pycache__/
+*.pyc
+venv/
+.venv/
