@@ -15,20 +15,15 @@ import sys
 
 import requests
 
+from obenpaper_rules import BOARDS
 from pinterest_common import API_BASE, HERE, auth_headers, load_config
 
 MAP_PATH = os.path.join(HERE, "board_map.json")
 
-# Category keys come from Project Context v32 §07a. Add to this list only
-# when a new named board is actually created on the account.
-CATEGORY_KEYS = [
-    "student_planner",          # Student Planner & Study Organization
-    "mindful_drinking",         # Mindful Drinking & Sober Curious
-    "cycle_tracking",           # Cycle Tracking & Wellness
-    "solo_travel",              # Solo Travel Planning & Journals
-    "cycle_fr",                 # Carnet de cycle & bien-être (FR only)
-    "scratch",                  # zz-api-test — Trial testing only
-]
+# Category keys and board names live in obenpaper_rules.BOARDS (boards.md,
+# eight boards as of 18 Aug 2026). Add a key there only when the board
+# actually exists on the account.
+CATEGORY_KEYS = list(BOARDS)
 
 
 def fetch_boards(cfg):
@@ -72,6 +67,12 @@ def main():
             f"{board.get('id', '?'):<22} {str(counts):>6}  "
             f"{board.get('privacy', '-'):<8} {board.get('name', '(unnamed)')}"
         )
+
+    by_name = {b.get("name", "").strip().lower(): b.get("id") for b in boards}
+    print("\nExact name matches (confirm each one before copying it into board_map.json):")
+    for key, name in BOARDS.items():
+        match = by_name.get(name.strip().lower())
+        print(f"  {key:<17} {match or '— no board with exactly this name':<36} {name}")
 
     if os.path.exists(MAP_PATH):
         print(f"\nboard_map.json already exists — leaving it untouched.")

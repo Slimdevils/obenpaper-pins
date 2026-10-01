@@ -1,14 +1,28 @@
 [
   {
-    "id": "TEST-1",
-    "product": "API test",
-    "category": "scratch",
-    "image_file": "test-pin.png",
+    "id": "SP-1",
+    "product": "Student Planner",
+    "category": "student_planner",
+    "image_file": "sp-1.png",
     "image_url": "",
-    "title": "API test pin",
-    "description": "Disposable test pin for Pinterest API verification.",
-    "alt_text": "Cream background with the word TEST.",
-    "link": "",
-    "scheduled_at": "2026-08-05T12:00:00"
+    "title": "Dated Student Planner Printable 2026-27",
+    "description": "A dated academic planner with weekly spreads and a class timetable, printable or for tablet. Instant download.",
+    "alt_text": "A weekly planner spread with class slots and a short to-do list.",
+    "link": "https://shop.obenpaper.com/b/YpUmC",
+    "link_confirmed": true,
+    "scheduled_at": "2026-10-06T19:00:00"
+  },
+  {
+    "id": "W-11",
+    "product": "Quiz",
+    "category": "free_tools",
+    "image_file": "w-11.png",
+    "image_url": "",
+    "title": "Which Planner Fits You? Free Planner Quiz",
+    "description": "Answer a few questions and get matched to a planner. Free in the browser, no sign-up.",
+    "alt_text": "A quiz card asking how you like to plan your week.",
+    "link": "https://obenpaper.com/quiz",
+    "link_confirmed": true,
+    "scheduled_at": "2026-10-07T19:00:00"
   }
 ]

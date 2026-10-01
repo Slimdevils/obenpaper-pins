@@ -1,9 +1,11 @@
+# Secrets and local-only files — never committed
 config.json
 token.json
-posted_ids.json
-pins_export.json
 images/
 __pycache__/
 *.pyc
 venv/
 .venv/
+
+# pins_export.json, board_map.json and posted_ids.json ARE committed now:
+# the GitHub Actions publisher reads the queue and records posts in the repo.
