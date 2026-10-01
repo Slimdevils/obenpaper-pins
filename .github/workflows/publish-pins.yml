@@ -19,6 +19,7 @@ on:
     paths:
       - "pinterest-api/**"
       - "pins/**"
+      - "pin-studio/**"
       - ".github/workflows/publish-pins.yml"
 
 # Never two runs at once: a refresh token can only be spent once.
@@ -73,46 +74,34 @@ jobs:
       - name: Keep the Pinterest token alive
         id: token
         env:
-          PINTEREST_CLIENT_ID: ${{ secrets.PINTEREST_CLIENT_ID }}
-          PINTEREST_CLIENT_SECRET: ${{ secrets.PINTEREST_CLIENT_SECRET }}
-          PINTEREST_TOKEN: ${{ secrets.PINTEREST_TOKEN }}
-          GH_TOKEN: ${{ secrets.PINTEREST_SECRETS_PAT }}
+          PINTEREST_KEY: ${{ secrets.PINTEREST_KEY }}
         run: python cloud_token.py
 
       - name: Publish due pins
         if: steps.token.outputs.configured == 'true' && (github.event_name == 'schedule' || inputs.mode == 'publish')
-        env:
-          PINTEREST_CLIENT_ID: ${{ secrets.PINTEREST_CLIENT_ID }}
-          PINTEREST_CLIENT_SECRET: ${{ secrets.PINTEREST_CLIENT_SECRET }}
         run: python pinterest_publish.py
 
       - name: Dry run
         if: steps.token.outputs.configured == 'true' && inputs.mode == 'dry-run'
-        env:
-          PINTEREST_CLIENT_ID: ${{ secrets.PINTEREST_CLIENT_ID }}
-          PINTEREST_CLIENT_SECRET: ${{ secrets.PINTEREST_CLIENT_SECRET }}
         run: python pinterest_publish.py --dry-run
 
       - name: List boards and IDs
         if: steps.token.outputs.configured == 'true' && inputs.mode == 'list-boards'
-        env:
-          PINTEREST_CLIENT_ID: ${{ secrets.PINTEREST_CLIENT_ID }}
-          PINTEREST_CLIENT_SECRET: ${{ secrets.PINTEREST_CLIENT_SECRET }}
         run: python pinterest_boards.py
 
       # Runs even if publishing failed, so a pin that DID post is always
       # recorded and can never be posted twice.
-      - name: Record posted pins and token dates
+      - name: Record posted pins and board IDs
         if: always() && steps.token.outputs.configured == 'true'
         run: |
           git config user.name "obenpaper-publisher"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add posted_ids.json state/
+          git add posted_ids.json board_map.json state/
           if git diff --cached --quiet; then
             echo "Nothing to record."
             exit 0
           fi
-          git commit -m "Record published pins / token dates [skip ci]"
+          git commit -m "Record published pins [skip ci]"
           for attempt in 1 2 3; do
             git pull --rebase origin main && git push origin HEAD:main && exit 0
             sleep 10

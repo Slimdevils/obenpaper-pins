@@ -8,13 +8,16 @@ red check on GitHub means "fix the queue", never "it posted anyway".
 
 Per pin:
   - required fields present; ids unique
-  - board category exists and is mapped to a real board ID
+  - board category exists (and, when publishing, is mapped to a real board ID)
   - FR pins only on the FR board, and the FR board only takes FR pins
   - destination is https on obenpaper.com or shop.obenpaper.com, no UTM,
     no query string or fragment at all, a confirmed route or a /b/<slug>
   - macro-split is never pinned
   - website boards only take their own routes
-  - link_confirmed is true (Luc confirmed the URL; it locks on publish)
+  - a store link is in confirmed_links.json (URLs lock on publish, never guessed)
+  - guardrail lint passes for the pin's line (+ "general"): an off-limits term
+    is an error anywhere; a headline-watch term is an error in the title and a
+    warning elsewhere
   - title / description / alt text within Pinterest's limits
   - image is a PNG/JPG (video pins are not supported by this publisher)
 
@@ -44,14 +47,21 @@ from obenpaper_rules import (
     TIMEZONE,
     TOOL_SLUGS,
 )
+from guardrail_lint import HEADLINE_WATCH, WORDLISTS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PINS_PATH = os.path.join(HERE, "pins_export.json")
 MAP_PATH = os.path.join(HERE, "board_map.json")
 POSTED_PATH = os.path.join(HERE, "posted_ids.json")
+LINKS_PATH = os.path.join(HERE, "confirmed_links.json")
+
+
+def confirmed_shop_links():
+    with open(LINKS_PATH, "r", encoding="utf-8") as fh:
+        return set(json.load(fh)["shop"])
 
 REQUIRED = ["id", "product", "category", "title", "description", "alt_text",
-            "link", "scheduled_at"]
+            "link", "scheduled_at", "guardrail"]
 
 
 def parse_when(value):
@@ -88,6 +98,8 @@ def check_link(pin, category):
         segments = path.strip("/").split("/")
         if len(segments) != 2 or segments[0] != "b" or not segments[1].isalnum():
             problems.append(f"store link must be https://{SHOP_HOST}/b/<slug>, got {path}")
+        elif link not in confirmed_shop_links():
+            problems.append("store link is not in confirmed_links.json — never guessed")
         if category in SITE_BOARD_ROUTES:
             problems.append("a website board pin must link to obenpaper.com, not straight to the store")
     elif host == SITE_HOST:
@@ -111,7 +123,27 @@ def check_link(pin, category):
     return problems
 
 
-def check_pin(pin, board_map):
+def check_guardrail(pin):
+    """Return (errors, warnings) from the vendored guardrail word lists."""
+    line = pin.get("guardrail")
+    if line not in WORDLISTS:
+        return [f"guardrail '{line}' is not a lint line ({', '.join(WORDLISTS)})"], []
+    errors, warnings = [], []
+    lines = [line] if line == "general" else [line, "general"]
+    for field in ("title", "description", "alt_text"):
+        text = " ".join(str(pin.get(field, "")).split()).lower()
+        for key in lines:
+            for term in WORDLISTS[key]:
+                if term.lower() in text:
+                    errors.append(f"guardrail ({key}): off-limits term '{term.strip()}' in {field}")
+            for term in HEADLINE_WATCH.get(key, []):
+                if term.lower() in text:
+                    msg = f"guardrail ({key}): '{term}' in {field} — label only, never a selling point"
+                    (errors if field == "title" else warnings).append(msg)
+    return errors, warnings
+
+
+def check_pin(pin, board_map, require_boards=True):
     errors = []
     for field in REQUIRED:
         value = pin.get(field)
@@ -123,7 +155,7 @@ def check_pin(pin, board_map):
     category = pin["category"]
     if category not in BOARDS:
         errors.append(f"unknown category '{category}' (boards: {', '.join(BOARDS)})")
-    elif not board_map.get(category):
+    elif require_boards and not board_map.get(category):
         errors.append(f"category '{category}' has no board ID in board_map.json")
 
     product = pin["product"]
@@ -134,8 +166,6 @@ def check_pin(pin, board_map):
 
     errors.extend(check_link(pin, category))
 
-    if pin.get("link_confirmed") is not True and category != "scratch":
-        errors.append("link_confirmed is not true — Luc confirms every URL before it can publish")
 
     for field, limit in LIMITS.items():
         if len(pin[field]) > limit:
@@ -154,8 +184,13 @@ def check_pin(pin, board_map):
     return errors
 
 
-def validate(pins, board_map, posted_ids, now=None):
-    """Return (errors, warnings, missed_ids). errors/warnings are strings."""
+def validate(pins, board_map, posted_ids, now=None, require_boards=True):
+    """Return (errors, warnings, missed_ids). errors/warnings are strings.
+
+    require_boards=False is for the push check: board IDs are filled in by the
+    cloud publisher on its first run, so an unmapped board is only a warning
+    until then. The publisher always validates with require_boards=True.
+    """
     now = now or datetime.now(TIMEZONE)
     errors, warnings, missed = [], [], set()
 
@@ -165,8 +200,14 @@ def validate(pins, board_map, posted_ids, now=None):
         if pid in seen:
             errors.append(f"{pid}: duplicate id")
         seen.add(pid)
-        for problem in check_pin(pin, board_map):
+        for problem in check_pin(pin, board_map, require_boards):
             errors.append(f"{pid}: {problem}")
+        if pid not in posted_ids and pin.get("guardrail"):
+            g_err, g_warn = check_guardrail(pin)
+            errors.extend(f"{pid}: {e}" for e in g_err)
+            warnings.extend(f"{pid}: {w}" for w in g_warn)
+        if not require_boards and pin.get("category") in BOARDS and not board_map.get(pin["category"]):
+            warnings.append(f"{pid}: board '{pin['category']}' not mapped yet — filled on the first cloud run")
 
     dated = []
     for pin in pins:
@@ -222,7 +263,7 @@ def main():
         print("pins_export.json is empty or absent — nothing to check.")
         return 0
 
-    errors, warnings, missed = validate(pins, board_map, posted_ids)
+    errors, warnings, missed = validate(pins, board_map, posted_ids, require_boards=False)
     pending = [p for p in pins if p.get("id") not in posted_ids and p.get("id") not in missed]
     print(f"{len(pins)} pin(s) in the queue: {len(posted_ids & {p.get('id') for p in pins})} posted, "
           f"{len(pending)} upcoming, {len(missed)} missed.")

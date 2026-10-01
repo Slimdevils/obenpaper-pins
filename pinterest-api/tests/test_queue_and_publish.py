@@ -41,7 +41,7 @@ def pin(pid, product, days, **over):
         "description": "A dated academic planner, printable or for tablet.",
         "alt_text": "A weekly spread with class slots.",
         "link": "https://shop.obenpaper.com/b/YpUmC",
-        "link_confirmed": True,
+        "guardrail": "general",
         "scheduled_at": (NOW + timedelta(days=days)).replace(tzinfo=None).isoformat(),
     }
     base.update(over)
@@ -69,9 +69,13 @@ class LinkRules(unittest.TestCase):
         p = pin("A", "Student Planner", 1, link="https://www.etsy.com/listing/123")
         self.assertTrue(any("host" in e for e in errors_for([p])))
 
-    def test_unconfirmed_link_refused(self):
-        p = pin("A", "Student Planner", 1, link_confirmed=False)
-        self.assertTrue(any("link_confirmed" in e for e in errors_for([p])))
+    def test_link_not_in_registry_refused(self):
+        p = pin("A", "Student Planner", 1, link="https://shop.obenpaper.com/b/Guess1")
+        self.assertTrue(any("confirmed_links.json" in e for e in errors_for([p])))
+
+    def test_every_registry_link_is_canonical(self):
+        for link in validate_queue.confirmed_shop_links():
+            self.assertRegex(link, r"^https://shop\.obenpaper\.com/b/[A-Za-z0-9]+$")
 
     def test_macro_split_never_pinned(self):
         p = pin("A", "Tools", 1, category="free_tools", link="https://obenpaper.com/tools/macro-split")
@@ -99,10 +103,17 @@ class LinkRules(unittest.TestCase):
 
 
 class BoardAndCopyRules(unittest.TestCase):
-    def test_unmapped_board_refused(self):
+    def test_unmapped_board_refused_when_publishing(self):
         p = pin("A", "Student Planner", 1)
         errors, _, _ = validate([p], {**BOARD_MAP, "student_planner": None}, set(), NOW)
         self.assertTrue(any("no board ID" in e for e in errors))
+
+    def test_unmapped_board_only_warns_on_push(self):
+        p = pin("A", "Student Planner", 1)
+        errors, warnings, _ = validate([p], {**BOARD_MAP, "student_planner": None}, set(), NOW,
+                                       require_boards=False)
+        self.assertEqual(errors, [])
+        self.assertTrue(any("not mapped yet" in w for w in warnings))
 
     def test_fr_product_only_on_fr_board(self):
         p = pin("A", "In Tune FR", 1, category="cycle_tracking")
@@ -123,6 +134,51 @@ class BoardAndCopyRules(unittest.TestCase):
     def test_duplicate_ids(self):
         errs = errors_for([pin("A", "Student Planner", 1), pin("A", "In Session", 3)])
         self.assertTrue(any("duplicate" in e for e in errs))
+
+
+class Guardrail(unittest.TestCase):
+    def test_off_limits_term_refused(self):
+        p = pin("A", "In Check", 1, category="mindful_drinking", guardrail="in_check",
+                link="https://shop.obenpaper.com/b/97gJi",
+                description="A journal that works like therapy for cutting back.")
+        self.assertTrue(any("off-limits term 'therapy'" in e for e in errors_for([p])))
+
+    def test_general_always_applies(self):
+        p = pin("A", "Student Planner", 1, guardrail="in_check",
+                description="Guaranteed to fix your study week.")
+        self.assertTrue(any("guaranteed to fix" in e for e in errors_for([p])))
+
+    def test_headline_watch_error_in_title_warning_elsewhere(self):
+        p = pin("A", "Bedtime tool", 1, category="free_tools", guardrail="tools",
+                link="https://obenpaper.com/tools/bedtime", title="Sleep Better Tonight",
+                alt_text="A clock and the word sleep.")
+        errors, warnings, _ = validate([p], BOARD_MAP, set(), NOW)
+        self.assertTrue(any("in title" in e for e in errors))
+        self.assertTrue(any("in alt_text" in w for w in warnings))
+
+    def test_line_break_does_not_hide_a_term(self):
+        p = pin("A", "In Tune", 1, category="cycle_tracking", guardrail="in_tune_en",
+                link="https://shop.obenpaper.com/b/fOJe0",
+                description="Not for anyone trying to\nconceive.")
+        self.assertTrue(any("trying to conceive" in e for e in errors_for([p])))
+
+    def test_unknown_line_refused(self):
+        self.assertTrue(any("not a lint line" in e for e in errors_for([pin("A", "X", 1, guardrail="nope")])))
+
+
+class TokenStore(unittest.TestCase):
+    def test_round_trip_and_wrong_key(self):
+        import token_store
+        path = os.path.join(tempfile.mkdtemp(), "t.enc")
+        bundle = {"client_id": "1", "client_secret": "s", "access_token": "a",
+                  "refresh_token": "r", "expires_in": 10, "obtained_at": 5}
+        key = token_store.new_key()
+        token_store.encrypt_bundle(bundle, key, path)
+        with open(path, "rb") as fh:
+            self.assertNotIn(b"refresh", fh.read().lower())
+        self.assertEqual(token_store.decrypt_bundle(key, path), bundle)
+        with self.assertRaises(SystemExit):
+            token_store.decrypt_bundle(token_store.new_key(), path)
 
 
 class Pacing(unittest.TestCase):
@@ -247,3 +303,20 @@ class Publisher(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BoardResolution(unittest.TestCase):
+    def test_spelling_variants_match_but_other_boards_do_not(self):
+        import pinterest_boards
+        boards = [
+            {"id": "111", "name": "Student Planner & Study Organisation"},
+            {"id": "222", "name": "Free planner tools and quizzes"},
+            {"id": "333", "name": "Solo Travel"},                       # partial — must NOT match
+        ]
+        board_map = {key: None for key in BOARDS}
+        with mock.patch.object(pinterest_boards, "MAP_PATH", os.path.join(tempfile.mkdtemp(), "m.json")):
+            filled, names = pinterest_boards.resolve_missing({}, board_map, boards)
+        self.assertEqual(board_map["student_planner"], "111")
+        self.assertEqual(board_map["free_tools"], "222")
+        self.assertIsNone(board_map["solo_travel"])
+        self.assertEqual(sorted(filled), ["free_tools", "student_planner"])

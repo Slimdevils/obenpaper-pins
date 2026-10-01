@@ -1,1 +1,174 @@
-[]
+[
+  {
+    "id": "A-2026-10-02-student-planner",
+    "subject": "student-planner",
+    "product": "Student Planner",
+    "category": "student_planner",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/YpUmC",
+    "image_file": "a-2026-10-02-student-planner.png",
+    "image_url": "",
+    "title": "Student Planner 2026–27 — Exam Study Plan & Grade Tracker",
+    "description": "A student planner for 2026–27 with dated and undated editions in one download, for tablet or printed on A4 and US Letter. This pin shows the exams and study plan page and the grade tracker, so every test and mark sits in one place. Instant download.",
+    "alt_text": "Two planner pages fanned on a soft plum background: an exams and study plan table, and a grade tracker with columns for each course.",
+    "scheduled_at": "2026-10-02T19:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Student Planner 2026–27",
+      "headline": "Exams and grades in one place",
+      "subline": "Dated + undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/08.jpg",
+        "print/09.jpg"
+      ],
+      "footer": "Instant download"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-10-04-quiz",
+    "subject": "quiz",
+    "product": "Planner Quiz",
+    "category": "free_tools",
+    "guardrail": "general",
+    "link": "https://obenpaper.com/quiz",
+    "image_file": "a-2026-10-04-quiz.png",
+    "image_url": "",
+    "title": "Which Planner Fits You? Free Planner Quiz",
+    "description": "Not sure which planner suits the way you work? This free quiz matches you to one. It runs in your browser: nothing to download and no sign-up.",
+    "alt_text": "A white card on a cream background titled 'Find the planner that fits you', with three answer rows and a button reading 'Free · no sign-up'.",
+    "scheduled_at": "2026-10-04T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free planner quiz",
+      "headline": "Which planner fits the way you work?",
+      "subline": "A few questions, one match. Free in the browser.",
+      "card_title": "Find the planner that fits you",
+      "card_text": "Answer a few questions about how you plan, and the quiz matches you to a planner.",
+      "badge": "Free · no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-10-06-in-check",
+    "subject": "in-check",
+    "product": "In Check",
+    "category": "mindful_drinking",
+    "guardrail": "in_check",
+    "link": "https://shop.obenpaper.com/b/97gJi",
+    "image_file": "a-2026-10-06-in-check.png",
+    "image_url": "",
+    "title": "Mindful Drinking Journal — 30-Day Reset & Daily Check-In",
+    "description": "In Check is a journal for drinking less or going alcohol-free, at the pace you choose. This pin shows the 30-day reset, one square a day to colour in, and the daily check-in page. No streaks to break: a slip is a data point, not a failure. For tablet, A4 and US Letter.",
+    "alt_text": "Two journal pages fanned on a pale sea-glass background: a 30-day reset grid of squares to colour in, and a daily check-in page with small rating circles and lines for notes.",
+    "scheduled_at": "2026-10-06T19:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "In Check · mindful drinking",
+      "headline": "A gentle 30-day reset",
+      "subline": "For drinking less or going alcohol-free",
+      "pages": [
+        "print/05.jpg",
+        "print/06.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-10-08-tool-trip-spend",
+    "subject": "tool-trip-spend",
+    "product": "Trip Spend Tool",
+    "category": "solo_travel",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/trip-spend",
+    "image_file": "a-2026-10-08-tool-trip-spend.png",
+    "image_url": "",
+    "title": "Travel Budget Calculator — What Your Trip Leaves You a Day",
+    "description": "A free travel budget calculator: take the flights and the beds off the top first, then divide what remains by the days. That is your real daily spend. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a soft clay background titled 'What a trip leaves you a day', with three input rows and a button reading 'Free · no sign-up'.",
+    "scheduled_at": "2026-10-08T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free travel calculator",
+      "headline": "Your real daily budget for the trip",
+      "subline": "Flights and beds come off the top first.",
+      "card_title": "What a trip leaves you a day",
+      "card_text": "Take the flights and the beds off the top, then divide what remains by the days.",
+      "badge": "Free · no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-10-10-in-session",
+    "subject": "in-session",
+    "product": "In Session",
+    "category": "teacher_planner",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/XFteK",
+    "image_file": "a-2026-10-10-in-session.png",
+    "image_url": "",
+    "title": "Undated Teacher Planner — Seating Chart & Class Roster Pages",
+    "description": "In Session is an undated teacher planner and lesson plan book: start any week of any year and reuse it term after term. This pin shows the seating chart page on a tablet, alongside the class rosters, timetables, attendance and gradebook grids inside. For tablet, A4 and US Letter.",
+    "alt_text": "A tablet on a warm marigold background showing a seating chart page: a grid of empty desk boxes under the heading 'Seating chart'.",
+    "scheduled_at": "2026-10-10T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "In Session · teacher planner",
+      "headline": "A plan book you can reuse every term",
+      "subline": "Undated · timetables, rosters, seating charts",
+      "pages": [
+        "tablet/09.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-10-12-made-to-order",
+    "subject": "made-to-order",
+    "product": "Made to Order",
+    "category": "custom_planners",
+    "guardrail": "general",
+    "link": "https://obenpaper.com/made-to-order",
+    "image_file": "a-2026-10-12-made-to-order.png",
+    "image_url": "",
+    "title": "Custom Printable Planner — Your Colour, Your Cover, Your Pages",
+    "description": "A made-to-order planner: choose your own colour, cover lettering, format and pages, for tablet, A4 or US Letter. Each one is made one at a time, with a free sample before you pay.",
+    "alt_text": "A white card on a cream background titled 'A planner made for you', listing colour, cover lettering, format and pages, with a button reading 'Free sample first'.",
+    "scheduled_at": "2026-10-12T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Made to order",
+      "headline": "Your colour, your cover, your pages",
+      "subline": "Tablet, A4 or US Letter · made one at a time",
+      "card_title": "A planner made for you",
+      "card_text": "Choose the colour, the cover lettering, the format and the pages. See a free sample before you pay.",
+      "badge": "Free sample first"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-10-14-in-tune",
+    "subject": "in-tune",
+    "product": "In Tune",
+    "category": "cycle_tracking",
+    "guardrail": "in_tune_en",
+    "link": "https://shop.obenpaper.com/b/fOJe0",
+    "image_file": "a-2026-10-14-in-tune.png",
+    "image_url": "",
+    "title": "Cycle Tracking Journal — Monthly Cycle Tracker & Mood Check-Ins",
+    "description": "In Tune is a cycle and wellness journal for noticing your own patterns: a monthly cycle tracker, symptom tracking, and mood and PMS check-ins. This pin shows 'Your cycle, simply' and the monthly tracker. For awareness only. For tablet, A4 and US Letter.",
+    "alt_text": "Two journal pages fanned on a soft berry background: a page titled 'Your cycle, simply' with four coloured phase cards, and a monthly cycle tracker grid.",
+    "scheduled_at": "2026-10-14T19:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "In Tune · cycle & wellness",
+      "headline": "Get to know your own cycle",
+      "subline": "Monthly tracker · mood and PMS check-ins",
+      "pages": [
+        "print/03.jpg",
+        "print/07.jpg"
+      ]
+    },
+    "made_by": "claude"
+  }
+]

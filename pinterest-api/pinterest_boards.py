@@ -49,6 +49,34 @@ def fetch_boards(cfg):
     return boards
 
 
+def normalise(name):
+    """Spelling-tolerant, never meaning-tolerant: lower case, '&' = 'and',
+    British/American -ise/-ize and -our/-or, punctuation and spaces dropped."""
+    n = name.lower().replace("&", " and ")
+    for uk, us in (("organisation", "organization"), ("personalised", "personalized"),
+                   ("colour", "color")):
+        n = n.replace(uk, us)
+    return "".join(ch for ch in n if ch.isalnum())
+
+
+def resolve_missing(cfg, board_map, boards=None):
+    """Fill null board_map entries from the board whose normalised name equals
+    the expected one. Never a partial or near match. Returns (filled, names)
+    where names lists every board on the account (for error messages)."""
+    boards = boards if boards is not None else fetch_boards(cfg)
+    by_name = {normalise(b.get("name", "")): b.get("id") for b in boards}
+    filled = []
+    for key, name in BOARDS.items():
+        if not board_map.get(key) and by_name.get(normalise(name)):
+            board_map[key] = by_name[normalise(name)]
+            filled.append(key)
+    if filled:
+        with open(MAP_PATH, "w", encoding="utf-8") as fh:
+            json.dump(board_map, fh, indent=2)
+            fh.write("\n")
+    return filled, sorted(b.get("name", "") for b in boards)
+
+
 def main():
     cfg = load_config()
     boards = fetch_boards(cfg)
@@ -68,10 +96,10 @@ def main():
             f"{board.get('privacy', '-'):<8} {board.get('name', '(unnamed)')}"
         )
 
-    by_name = {b.get("name", "").strip().lower(): b.get("id") for b in boards}
-    print("\nExact name matches (confirm each one before copying it into board_map.json):")
+    by_name = {normalise(b.get("name", "")): b.get("id") for b in boards}
+    print("\nName matches (the cloud publisher fills these into board_map.json itself):")
     for key, name in BOARDS.items():
-        match = by_name.get(name.strip().lower())
+        match = by_name.get(normalise(name))
         print(f"  {key:<17} {match or '— no board with exactly this name':<36} {name}")
 
     if os.path.exists(MAP_PATH):

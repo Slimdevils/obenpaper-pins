@@ -1,154 +1,103 @@
 # Obenpaper Pinterest publisher
 
-Publishes Obenpaper's pins through the Pinterest v5 API, **automatically,
-from GitHub Actions** — every hour it checks the queue and posts what is due.
-Organic only, written by hand, posted on schedule by our own code.
+**Claude makes the pins and the publisher posts them — no action from Luc**
+(Luc's decision, 1 Oct 2026). Organic only, through the Pinterest v5 API.
 
-- **App:** `Obenpaper_Scheduler`, app ID `1587406`
-- **Tier:** **STANDARD** (since 1 Oct 2026) — API pins are public.
-- **Repo:** `slimdevils/obenpaper-pins` — **public**, because Pinterest fetches
-  pin images anonymously. Its Actions logs are public too: no script ever
-  prints a token, and the token keeper masks both tokens before anything else.
+- **App:** `Obenpaper_Scheduler`, app ID `1587406` — **Standard** access.
+- **Repo:** `Slimdevils/obenpaper-pins` — public, because Pinterest fetches
+  pin images anonymously. Workflow logs are public too: no script prints a
+  token, and every secret is masked before anything else runs.
 
-## How it works
+## How it runs
 
 ```
-pins_export.json  ──►  every hour (:17)  ──►  validate_queue  ──►  cloud_token  ──►  publish ≤1 pin  ──►  posted_ids.json
- (you write it)        GitHub Actions          rules check         keep token          POST /v5/pins       (committed back)
+every week (Claude, scheduled task)                     every hour (GitHub Actions, :17)
+  read catalogue + history                                decrypt token, rotate if due
+  write copy, render tiles  ──►  pins_export.json  ──►    validate the queue
+  look at every tile             pins/*.png               post ≤ 1 due pin
+  validate, commit, push                                  record it in posted_ids.json
 ```
 
-1. **You** write pins into `pinterest-api/pins_export.json` (format below),
-   commit the images into `pins/`, and push.
-2. On the push, GitHub runs the tests and checks the queue. A red ✗ on the
-   commit means a pin breaks a rule — the log says which and why.
-3. Every hour the publisher posts **at most one** pin whose `scheduled_at`
-   (Zurich time) has passed, then records it in `posted_ids.json`.
-4. A pin more than **24 h late** (GitHub outage, queue broken) is **never
-   posted late** — it is reported as missed. Give it a new date.
+- **Making pins** — `pin-studio/`. A weekly Claude session follows
+  `pin-studio/AGENT.md`: it keeps the queue filled 14 days ahead, one pin
+  every two days at 19:00 Zurich, alternating subjects. Copy is written by
+  Claude from the facts in `pin-studio/catalogue.json` only; links, boards and
+  guardrail lines are filled by `studio.py` from the catalogue, never typed.
+- **Posting pins** — `pinterest-api/`. The hourly workflow posts at most one
+  due pin per run. A pin more than 24 h late is never posted late.
 
-## Pin format
-
-```json
-{
-  "id": "SP-1",
-  "product": "Student Planner",
-  "category": "student_planner",
-  "image_file": "sp-1.png",
-  "image_url": "",
-  "title": "…",
-  "description": "…",
-  "alt_text": "…",
-  "link": "https://shop.obenpaper.com/b/YpUmC",
-  "link_confirmed": true,
-  "scheduled_at": "2026-10-06T19:00:00"
-}
-```
-
-- `category` — one of the board keys in `obenpaper_rules.py` (`BOARDS`).
-- `image_file` — a PNG/JPG committed in `pins/`. `image_url` fills itself.
-- `link_confirmed` — set to `true` only once Luc has confirmed the URL.
-  **Destination URLs lock permanently on publish.**
-- `scheduled_at` — Zurich local time unless an offset is given.
-- `product` — used for alternation. FR products end in ` FR`.
-
-See `pins_export.example.json`. Pin **copy** follows the
-`obenpaper-pinterest-pins` skill and must pass `obenpaper-guardrail-lint`
-before it goes in the file — this repo checks the rules, not the wording.
-
-## Rules the publisher enforces (refuses the whole queue on any error)
+## Rules enforced on every pin (the queue is refused on any error)
 
 | Rule | Check |
 |---|---|
 | Organic, plain URLs | no `utm_`, no query string or fragment, https only |
-| Owned destinations only | `obenpaper.com` confirmed routes, or `shop.obenpaper.com/b/<slug>` |
+| URLs never guessed | store links must be in `confirmed_links.json` (verbatim from the site's `lib/products.json`); site links must be confirmed routes |
 | `macro-split` never pinned | standing exclusion |
 | Website boards link to the site | *Free Planner Tools & Quizzes* → `/quiz`, `/tools…`, `/focus`; *Custom & Personalised Planners* → `/made-to-order` |
-| FR stays on the FR board | both directions |
-| URL confirmed before publish | `link_confirmed: true` |
-| Board exists | category mapped to a real ID in `board_map.json` |
-| Alternate products | never the same product twice in a row |
-| 1–2 day spacing | never two pins on one day (Zurich); over 2 days = warning |
+| FR stays on the FR board | both directions (In Tune FR is not in the catalogue until live) |
+| Guardrails | `obenpaper-guardrail-lint` word lists (vendored, `guardrail_lint.py`) on title, description and alt text — off-limits term = error; headline-watch term = error in the title |
+| Alternate products, 1–2 day spacing | never the same product twice running, never two pins on one day |
+| Fresh pins | a subject at most once every 6 days; a page combination never reused (studio) |
 | Pinterest limits | title 100, description/alt 500 — refused, never truncated |
-| No burst | max 1 pin per run; missed pins never posted late |
-| Board-first save | the API sets `board_id` in the create call itself |
+| Board exists | board IDs are filled automatically from the account's board names (spelling-tolerant, never a near match); a missing board blocks only its own pins |
 
-Video pins are not supported by this publisher (refused by the check).
+## One-time setup — the only thing Luc does
 
-## One-time setup
-
-### 1. Repository secrets
-
-`https://github.com/slimdevils/obenpaper-pins/settings/secrets/actions` →
-*New repository secret*:
-
-| Secret | Value |
-|---|---|
-| `PINTEREST_CLIENT_ID` | from the Pinterest developer portal |
-| `PINTEREST_CLIENT_SECRET` | from the Pinterest developer portal |
-| `PINTEREST_SECRETS_PAT` | fine-grained PAT, repo `slimdevils/obenpaper-pins` only, permission **Secrets: Read and write** |
-| `PINTEREST_TOKEN` | set by `seed_cloud_token.py` (step 2) |
-
-**Why the PAT:** Pinterest rotates the refresh token on every refresh — the
-old one is spent and only the new one works (30-day access token, 60-day
-refresh token renewed each time). The workflow must write the new one back
-into `PINTEREST_TOKEN`, and GitHub's built-in token cannot write secrets.
-The PAT's own expiry date is the one date to watch: when it lapses, the next
-refresh is refused (safely — the token is never spent without being saved).
-
-### 2. Authorize once, hand the token to the cloud
+In your local clone of `obenpaper-pins`:
 
 ```
-python pinterest_auth.py        # browser consent, writes token.json
-python seed_cloud_token.py      # copies it into PINTEREST_TOKEN, deletes token.json
+cd pinterest-api
+pip install -r requirements.txt
+python setup_cloud.py
 ```
 
-From here on the **cloud owns the token**. Do not publish locally: a local
-refresh would spend the refresh token the cloud depends on. `--dry-run`
-works locally without a token.
+It asks for the app ID and secret (reused from `config.json` if present),
+opens Pinterest — click **Give access** — then encrypts everything into
+`state/token.enc`, pushes it, and stores the key as the `PINTEREST_KEY`
+repository secret (automatically with the GitHub CLI; otherwise it shows the
+key once and the page to paste it into). Done.
 
-### 3. Map the boards
+The redirect URI `http://localhost:8085/callback` must be listed in the
+Pinterest app settings (it is already, from the Trial demo).
 
-Actions → *Publish pins* → *Run workflow* → mode **list-boards**. The log
-lists every board with its ID and the exact-name matches. Confirm each one,
-put the IDs into `pinterest-api/board_map.json`, commit, push.
+Run it again only if a workflow run says the token expired or was lost.
 
-### 4. Check it
+### Why there is no other secret
 
-Actions → *Run workflow* → mode **dry-run**: shows the payloads it would send.
-
-## Day-to-day
-
-- Add pins + images, push, wait for the green ✓.
-- `posted_ids.json` is the record of what went out (pin id → Pinterest pin
-  id, link, time). Pull before editing the queue — the workflow commits to it.
-- `state/token_meta.json` shows when the token was last rotated and when it
-  expires. The rotation commit (every ~27 days) also keeps GitHub from
-  pausing the hourly schedule, which it does after 60 days without commits.
-- Re-authorize (step 2) only if a run says the refresh token expired or was
-  lost.
+Pinterest rotates the refresh token on every refresh — the old one is spent
+at once (30-day access token, 60-day refresh token renewed each time). The
+workflow re-encrypts the new token and commits `state/token.enc` before doing
+anything else, and refuses to refresh at all if it could not push. It only
+refreshes when the access token has under 3 days left, which also commits
+roughly monthly and keeps GitHub from pausing the hourly schedule (it pauses
+scheduled workflows after 60 days without a commit).
 
 ## Files
 
-| File | Purpose |
+| Path | Purpose |
 |---|---|
-| `obenpaper_rules.py` | The standing rules as data — boards, routes, limits, timezone |
-| `validate_queue.py` | Checks `pins_export.json` against those rules |
-| `pinterest_publish.py` | Posts due pins (`--dry-run`, `--pin ID`) |
-| `cloud_token.py` | Keeps the token alive in Actions; saves each rotation |
-| `seed_cloud_token.py` | One-time hand-off of a local token to the cloud |
-| `pinterest_auth.py` | One-time OAuth consent (localhost:8085 callback) |
-| `pinterest_boards.py` | Lists boards + IDs |
-| `pinterest_upload_images.py` | Optional: push images from a local folder via the GitHub API |
-| `tests/` | Rule and publisher tests, run on every push |
-| `pins_export.json` · `board_map.json` · `posted_ids.json` | Queue, board IDs, record — committed |
+| `pin-studio/AGENT.md` | The weekly procedure Claude follows |
+| `pin-studio/catalogue.json` | The only subjects that may be pinned, with their facts, accents, board, link |
+| `pin-studio/studio.py` | `status` · `slots` · `add batch.json` (fills, renders, validates) |
+| `pin-studio/render_tile.py` | 1000×1500 tiles in the house look (§01) |
+| `pin-studio/previews/`, `fonts/` | Product page previews (from the site) and the house fonts |
+| `pinterest-api/validate_queue.py` | The rules above |
+| `pinterest-api/pinterest_publish.py` | Posts due pins (`--dry-run`, `--pin ID`) |
+| `pinterest-api/cloud_token.py` | Keeps the token alive, saves each rotation |
+| `pinterest-api/setup_cloud.py` | The one-time setup |
+| `pinterest-api/confirmed_links.json` | Store URLs a pin may use |
+| `pinterest-api/guardrail_lint.py` | Verbatim copy of the guardrail skill's linter |
+| `pinterest-api/pins_export.json` · `posted_ids.json` · `board_map.json` | Queue, record, board IDs |
+| `pinterest-api/state/` | `token.enc` (encrypted) and `token_meta.json` (expiry dates) |
 
-Never committed: `config.json`, `token.json`, `images/`.
+Manual runs: Actions → *Publish pins* → *Run workflow* → `dry-run`,
+`publish` or `list-boards`.
 
-## Security
+## Keeping it in step with the md
 
-- Secrets live only in GitHub repository secrets (cloud) or `config.json` /
-  `token.json` (local, gitignored, `token.json` written `0600`).
-- The public repo holds only pin images, the queue and these scripts — no
-  PDFs, no product files.
-- The queue is public once pushed: a pin for an unannounced product reveals
-  it. Push those close to their date.
+When a product goes live, gets a board, changes name or is retired, the
+change is made in a working session with Luc: `catalogue.json` (facts,
+board, accent, previews), `confirmed_links.json` (from the site's
+`lib/products.json`), and `obenpaper_rules.py` (boards, routes). When the
+guardrail skill's word lists change, copy its script over `guardrail_lint.py`
+unchanged. The weekly run never edits these itself.

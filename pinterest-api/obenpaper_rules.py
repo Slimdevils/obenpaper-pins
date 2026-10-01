@@ -12,19 +12,21 @@ from zoneinfo import ZoneInfo
 TIMEZONE = ZoneInfo("Europe/Zurich")
 
 # --- Boards -----------------------------------------------------------------
-# Category key -> board name on the account (boards.md, eight boards as of
-# 18 Aug 2026). board_map.json maps each key to the real board ID. Add a key
-# here only when the board actually exists on the account.
+# Category key -> EXACT board name on the account (boards.md, eight boards as
+# of 18 Aug 2026). board_map.json maps each key to the real board ID; in the
+# cloud, a null entry is filled automatically from the board whose name matches
+# exactly (case-insensitive) — never by a near match. Add a key here only when
+# the board actually exists on the account.
 BOARDS = {
     "student_planner": "Student Planner & Study Organization",
     "mindful_drinking": "Mindful Drinking & Sober Curious",
     "cycle_tracking": "Cycle Tracking & Wellness",
     "solo_travel": "Solo Travel Planning & Journals",
-    "cycle_fr": "Carnet de cycle & bien-être",
+    "cycle_fr": "Carnet de cycle & bien-être",  # FR pins stay gated (§07a)
     "free_tools": "Free Planner Tools & Quizzes",
     "custom_planners": "Custom & Personalised Planners",
     "teacher_planner": "Teacher Planner & Lesson Plan Book",
-    "scratch": "zz-api-test (Trial testing only)",
+    "scratch": "zz-api-test",  # Trial testing only
 }
 
 # --- Destinations -----------------------------------------------------------

@@ -8,6 +8,7 @@ In normal use this runs every hour from GitHub Actions (see
 .github/workflows/publish-pins.yml); running it by hand is for dry-runs.
 
 Order of operations, every run:
+  0. In the cloud, fill any unmapped board ID from the exact board name.
   1. validate_queue.validate() — any error and NOTHING publishes.
   2. Pick pins whose scheduled_at (Zurich time) has passed, that are not in
      posted_ids.json and not missed (over 24 h late — never posted late).
@@ -29,7 +30,8 @@ from datetime import datetime
 import requests
 
 from obenpaper_rules import BOARDS, LIMITS, TIMEZONE
-from pinterest_common import API_BASE, HERE, auth_headers, load_config
+from pinterest_boards import resolve_missing
+from pinterest_common import API_BASE, CLOUD, HERE, auth_headers, load_config
 from validate_queue import POSTED_PATH, load_json, load_queue, parse_when, validate
 
 PINS_ENDPOINT = f"{API_BASE}/pins"
@@ -116,6 +118,7 @@ def publish(pin, payload, headers, dry_run):
         "link": payload.get("link", ""),
         "pinterest_pin_id": body.get("id"),
         "scheduled_at": pin["scheduled_at"],
+        "image": pin.get("image_file", ""),
         "posted_at": datetime.now(TIMEZONE).isoformat(timespec="seconds"),
     })
     print(f"OK — Pinterest pin {body.get('id')} recorded in posted_ids.json")
@@ -134,8 +137,16 @@ def main():
         print("Queue is empty. Nothing to do.")
         return 0
 
+    needed = {p.get("category") for p in pins if p.get("id") not in posted_ids}
+    account_boards = []
+    if CLOUD and any(not board_map.get(c) for c in needed if c):
+        filled, account_boards = resolve_missing(cfg, board_map)
+        if filled:
+            print(f"Board IDs filled by name: {', '.join(filled)} (board_map.json)")
+
     now = datetime.now(TIMEZONE)
-    errors, warnings, missed = validate(pins, board_map, posted_ids, now)
+    # An unmapped board blocks only its own pins (below), never the whole queue.
+    errors, warnings, missed = validate(pins, board_map, posted_ids, now, require_boards=False)
     for line in warnings:
         print(f"WARNING  {line}")
     if errors:
@@ -170,6 +181,11 @@ def main():
     headers = None if args.dry_run else auth_headers(cfg)
     failed = 0
     for pin in queue:
+        if not board_map.get(pin["category"]):
+            print(f"\nSKIP {pin['id']} — no board on the account named "
+                  f"'{BOARDS.get(pin['category'])}'. Boards found: {', '.join(account_boards) or '(not listed)'}")
+            failed += 1
+            continue
         image_url, problem = resolve_image_url(pin, cfg)
         if problem:
             print(f"\nSKIP {pin['id']} — {problem}")

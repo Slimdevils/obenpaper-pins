@@ -1,28 +1,28 @@
 [
   {
-    "id": "SP-1",
+    "id": "A-2026-10-02-student-planner",
+    "subject": "student-planner",
     "product": "Student Planner",
     "category": "student_planner",
-    "image_file": "sp-1.png",
-    "image_url": "",
-    "title": "Dated Student Planner Printable 2026-27",
-    "description": "A dated academic planner with weekly spreads and a class timetable, printable or for tablet. Instant download.",
-    "alt_text": "A weekly planner spread with class slots and a short to-do list.",
+    "guardrail": "general",
     "link": "https://shop.obenpaper.com/b/YpUmC",
-    "link_confirmed": true,
-    "scheduled_at": "2026-10-06T19:00:00"
-  },
-  {
-    "id": "W-11",
-    "product": "Quiz",
-    "category": "free_tools",
-    "image_file": "w-11.png",
+    "image_file": "a-2026-10-02-student-planner.png",
     "image_url": "",
-    "title": "Which Planner Fits You? Free Planner Quiz",
-    "description": "Answer a few questions and get matched to a planner. Free in the browser, no sign-up.",
-    "alt_text": "A quiz card asking how you like to plan your week.",
-    "link": "https://obenpaper.com/quiz",
-    "link_confirmed": true,
-    "scheduled_at": "2026-10-07T19:00:00"
+    "title": "Student Planner 2026–27 — Exam Study Plan & Grade Tracker",
+    "description": "A student planner for 2026–27 with dated and undated editions in one download, for tablet or printed on A4 and US Letter. This pin shows the exams and study plan page and the grade tracker, so every test and mark sits in one place. Instant download.",
+    "alt_text": "Two planner pages fanned on a soft plum background: an exams and study plan table, and a grade tracker with columns for each course.",
+    "scheduled_at": "2026-10-02T19:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Student Planner 2026–27",
+      "headline": "Exams and grades in one place",
+      "subline": "Dated + undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/08.jpg",
+        "print/09.jpg"
+      ],
+      "footer": "Instant download"
+    },
+    "made_by": "claude"
   }
 ]

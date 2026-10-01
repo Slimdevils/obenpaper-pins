@@ -1,22 +1,21 @@
 """Cloud-mode token keeper. Runs at the start of every GitHub Actions run.
 
 Pinterest rotates the refresh token on every refresh: the one sent is spent
-and only the new one works (continuous refresh — 30-day access token,
-60-day refresh token renewed each time). So this script:
+and only the new one works (30-day access token, 60-day refresh token renewed
+each time). So this script:
 
-  1. Reads the PINTEREST_TOKEN repository secret (JSON written by
-     seed_cloud_token.py or by a previous run of this script).
-  2. Masks both tokens in the logs straight away — the repo is public and so
-     are its workflow logs.
+  1. Decrypts state/token.enc with the PINTEREST_KEY secret.
+  2. Masks the tokens and client secret in the logs straight away — the repo
+     is public and so are its workflow logs.
   3. Refreshes ONLY when needed (access token under 3 days left, or refresh
      token under 14 days left). Most runs refresh nothing.
-  4. Before spending the refresh token, checks it can write the secret back;
-     after refreshing, writes the new JSON to PINTEREST_TOKEN at once.
-  5. Writes the live token to a private temp file for the publish step and
-     records non-secret expiry dates in state/token_meta.json.
+  4. Before spending the refresh token, checks it can push to the repo;
+     after refreshing, re-encrypts, commits and pushes state/token.enc at once,
+     before anything else happens.
+  5. Writes the live bundle to a private temp file for the later steps.
 
-If PINTEREST_TOKEN is not set yet, it reports "not configured" and the
-workflow skips publishing instead of failing every hour.
+If PINTEREST_KEY or state/token.enc is missing, it reports "not configured"
+and the workflow skips publishing instead of failing every hour.
 """
 
 import json
@@ -26,19 +25,12 @@ import sys
 import time
 from datetime import datetime, timezone
 
-from pinterest_common import (
-    HERE,
-    REFRESH_MARGIN_SECONDS,
-    load_config,
-    request_refresh,
-    seconds_left,
-    stamp,
-)
+from pinterest_common import REFRESH_MARGIN_SECONDS, request_refresh, seconds_left, stamp
+from token_store import STATE_DIR, TOKEN_ENC_PATH, decrypt_bundle, encrypt_bundle
 
-SECRET_NAME = "PINTEREST_TOKEN"
 REFRESH_TOKEN_MARGIN = 14 * 24 * 3600
-STATE_DIR = os.path.join(HERE, "state")
 META_PATH = os.path.join(STATE_DIR, "token_meta.json")
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def gh_output(key, value):
@@ -72,74 +64,65 @@ def day(ts):
     return datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%d") if ts else "unknown"
 
 
-def repo():
-    return os.environ.get("GITHUB_REPOSITORY", "slimdevils/obenpaper-pins")
+def git(*args, check=True):
+    return subprocess.run(["git", *args], cwd=REPO_ROOT, capture_output=True, text=True, check=check)
 
 
-def can_write_secret():
-    """Pre-flight: the PAT in GH_TOKEN must reach this repo's secrets."""
-    if not os.environ.get("GH_TOKEN"):
-        return False, "GH_TOKEN is empty — the PINTEREST_SECRETS_PAT secret is not set"
-    probe = subprocess.run(
-        ["gh", "secret", "list", "--repo", repo()],
-        capture_output=True, text=True,
-    )
-    if probe.returncode != 0:
-        return False, "the PAT cannot read this repo's secrets (needs Secrets: Read and write)"
-    return True, ""
+def can_push():
+    result = git("push", "--dry-run", "origin", "HEAD:main", check=False)
+    return result.returncode == 0
 
 
-def write_secret(token):
-    body = json.dumps(token)
-    for attempt in range(1, 4):
-        result = subprocess.run(
-            ["gh", "secret", "set", SECRET_NAME, "--repo", repo()],
-            input=body, capture_output=True, text=True,
-        )
-        if result.returncode == 0:
+def push_state(message):
+    """Commit and push state/ now. Returns True once it is on origin/main."""
+    git("config", "user.name", "obenpaper-publisher")
+    git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
+    git("add", "pinterest-api/state")
+    if git("diff", "--cached", "--quiet", check=False).returncode == 0:
+        return True
+    git("commit", "-m", message)
+    for _ in range(4):
+        if git("pull", "--rebase", "origin", "main", check=False).returncode == 0 and \
+                git("push", "origin", "HEAD:main", check=False).returncode == 0:
             return True
-        print(f"Saving {SECRET_NAME} failed (attempt {attempt}/3).")
-        time.sleep(5)
+        time.sleep(8)
     return False
 
 
 def write_meta(token, refreshed):
     os.makedirs(STATE_DIR, exist_ok=True)
+    previous = {}
+    if os.path.exists(META_PATH):
+        with open(META_PATH, "r", encoding="utf-8") as fh:
+            previous = json.load(fh)
     meta = {
-        "refreshed_at": day(token.get("obtained_at")) if refreshed else None,
+        "refreshed_at": day(token["obtained_at"]) if refreshed else previous.get("refreshed_at"),
         "access_token_expires": day(token["obtained_at"] + token["expires_in"]),
         "refresh_token_expires": day(refresh_expires_at(token)),
     }
-    if not refreshed and os.path.exists(META_PATH):
-        with open(META_PATH, "r", encoding="utf-8") as fh:
-            meta["refreshed_at"] = json.load(fh).get("refreshed_at")
     with open(META_PATH, "w", encoding="utf-8") as fh:
         json.dump(meta, fh, indent=2)
         fh.write("\n")
 
 
 def main():
-    raw = os.environ.get("PINTEREST_TOKEN", "").strip()
-    if not raw:
-        print("PINTEREST_TOKEN is not set — the publisher is not configured yet. Skipping.")
+    key = os.environ.get("PINTEREST_KEY", "").strip()
+    if not key or not os.path.exists(TOKEN_ENC_PATH):
+        print("Publisher not configured yet (PINTEREST_KEY or state/token.enc missing). "
+              "Run setup_cloud.py once. Skipping.")
         gh_output("configured", "false")
         return 0
+    add_mask(key)
 
-    try:
-        token = json.loads(raw)
-    except json.JSONDecodeError:
-        sys.exit("PINTEREST_TOKEN is not valid JSON. Re-seed it with seed_cloud_token.py.")
-    add_mask(token.get("access_token"))
-    add_mask(token.get("refresh_token"))
+    bundle = decrypt_bundle(key)
+    for field in ("access_token", "refresh_token", "client_secret"):
+        add_mask(bundle.get(field))
 
-    cfg = load_config()
     now = time.time()
-    access_left = seconds_left(token)
-    refresh_at = refresh_expires_at(token)
-
+    access_left = seconds_left(bundle)
+    refresh_at = refresh_expires_at(bundle)
     if refresh_at and refresh_at < now:
-        sys.exit("The refresh token has expired. Re-authorize locally (pinterest_auth.py) "
-                 "and re-seed with seed_cloud_token.py.")
+        sys.exit("The Pinterest refresh token has expired. Run setup_cloud.py again.")
 
     needs_refresh = (
         access_left is None
@@ -148,33 +131,33 @@ def main():
     )
 
     if needs_refresh:
-        ok, why = can_write_secret()
-        if not ok:
-            sys.exit(f"Refresh needed but NOT attempted: {why}. "
-                     "Refreshing now would spend the refresh token with nowhere to save "
-                     "its replacement.")
+        if not can_push():
+            sys.exit("Refresh needed but NOT attempted: this run cannot push to the repo, so the "
+                     "rotated token would have nowhere to go.")
         print("Refreshing the Pinterest access token...")
-        token = stamp(request_refresh(cfg, token))
-        add_mask(token.get("access_token"))
-        add_mask(token.get("refresh_token"))
-        if not write_secret(token):
-            sys.exit("TOKEN ROTATED BUT NOT SAVED. The old refresh token is spent and the new "
-                     "one is lost. Re-authorize locally (pinterest_auth.py) and re-seed with "
-                     "seed_cloud_token.py before the next run.")
-        print(f"Rotated token saved to the {SECRET_NAME} secret.")
+        payload = request_refresh(bundle, bundle)
+        add_mask(payload.get("access_token"))
+        add_mask(payload.get("refresh_token"))
+        bundle = stamp({**bundle, **payload})
+        encrypt_bundle(bundle, key)
+        write_meta(bundle, refreshed=True)
+        if not push_state("Rotate Pinterest token [skip ci]"):
+            sys.exit("TOKEN ROTATED BUT NOT PUSHED. The old refresh token is spent; the new one "
+                     "is only on this runner. Run setup_cloud.py again.")
+        print("Rotated token encrypted and pushed (state/token.enc).")
+    elif not os.path.exists(META_PATH):
+        write_meta(bundle, refreshed=False)
 
-    write_meta(token, refreshed=needs_refresh)
-
-    temp_dir = os.environ.get("RUNNER_TEMP") or HERE
+    temp_dir = os.environ.get("RUNNER_TEMP") or STATE_DIR
     path = os.path.join(temp_dir, "pinterest_token.json")
     with open(path, "w", encoding="utf-8") as fh:
-        json.dump(token, fh)
+        json.dump(bundle, fh)
     os.chmod(path, 0o600)
     gh_env("PINTEREST_TOKEN_FILE", path)
     gh_output("configured", "true")
 
-    print(f"Access token valid until {day(token['obtained_at'] + token['expires_in'])}; "
-          f"refresh token until {day(refresh_expires_at(token))}.")
+    print(f"Access token valid until {day(bundle['obtained_at'] + bundle['expires_in'])}; "
+          f"refresh token until {day(refresh_expires_at(bundle))}.")
     return 0
 
 

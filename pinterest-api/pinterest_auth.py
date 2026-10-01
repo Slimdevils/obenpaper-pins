@@ -61,8 +61,8 @@ class CallbackHandler(BaseHTTPRequestHandler):
         pass  # keep the terminal clean for the recording
 
 
-def main():
-    cfg = load_config()
+def authorize(cfg):
+    """Run the browser consent and return Pinterest's token payload."""
     state = "obenpaper-" + str(abs(hash(cfg["client_id"])) % 10**8)
 
     query = urllib.parse.urlencode(
@@ -118,14 +118,19 @@ def main():
     if resp.status_code != 200:
         sys.exit(f"Token exchange failed ({resp.status_code}): {resp.text}")
 
-    payload = resp.json()
+    return resp.json()
+
+
+def main():
+    cfg = load_config()
+    payload = authorize(cfg)
     save_token(payload)
 
     print("\ntoken.json written (file permissions 600).")
     print(f"  granted scope : {payload.get('scope', '(not returned)')}")
     print(f"  expires_in    : {payload.get('expires_in')} seconds")
     print(f"  refresh token : {'present' if payload.get('refresh_token') else 'MISSING'}")
-    print("\nNext: python pinterest_boards.py")
+    print("\nFor the automatic cloud publisher, use setup_cloud.py instead.")
 
 
 if __name__ == "__main__":

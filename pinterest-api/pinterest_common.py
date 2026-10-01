@@ -2,9 +2,9 @@
 
 Two modes:
   - LOCAL (default): config.json + token.json in this folder, as before.
-  - CLOUD (OBENPAPER_CLOUD=1, set by the GitHub Actions workflow): config
-    comes from environment variables, and the access token from the file that
-    cloud_token.py writes. In cloud mode this module never refreshes the token
+  - CLOUD (OBENPAPER_CLOUD=1, set by the GitHub Actions workflow): the
+    credentials and the access token come from the file that cloud_token.py
+    decrypts from state/token.enc. In cloud mode this module never refreshes the token
     itself — cloud_token.py owns rotation, because Pinterest spends the old
     refresh token on every refresh and the new one must be saved at once.
 
@@ -56,10 +56,17 @@ def mask(value):
 
 
 def _cloud_config():
-    owner, _, repo = os.environ.get("GITHUB_REPOSITORY", "slimdevils/obenpaper-pins").partition("/")
+    """Cloud mode: credentials come from the decrypted bundle that
+    cloud_token.py wrote to PINTEREST_TOKEN_FILE (never from the repo)."""
+    owner, _, repo = os.environ.get("GITHUB_REPOSITORY", "Slimdevils/obenpaper-pins").partition("/")
+    bundle = {}
+    path = os.environ.get("PINTEREST_TOKEN_FILE")
+    if path and os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as fh:
+            bundle = json.load(fh)
     cfg = {
-        "client_id": os.environ.get("PINTEREST_CLIENT_ID", ""),
-        "client_secret": os.environ.get("PINTEREST_CLIENT_SECRET", ""),
+        "client_id": bundle.get("client_id", ""),
+        "client_secret": bundle.get("client_secret", ""),
         "github_owner": owner,
         "github_repo": repo,
         "github_branch": os.environ.get("GITHUB_REF_NAME", "main"),
@@ -67,10 +74,8 @@ def _cloud_config():
         "images_dir": os.path.join(os.path.dirname(HERE), "pins"),
         "max_posts_per_run": int(os.environ.get("MAX_POSTS_PER_RUN", "1")),
     }
-    missing = [k for k in ("client_id", "client_secret") if not cfg[k]]
-    if missing:
-        sys.exit("Cloud mode is missing repository secrets: "
-                 + ", ".join("PINTEREST_" + k.upper() for k in missing))
+    if not cfg["client_id"] or not cfg["client_secret"]:
+        sys.exit("Cloud mode has no credentials — cloud_token.py must run first.")
     return cfg
 
 

@@ -1,0 +1,392 @@
+{
+  "_rule": "The ONLY subjects the weekly pin agent may pin, and the only facts it may state about them. Every fact is copied from the project-context md (§01 accents, §02 catalogue), the pinterest-pins skill's boards.md, or obenpaper-site lib/products.json and lib/tools.json. Copy may rephrase a fact; it may never add one (no page counts, features, prices or claims that are not listed here). A product with no Pinterest board is not here: it gets pinned once its board exists. In Tune FR stays out until its listing is live (§07a gating).",
+  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json)",
+  "subjects": [
+    {
+      "key": "student-planner",
+      "product": "Student Planner",
+      "kind": "product",
+      "board": "student_planner",
+      "link": "https://shop.obenpaper.com/b/YpUmC",
+      "guardrail": "general",
+      "accent": {
+        "main": "#6E5582",
+        "dark": "#574169",
+        "bg": "#E5DAEA"
+      },
+      "previews": "previews/student-planner",
+      "facts": [
+        "Student Planner 2026–27",
+        "Dated and undated editions in one download",
+        "Dated edition 76 pages, undated edition 34 pages",
+        "Formats: tablet (hyperlinked, for apps like GoodNotes and Notability), A4 and US Letter",
+        "Dashboard pages: year at a glance, courses, timetable, goals and focus, monthly, weekly, exams and study, grades",
+        "Instant digital download",
+        "Pages shown in the previews: My Year dashboard, year at a glance, courses, weekly timetable, goals & focus, exams & study plan, grade tracker, monthly calendar"
+      ]
+    },
+    {
+      "key": "in-session",
+      "product": "In Session",
+      "kind": "product",
+      "board": "teacher_planner",
+      "link": "https://shop.obenpaper.com/b/XFteK",
+      "guardrail": "general",
+      "accent": {
+        "main": "#E8983C",
+        "dark": "#C0741C",
+        "bg": "#F6DEC0"
+      },
+      "previews": "previews/in-session",
+      "facts": [
+        "In Session — a teacher planner and lesson plan book",
+        "Undated: start any week of any year and reuse it term after term",
+        "Lesson planning pages, class timetables, class rosters, attendance and gradebook grids",
+        "Sections: setup, class, plan, track, notes",
+        "Formats: tablet (folder tabs to jump between sections in GoodNotes, Notability or any tablet app), A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: how to use this plan book, my teaching year, my timetable, year at a glance, important dates & events, class roster, seating chart, birthdays & celebrations"
+      ]
+    },
+    {
+      "key": "in-check",
+      "product": "In Check",
+      "kind": "product",
+      "board": "mindful_drinking",
+      "link": "https://shop.obenpaper.com/b/97gJi",
+      "guardrail": "in_check",
+      "accent": {
+        "main": "#66C2AC",
+        "dark": "#3C8C78",
+        "bg": "#E7F4F0"
+      },
+      "previews": "previews/in-check",
+      "facts": [
+        "In Check — a mindful-drinking and alcohol-free journal",
+        "For going fully alcohol-free or simply drinking less — you choose your pace",
+        "The 'Surf the urge' log: notice, pause, swap, reflect",
+        "Urge logs, milestones and resets",
+        "No streaks to break: a slip is a data point, not a failure",
+        "17 pages; formats: tablet (landscape), A4 and US Letter",
+        "Wellness and habit framing only — never treatment, therapy or a cure",
+        "Pages shown in the previews: contents, how to use this journal, your why, the 30-day reset, daily check-in"
+      ]
+    },
+    {
+      "key": "in-tune",
+      "product": "In Tune",
+      "kind": "product",
+      "board": "cycle_tracking",
+      "link": "https://shop.obenpaper.com/b/fOJe0",
+      "guardrail": "in_tune_en",
+      "accent": {
+        "main": "#B5375A",
+        "dark": "#8E2A46",
+        "bg": "#EFE2DD"
+      },
+      "previews": "previews/in-tune",
+      "facts": [
+        "In Tune — a cycle and wellness journal",
+        "Cycle and symptom tracking, 28-day grids, phase awareness, mood and PMS check-ins",
+        "25 pages; formats: tablet, A4 and US Letter",
+        "Awareness only — never contraception, fertility or conception planning; ovulation may appear only as a phase label, never a selling point",
+        "Pages shown in the previews: how to use this journal, your cycle simply, know your normal, year at a glance, predict your next period, monthly cycle tracker, period log"
+      ]
+    },
+    {
+      "key": "travel-pair",
+      "product": "Travel Pair",
+      "kind": "product",
+      "board": "solo_travel",
+      "link": "https://shop.obenpaper.com/b/YDASl",
+      "guardrail": "general",
+      "accent": {
+        "main": "#BD6B4E",
+        "dark": "#9E5439",
+        "bg": "#EADBC6"
+      },
+      "previews": "previews/solo-travel-planner",
+      "previews_extra": "previews/travel-journal",
+      "facts": [
+        "Travel Pair — the Solo Travel Planner and the Travel Journal & Planner together in one bundle",
+        "Plan the trip, then keep the journal",
+        "Five PDFs in one download",
+        "Pages shown in the previews: your trip your way (plan & book, see do & eat, solo safety, budget, day by day, people & reflect), trip overview, before you go, packing list, see & do; and from the journal: how to use this journal (dream, plan, live, look back), my year of travel, travel bucket list, travel fund, trip overview"
+      ]
+    },
+    {
+      "key": "solo-travel-planner",
+      "product": "Solo Travel Planner",
+      "kind": "product",
+      "board": "solo_travel",
+      "link": "https://shop.obenpaper.com/b/rMuU1",
+      "guardrail": "general",
+      "accent": {
+        "main": "#BD6B4E",
+        "dark": "#9E5439",
+        "bg": "#EADBC6"
+      },
+      "previews": "previews/solo-travel-planner",
+      "facts": [
+        "Solo Travel Planner — trip templates and packing lists for travelling on your own",
+        "17 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: your trip your way (plan & book, see do & eat, solo safety, budget, day by day, people & reflect), trip overview, before you go, packing list, see & do"
+      ]
+    },
+    {
+      "key": "travel-journal",
+      "product": "Travel Journal & Planner",
+      "kind": "product",
+      "board": "solo_travel",
+      "link": "https://shop.obenpaper.com/b/dJRvG",
+      "guardrail": "general",
+      "accent": {
+        "main": "#4A8FB8",
+        "dark": "#357197",
+        "bg": "#EEE3D3"
+      },
+      "previews": "previews/travel-journal",
+      "facts": [
+        "Travel Journal & Planner — a printable travel journal",
+        "21 pages; print formats: A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: how to use this journal (dream, plan, live, look back), my year of travel, travel bucket list, travel fund, trip overview"
+      ]
+    },
+    {
+      "key": "quiz",
+      "product": "Planner Quiz",
+      "kind": "site",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/quiz",
+      "guardrail": "general",
+      "accent": {
+        "main": "#3B302B",
+        "dark": "#3B302B",
+        "bg": "#FDF8F2"
+      },
+      "facts": [
+        "A free quiz that matches you to a planner",
+        "Free in the browser, nothing to download, no sign-up"
+      ]
+    },
+    {
+      "key": "tools",
+      "product": "Free Planner Tools",
+      "kind": "site",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#3B302B",
+        "dark": "#3B302B",
+        "bg": "#FDF8F2"
+      },
+      "facts": [
+        "Small free calculators for budgets, books, wardrobes, study, trips and more",
+        "Free in the browser, nothing to download, no sign-up"
+      ]
+    },
+    {
+      "key": "focus",
+      "product": "Focus Timer",
+      "kind": "site",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/focus",
+      "guardrail": "general",
+      "accent": {
+        "main": "#3B302B",
+        "dark": "#3B302B",
+        "bg": "#FDF8F2"
+      },
+      "facts": [
+        "A quiet focus timer",
+        "Free in the browser, nothing to download, no sign-up"
+      ]
+    },
+    {
+      "key": "made-to-order",
+      "product": "Made to Order",
+      "kind": "site",
+      "board": "custom_planners",
+      "link": "https://obenpaper.com/made-to-order",
+      "guardrail": "general",
+      "accent": {
+        "main": "#3B302B",
+        "dark": "#3B302B",
+        "bg": "#FDF8F2"
+      },
+      "facts": [
+        "Made-to-order printable planners: choose your own colour, cover lettering, format and pages",
+        "Custom digital planners for tablet, A4 and US Letter",
+        "Made one at a time, with a free sample before you pay"
+      ]
+    },
+    {
+      "key": "tool-final-score",
+      "product": "Final Score Tool",
+      "kind": "tool",
+      "board": "student_planner",
+      "link": "https://obenpaper.com/tools/final-score",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#6E5582",
+        "dark": "#574169",
+        "bg": "#E5DAEA"
+      },
+      "facts": [
+        "What you need on the final — a free calculator",
+        "Put in what each piece of the course is worth and what you scored; it works out the mark you need on what's left",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-trip-spend",
+      "product": "Trip Spend Tool",
+      "kind": "tool",
+      "board": "solo_travel",
+      "link": "https://obenpaper.com/tools/trip-spend",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#BD6B4E",
+        "dark": "#9E5439",
+        "bg": "#EADBC6"
+      },
+      "facts": [
+        "What a trip leaves you a day — a free calculator",
+        "Take the flights and the beds off the top first, then divide what remains by the days: your real daily spend",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-compound-interest",
+      "product": "Savings Growth Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/compound-interest",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#0E5F7E",
+        "dark": "#0A4459",
+        "bg": "#DDEAF0"
+      },
+      "facts": [
+        "What savings grow into — a free calculator",
+        "Put in what you start with, what you add each month and how long you leave it; it shows what you paid in and what the growth added",
+        "Shows numbers only — never advice on what to do with money",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-cost-per-wear",
+      "product": "Cost per Wear Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/cost-per-wear",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#7E5640",
+        "dark": "#5A3C2C",
+        "bg": "#ECE3DA"
+      },
+      "facts": [
+        "Cost per wear — a free calculator",
+        "What something cost, divided by how many times you have actually worn it",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-scale-recipe",
+      "product": "Recipe Scaler Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/scale-recipe",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#BE3A68",
+        "dark": "#9C2C52",
+        "bg": "#F1DEE5"
+      },
+      "facts": [
+        "Scale a recipe — a free tool",
+        "Paste an ingredient list, say how many it serves and how many you need; every quantity is rescaled",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-books-per-year",
+      "product": "Books a Year Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/books-per-year",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#A94E28",
+        "dark": "#7C371C",
+        "bg": "#F3E0D7"
+      },
+      "facts": [
+        "Books a year — a free calculator",
+        "Put in your minutes of reading a day and see the year",
+        "Twenty minutes a day is more books than most people expect",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-week-hours",
+      "product": "Week Hours Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/week-hours",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#8FAE7A",
+        "dark": "#6E9159",
+        "bg": "#EDE7D8"
+      },
+      "facts": [
+        "Where the week goes — a free calculator",
+        "A week is 168 hours: put in what already has a claim on them and see what is genuinely left",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-backlog",
+      "product": "Backlog Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/backlog",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#5A4FCF",
+        "dark": "#3F37A6",
+        "bg": "#E6E3F5"
+      },
+      "facts": [
+        "When the backlog clears — a free calculator for games",
+        "How many hours are sitting unplayed, and how many you get in a week; it gives you the date",
+        "Free in the browser, no sign-up"
+      ]
+    },
+    {
+      "key": "tool-bedtime",
+      "product": "Bedtime Tool",
+      "kind": "tool",
+      "board": "free_tools",
+      "link": "https://obenpaper.com/tools/bedtime",
+      "guardrail": "tools",
+      "accent": {
+        "main": "#3F4C81",
+        "dark": "#2D3861",
+        "bg": "#EDEEF4"
+      },
+      "facts": [
+        "Work backwards to bedtime — a free calculator",
+        "Set the time you have to be up and the hours you want; it counts back, including how long you take to drop off",
+        "Clock arithmetic only — no sleep-cycle language, no promises about sleep",
+        "Free in the browser, no sign-up"
+      ]
+    }
+  ]
+}
