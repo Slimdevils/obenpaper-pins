@@ -41,7 +41,8 @@ REDIRECT_URI = "http://localhost:8085/callback"
 def git(*args):
     """Run git; return True on success. Never stops the setup: a failed push
     must not lose the key (that is what happened on 19 Oct 2026)."""
-    result = subprocess.run(["git", *args], cwd=REPO_ROOT, capture_output=True, text=True)
+    env = {**os.environ, "GIT_TERMINAL_PROMPT": "0"}   # never stop to ask for a GitHub login
+    result = subprocess.run(["git", *args], cwd=REPO_ROOT, capture_output=True, text=True, env=env)
     return result.returncode == 0
 
 
