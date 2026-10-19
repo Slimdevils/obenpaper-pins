@@ -1,11 +1,13 @@
 {
   "student_planner": "1119003907354606095",
-  "mindful_drinking": null,
-  "cycle_tracking": null,
-  "solo_travel": null,
-  "cycle_fr": null,
+  "teacher_planner": "1119003907354606087",
   "free_tools": "1119003907354604811",
   "custom_planners": "1119003907354604812",
-  "teacher_planner": "1119003907354606087",
+  "self_care": "1119003907354513332",
+  "travel": "1119003907354513337",
+  "planners": "1119003907354513333",
+  "home": "1119003907354513335",
+  "hobbies": "1119003907354513338",
+  "work_finance": "1119003907354513331",
   "scratch": null
 }

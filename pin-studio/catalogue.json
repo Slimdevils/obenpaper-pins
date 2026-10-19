@@ -52,7 +52,7 @@
       "key": "in-check",
       "product": "In Check",
       "kind": "product",
-      "board": "mindful_drinking",
+      "board": "self_care",
       "link": "https://shop.obenpaper.com/b/97gJi",
       "guardrail": "in_check",
       "accent": {
@@ -76,7 +76,7 @@
       "key": "in-tune",
       "product": "In Tune",
       "kind": "product",
-      "board": "cycle_tracking",
+      "board": "self_care",
       "link": "https://shop.obenpaper.com/b/fOJe0",
       "guardrail": "in_tune_en",
       "accent": {
@@ -97,7 +97,7 @@
       "key": "travel-pair",
       "product": "Travel Pair",
       "kind": "product",
-      "board": "solo_travel",
+      "board": "travel",
       "link": "https://shop.obenpaper.com/b/YDASl",
       "guardrail": "general",
       "accent": {
@@ -118,7 +118,7 @@
       "key": "solo-travel-planner",
       "product": "Solo Travel Planner",
       "kind": "product",
-      "board": "solo_travel",
+      "board": "travel",
       "link": "https://shop.obenpaper.com/b/rMuU1",
       "guardrail": "general",
       "accent": {
@@ -138,7 +138,7 @@
       "key": "travel-journal",
       "product": "Travel Journal & Planner",
       "kind": "product",
-      "board": "solo_travel",
+      "board": "travel",
       "link": "https://shop.obenpaper.com/b/dJRvG",
       "guardrail": "general",
       "accent": {
@@ -245,7 +245,7 @@
       "key": "tool-trip-spend",
       "product": "Trip Spend Tool",
       "kind": "tool",
-      "board": "solo_travel",
+      "board": "travel",
       "link": "https://obenpaper.com/tools/trip-spend",
       "guardrail": "tools",
       "accent": {

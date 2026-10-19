@@ -12,22 +12,31 @@ from zoneinfo import ZoneInfo
 TIMEZONE = ZoneInfo("Europe/Zurich")
 
 # --- Boards -----------------------------------------------------------------
-# Category key -> EXACT board name on the account (boards.md, eight boards as
-# of 18 Aug 2026). board_map.json maps each key to the real board ID; in the
-# cloud, a null entry is filled automatically from the board whose name matches
-# exactly (case-insensitive) — never by a near match. Add a key here only when
-# the board actually exists on the account.
+# Category key -> board name AS IT EXISTS ON THE ACCOUNT, read through the API
+# on 19 Oct 2026 (pinterest-api/state/account_boards.json). The account is
+# organised by collection, not by the per-niche boards boards.md listed in
+# August — those (Mindful Drinking, Cycle Tracking, Solo Travel, the FR board)
+# do not exist on it. board_map.json maps each key to the board's ID; in the
+# cloud a null entry is filled from the name (spelling-tolerant, never a near
+# match). Add a key only when the board actually exists on the account.
 BOARDS = {
     "student_planner": "Student Planner & Study Organization",
-    "mindful_drinking": "Mindful Drinking & Sober Curious",
-    "cycle_tracking": "Cycle Tracking & Wellness",
-    "solo_travel": "Solo Travel Planning & Journals",
-    "cycle_fr": "Carnet de cycle & bien-être",  # FR pins stay gated (§07a)
+    "teacher_planner": "Teacher Planner & Lesson Plan Book",
     "free_tools": "Free Planner Tools & Quizzes",
     "custom_planners": "Custom & Personalised Planners",
-    "teacher_planner": "Teacher Planner & Lesson Plan Book",
+    "self_care": "Self Care & Wellness",
+    "travel": "Travel",
+    "planners": "Planners & Productivity",
+    "home": "Home & Lifestyle",
+    "hobbies": "Hobbies & Downtime",
+    "work_finance": "Work & Finance",
     "scratch": "zz-api-test",  # Trial testing only
 }
+
+# There is no French board on the account: an FR product cannot be pinned
+# until one exists (In Tune FR is gated on its listing anyway, §07a).
+FR_BOARD = None
+
 
 # --- Destinations -----------------------------------------------------------
 SHOP_HOST = "shop.obenpaper.com"

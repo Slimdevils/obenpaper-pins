@@ -116,12 +116,13 @@ class BoardAndCopyRules(unittest.TestCase):
         self.assertTrue(any("not mapped yet" in w for w in warnings))
 
     def test_fr_product_only_on_fr_board(self):
-        p = pin("A", "In Tune FR", 1, category="cycle_tracking")
-        self.assertTrue(any("FR board only" in e for e in errors_for([p])))
+        p = pin("A", "In Tune FR", 1, category="self_care")
+        self.assertTrue(any("French board" in e for e in errors_for([p])))
 
-    def test_fr_board_only_takes_fr(self):
-        p = pin("A", "In Tune", 1, category="cycle_fr")
-        self.assertTrue(any("only takes FR" in e for e in errors_for([p])))
+    def test_english_product_on_self_care_ok(self):
+        p = pin("A", "In Tune", 1, category="self_care", guardrail="in_tune_en",
+                link="https://shop.obenpaper.com/b/fOJe0")
+        self.assertEqual(errors_for([p]), [])
 
     def test_title_over_limit_refused_not_truncated(self):
         p = pin("A", "Student Planner", 1, title="x" * 101)
@@ -138,7 +139,7 @@ class BoardAndCopyRules(unittest.TestCase):
 
 class Guardrail(unittest.TestCase):
     def test_off_limits_term_refused(self):
-        p = pin("A", "In Check", 1, category="mindful_drinking", guardrail="in_check",
+        p = pin("A", "In Check", 1, category="self_care", guardrail="in_check",
                 link="https://shop.obenpaper.com/b/97gJi",
                 description="A journal that works like therapy for cutting back.")
         self.assertTrue(any("off-limits term 'therapy'" in e for e in errors_for([p])))
@@ -157,7 +158,7 @@ class Guardrail(unittest.TestCase):
         self.assertTrue(any("in alt_text" in w for w in warnings))
 
     def test_line_break_does_not_hide_a_term(self):
-        p = pin("A", "In Tune", 1, category="cycle_tracking", guardrail="in_tune_en",
+        p = pin("A", "In Tune", 1, category="self_care", guardrail="in_tune_en",
                 link="https://shop.obenpaper.com/b/fOJe0",
                 description="Not for anyone trying to\nconceive.")
         self.assertTrue(any("trying to conceive" in e for e in errors_for([p])))
@@ -318,5 +319,5 @@ class BoardResolution(unittest.TestCase):
             filled, names = pinterest_boards.resolve_missing({}, board_map, boards)
         self.assertEqual(board_map["student_planner"], "111")
         self.assertEqual(board_map["free_tools"], "222")
-        self.assertIsNone(board_map["solo_travel"])
+        self.assertIsNone(board_map["travel"])          # "Solo Travel" is not "Travel"
         self.assertEqual(sorted(filled), ["free_tools", "student_planner"])

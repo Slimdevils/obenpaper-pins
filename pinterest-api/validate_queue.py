@@ -35,6 +35,7 @@ from urllib.parse import urlsplit
 
 from obenpaper_rules import (
     BOARDS,
+    FR_BOARD,
     IMAGE_EXTENSIONS,
     LIMITS,
     MAX_GAP_DAYS,
@@ -159,10 +160,10 @@ def check_pin(pin, board_map, require_boards=True):
         errors.append(f"category '{category}' has no board ID in board_map.json")
 
     product = pin["product"]
-    if category == "cycle_fr" and not is_fr(product):
+    if is_fr(product) and (FR_BOARD is None or category != FR_BOARD):
+        errors.append("an FR product pins only to a French board — none exists on the account yet")
+    elif FR_BOARD and category == FR_BOARD and not is_fr(product):
         errors.append("the FR board only takes FR products (product name must end in ' FR')")
-    if is_fr(product) and category != "cycle_fr":
-        errors.append("an FR product pins to the FR board only")
 
     errors.extend(check_link(pin, category))
 
