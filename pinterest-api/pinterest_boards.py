@@ -102,6 +102,15 @@ def main():
         match = by_name.get(normalise(name))
         print(f"  {key:<17} {match or '— no board with exactly this name':<36} {name}")
 
+    # Board names are public on Pinterest anyway; recorded so a session that
+    # cannot read the Actions log can still see them.
+    state_dir = os.path.join(HERE, "state")
+    os.makedirs(state_dir, exist_ok=True)
+    with open(os.path.join(state_dir, "account_boards.json"), "w", encoding="utf-8") as fh:
+        json.dump(sorted(({"name": b.get("name"), "id": b.get("id"), "privacy": b.get("privacy")}
+                          for b in boards), key=lambda b: b["name"] or ""), fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
+
     if os.path.exists(MAP_PATH):
         print(f"\nboard_map.json already exists — leaving it untouched.")
         print("Delete it first if you want a fresh skeleton.")
