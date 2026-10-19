@@ -39,10 +39,10 @@ REDIRECT_URI = "http://localhost:8085/callback"
 
 
 def git(*args):
+    """Run git; return True on success. Never stops the setup: a failed push
+    must not lose the key (that is what happened on 19 Oct 2026)."""
     result = subprocess.run(["git", *args], cwd=REPO_ROOT, capture_output=True, text=True)
-    if result.returncode != 0:
-        sys.exit(f"git {' '.join(args)} failed:\n{result.stderr.strip()}")
-    return result.stdout
+    return result.returncode == 0
 
 
 def credentials():
@@ -61,40 +61,47 @@ def credentials():
 
 
 def main():
-    print("Updating the local clone...")
-    git("pull", "--rebase", "origin", "main")
+    print("Mise à jour du dossier...")
+    if not git("pull", "--rebase", "origin", "main"):
+        print("  (mise à jour impossible — on continue quand même)")
 
     client_id, client_secret, redirect_uri = credentials()
     cfg = {"client_id": client_id, "client_secret": client_secret, "redirect_uri": redirect_uri}
 
-    print("\nOpening Pinterest — click 'Give access' in the browser.")
+    print("\nPinterest va s'ouvrir dans le navigateur — clique sur « Give access ».")
     payload = authorize(cfg)
     if not payload.get("refresh_token"):
-        sys.exit("Pinterest returned no refresh token — nothing was saved.")
+        sys.exit("Pinterest n'a pas renvoyé de refresh token — rien n'a été enregistré.")
 
     key = new_key()
     bundle = stamp({**payload, "client_id": client_id, "client_secret": client_secret})
     encrypt_bundle(bundle, key)
-    print("Token encrypted into state/token.enc.")
+    print("Token chiffré dans pinterest-api/state/token.enc.")
 
-    git("add", os.path.relpath(TOKEN_ENC_PATH, REPO_ROOT))
+    rel = os.path.relpath(TOKEN_ENC_PATH, REPO_ROOT)
+    git("add", rel)
     git("commit", "-m", "Set up the Pinterest publisher token [skip ci]")
-    git("push", "origin", "HEAD:main")
-    print("Pushed.")
+    if git("push", "origin", "HEAD:main"):
+        print("Fichier envoyé sur GitHub.")
+    else:
+        print("Envoi sur GitHub impossible depuis ce Mac — pas grave : dis à Claude "
+              "« c'est fait », il enverra le fichier lui-même.")
 
     if shutil.which("gh"):
         result = subprocess.run(["gh", "secret", "set", "PINTEREST_KEY", "--repo", REPO],
                                 input=key, capture_output=True, text=True)
         if result.returncode == 0:
-            print("\nPINTEREST_KEY secret set via gh. Setup complete — nothing else to do.")
+            print("\nClé PINTEREST_KEY enregistrée sur GitHub. Terminé.")
             return
-        print(f"\ngh could not set the secret ({result.stderr.strip()}). Do it by hand:")
 
-    print("\nLast step — store the key as a repository secret:")
-    print(f"  1. Open https://github.com/{REPO}/settings/secrets/actions/new")
-    print("  2. Name:   PINTEREST_KEY")
-    print(f"  3. Secret: {key}")
-    print("\nThis key is shown once and saved nowhere else. Setup is complete once it is pasted.")
+    print("\n" + "=" * 64)
+    print("DERNIÈRE ÉTAPE — enregistrer la clé sur GitHub :")
+    print(f"  1. Ouvre https://github.com/{REPO}/settings/secrets/actions/new")
+    print("  2. Name :   PINTEREST_KEY")
+    print(f"  3. Secret : {key}")
+    print("  4. Clique « Add secret ».")
+    print("=" * 64)
+    print("Cette clé n'est affichée qu'une fois et n'est enregistrée nulle part ailleurs.")
 
 
 if __name__ == "__main__":
