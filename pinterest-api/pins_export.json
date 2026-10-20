@@ -170,5 +170,29 @@
       ]
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-03-tool-final-score",
+    "subject": "tool-final-score",
+    "product": "Final Score Tool",
+    "category": "student_planner",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/final-score",
+    "image_file": "a-2026-11-03-tool-final-score.png",
+    "image_url": "",
+    "title": "Final Exam Grade Calculator — What You Need on the Final",
+    "description": "A free calculator for students: put in what each piece of the course is worth and what you scored, and it works out the mark you need on what's left. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a soft plum background titled 'The mark you need on the final', explaining that you enter what each part of the course is worth and what you scored, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-03T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · final score",
+      "headline": "What do you need on the final?",
+      "subline": "Your scores so far in, the mark you need out",
+      "card_title": "The mark you need on the final",
+      "card_text": "Put in what each piece of the course is worth and what you scored. It works out the mark you need on what's left.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
   }
 ]
