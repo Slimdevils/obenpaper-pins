@@ -25,6 +25,13 @@ every week (Claude, scheduled task)                     every hour (GitHub Actio
   guardrail lines are filled by `studio.py` from the catalogue, never typed.
 - **Posting pins** — `pinterest-api/`. The hourly workflow posts at most one
   due pin per run. A pin more than 24 h late is never posted late.
+- **Video pins** (since 22 Oct 2026) — a pin with `"media": "video"` carries an
+  11–13 s MP4 flip-through of the product's real pages (`pins/<id>.mp4`) and
+  its PNG cover (`pins/<id>.png`). The publisher uploads the video through
+  Pinterest's media API (`pinterest_video.py`) and uses the PNG as the cover.
+  If Pinterest refuses video uploads for the app outright, the pin posts as an
+  image with that cover and the run says so; an upload that starts but does
+  not finish is retried next hour, inside the pin's 24 h window.
 
 ## Rules enforced on every pin (the queue is refused on any error)
 
@@ -39,6 +46,7 @@ every week (Claude, scheduled task)                     every hour (GitHub Actio
 | Alternate products, 1–2 day spacing | never the same product twice running, never two pins on one day |
 | Fresh pins | a subject at most once every 6 days; a page combination never reused (studio) |
 | Pinterest limits | title 100, description/alt 500 — refused, never truncated |
+| Media | image pins: a PNG/JPG; video pins: `media: "video"`, an `.mp4` `video_file` and a PNG cover as `image_file` |
 | Board exists | board IDs are filled automatically from the account's board names (spelling-tolerant, never a near match); a missing board blocks only its own pins |
 
 ## One-time setup — the only thing Luc does
@@ -80,6 +88,9 @@ scheduled workflows after 60 days without a commit).
 | `pin-studio/catalogue.json` | The only subjects that may be pinned, with their facts, accents, board, link |
 | `pin-studio/studio.py` | `status` · `slots` · `add batch.json` (fills, renders, validates) |
 | `pin-studio/render_tile.py` | 1000×1500 tiles in the house look (§01) |
+| `pin-studio/video_spec.py`, `video/` | Video pins and listing videos: text fitted like a tile, rendered with Remotion (`npm ci --prefix pin-studio/video` once) |
+| `pin-studio/listing_video.py` | Square/landscape listing videos for Etsy and Payhip, from an obenpaper-site checkout |
+| `pinterest-api/pinterest_video.py` | Uploads a pin's video to Pinterest (register, upload, wait) |
 | `pin-studio/previews/`, `fonts/` | Product page previews (from the site) and the house fonts |
 | `pinterest-api/validate_queue.py` | The rules above |
 | `pinterest-api/pinterest_publish.py` | Posts due pins (`--dry-run`, `--pin ID`) |

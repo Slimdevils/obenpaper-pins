@@ -10,7 +10,7 @@ Each pin in pinterest-api/pins_export.json carries a "subject" (a key in
 catalogue.json) and a "tile" object:
 
     "tile": {
-      "layout": "pages" | "tablet" | "type",
+      "layout": "pages" | "tablet" | "type" | "video",   # video: see video_spec.py
       "kicker":   "STUDENT PLANNER",          # small caps line, optional
       "headline": "Your whole year, one tap away",
       "subline":  "Dated + undated · tablet, A4, US Letter",
@@ -309,7 +309,12 @@ def main():
         subject = catalogue.get(pin.get("subject"))
         if not subject:
             sys.exit(f"{pin['id']}: subject '{pin.get('subject')}' is not in catalogue.json")
-        render(pin, subject, out)
+        if pin.get("media") == "video":
+            from video_spec import render_pin_video
+            render_pin_video(pin, subject, os.path.join(PINS_DIR, pin["video_file"]), out)
+            print(f"rendered pins/{pin['video_file']}")
+        else:
+            render(pin, subject, out)
         print(f"rendered {os.path.relpath(out, ROOT)}")
         done += 1
     print(f"{done} tile(s) rendered.")

@@ -56,5 +56,57 @@ class Render(unittest.TestCase):
                    load_catalogue()["quiz"], os.path.join(tempfile.mkdtemp(), "x.png"))
 
 
+class Video(unittest.TestCase):
+    """The video spec is checked without Node; the render runs only where
+    `npm ci --prefix pin-studio/video` has been done (not on GitHub)."""
+
+    def pages(self, key, names):
+        s = load_catalogue()[key]
+        return [os.path.join(STUDIO, s["previews"], n) for n in names]
+
+    def test_spec_fits_like_a_tile(self):
+        from video_spec import build_spec
+        s = load_catalogue()["in-check"]
+        spec = build_spec("pin", s["accent"], "In Check", "Notice the urge, then let it pass",
+                          "Tablet, A4 and US Letter",
+                          self.pages("in-check", ["tablet/01.jpg", "tablet/03.jpg", "tablet/05.jpg"]))
+        layout = spec["props"]["layout"]
+        self.assertLessEqual(len(layout["headline"]["lines"]), 2)
+        self.assertEqual(spec["props"]["edition"], "tablet")
+        self.assertGreater(layout["media"]["h"], 500)
+
+    def test_every_format_lays_out(self):
+        from video_spec import FORMATS, build_spec
+        s = load_catalogue()["in-check"]
+        for fmt in FORMATS:
+            with self.subTest(fmt):
+                build_spec(fmt, s["accent"], "In Check", "A gentle journal for drinking less",
+                           "Tablet, A4 and US Letter",
+                           self.pages("in-check", ["print/01.jpg", "print/02.jpg", "print/03.jpg"]), "")
+
+    def test_too_few_pages_refused(self):
+        from video_spec import build_spec
+        s = load_catalogue()["in-check"]
+        with self.assertRaises(ValueError):
+            build_spec("pin", s["accent"], "", "Two pages only", "", self.pages("in-check", ["print/01.jpg", "print/02.jpg"]))
+
+    def test_mixed_editions_refused(self):
+        from video_spec import build_spec
+        s = load_catalogue()["in-check"]
+        with self.assertRaises(ValueError):
+            build_spec("pin", s["accent"], "", "Mixed pages", "",
+                       self.pages("in-check", ["print/01.jpg", "tablet/02.jpg", "print/03.jpg"]))
+
+    @unittest.skipUnless(os.path.isdir(os.path.join(STUDIO, "video", "node_modules")), "video renderer not installed")
+    def test_render_video_pin(self):
+        from video_spec import render_pin_video
+        out = tempfile.mkdtemp()
+        pin = {"tile": {"layout": "video", "kicker": "In Check", "headline": "Notice the urge",
+                        "pages": ["tablet/01.jpg", "tablet/02.jpg", "tablet/03.jpg"]}}
+        render_pin_video(pin, load_catalogue()["in-check"], os.path.join(out, "v.mp4"), os.path.join(out, "v.png"))
+        self.assertGreater(os.path.getsize(os.path.join(out, "v.mp4")), 100_000)
+        self.assertGreater(os.path.getsize(os.path.join(out, "v.png")), 10_000)
+
+
 if __name__ == "__main__":
     unittest.main()
