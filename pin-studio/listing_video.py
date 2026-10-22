@@ -3,6 +3,7 @@
     python pin-studio/listing_video.py --site ../obenpaper-site --product in-mind
     python pin-studio/listing_video.py --site ../obenpaper-site --product in-mind \\
         --format landscape --pages 1,4,5,7 --out in-mind-landscape.mp4
+    python pin-studio/listing_video.py --site ../obenpaper-site --product well-read --edition print
     python pin-studio/listing_video.py --site ../obenpaper-site --all --out-dir listing-videos/
 
 The same flip-through as a video pin, square (1080×1080, default) or
@@ -59,7 +60,7 @@ def choose_pages(count, lead, wanted=4):
     return sorted(picks)[:MAX_PAGES]
 
 
-def spec_for(site, slug, fmt, pages_arg, footer):
+def spec_for(site, slug, fmt, pages_arg, footer, edition=None):
     previews, by_store, tokens = site_data(site)
     entry = previews["products"].get(slug)
     if not entry:
@@ -67,7 +68,9 @@ def spec_for(site, slug, fmt, pages_arg, footer):
     product = by_store.get(entry["store_slug"])
     if not product:
         raise SystemExit(f"'{slug}' → {entry['store_slug']} is not in lib/products.json")
-    edition = "tablet" if "tablet" in entry["editions"] else "print"
+    edition = edition or ("tablet" if "tablet" in entry["editions"] else "print")
+    if edition not in entry["editions"]:
+        raise SystemExit(f"'{slug}' has no {edition} edition")
     images = entry["editions"][edition]["images"]
     pages = [int(p) for p in pages_arg.split(",")] if pages_arg else choose_pages(len(images), entry.get("lead_page"))
     folder = (os.path.join(site, "public", "previews", previews["_flat_dir"]) if entry.get("layout") == "flat"
@@ -88,6 +91,7 @@ def main():
     ap.add_argument("--product", help="readable preview slug, e.g. in-mind")
     ap.add_argument("--all", action="store_true", help="every product with previews")
     ap.add_argument("--format", default="square", choices=["square", "landscape", "pin"])
+    ap.add_argument("--edition", choices=["tablet", "print"], help="default: tablet when there is one")
     ap.add_argument("--pages", help="comma-separated page numbers, e.g. 1,4,5,7 (default: chosen)")
     ap.add_argument("--footer", default="", help="right-hand footer text (default none — Etsy)")
     ap.add_argument("--out", help="output .mp4 for one product")
@@ -102,7 +106,7 @@ def main():
     for slug in slugs:
         out = args.out if (args.out and not args.all) else os.path.join(args.out_dir, f"{slug}-{args.format}.mp4")
         try:
-            render(spec_for(args.site, slug, args.format, None if args.all else args.pages, args.footer), out)
+            render(spec_for(args.site, slug, args.format, None if args.all else args.pages, args.footer, args.edition), out)
             print(f"rendered {out}")
         except (ValueError, RuntimeError, FileNotFoundError) as exc:
             print(f"FAILED {slug}: {exc}")
