@@ -15,6 +15,10 @@ part; everything that must not be guessed comes from catalogue.json:
                "subline": "...", "pages": ["print/03.jpg"]}
     }
 
+A tile with "layout": "video" (3–5 pages of one edition) becomes a video
+pin: an 11–13 s MP4 flip-through plus its PNG cover, both in pins/. It needs
+Node and `npm ci --prefix pin-studio/video` (see video_spec.py).
+
 `add` fills product, category (board), link and guardrail from the
 catalogue, gives each pin an id and an image file, renders the tile, then
 validates the WHOLE queue with the publisher's own rules. If anything fails,
@@ -130,6 +134,8 @@ def add(batch_path):
             "link": subject["link"],
             "image_file": f"{pid.lower()}.png",
             "image_url": "",
+            **({"media": "video", "video_file": f"{pid.lower()}.mp4"}
+               if d.get("tile", {}).get("layout") == "video" else {}),
             "title": d["title"].strip(),
             "description": " ".join(d["description"].split()),
             "alt_text": " ".join(d["alt_text"].split()),
@@ -158,9 +164,16 @@ def add(batch_path):
         for pin in new:
             out = os.path.join(PINS_DIR, pin["image_file"])
             try:
-                render(pin, catalogue[pin["subject"]], out)
-                rendered.append(out)
-            except (ValueError, FileNotFoundError) as exc:
+                if pin.get("media") == "video":
+                    from video_spec import render_pin_video  # needs Node; image pins never import it
+                    video = os.path.join(PINS_DIR, pin["video_file"])
+                    rendered.append(video)
+                    rendered.append(out)
+                    render_pin_video(pin, catalogue[pin["subject"]], video, out)
+                else:
+                    render(pin, catalogue[pin["subject"]], out)
+                    rendered.append(out)
+            except (ValueError, FileNotFoundError, RuntimeError) as exc:
                 problems.append(f"{pin['id']}: tile — {exc}")
 
     if not problems:
@@ -172,7 +185,8 @@ def add(batch_path):
 
     if problems:
         for out in rendered:
-            os.remove(out)
+            if os.path.exists(out):
+                os.remove(out)
         for p in problems:
             print(f"ERROR    {p}")
         print("\nNothing written. Fix the drafts and run again.")
@@ -182,7 +196,8 @@ def add(batch_path):
         json.dump(everything, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     for pin in new:
-        print(f"added {pin['id']}  →  pins/{pin['image_file']}")
+        extra = f" + pins/{pin['video_file']}" if pin.get("video_file") else ""
+        print(f"added {pin['id']}  →  pins/{pin['image_file']}{extra}")
     print(f"\n{len(new)} pin(s) added. Look at every tile before committing.")
     return 0
 

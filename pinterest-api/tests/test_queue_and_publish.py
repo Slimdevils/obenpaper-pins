@@ -128,9 +128,21 @@ class BoardAndCopyRules(unittest.TestCase):
         p = pin("A", "Student Planner", 1, title="x" * 101)
         self.assertTrue(any("title is 101" in e for e in errors_for([p])))
 
-    def test_video_refused(self):
+    def test_mp4_as_image_refused(self):
         p = pin("A", "In Focus", 1, image_file="day.mp4")
         self.assertTrue(any("video" in e for e in errors_for([p])))
+
+    def test_video_pin_with_cover_passes(self):
+        p = pin("A", "Student Planner", 1, media="video", video_file="a.mp4")
+        self.assertEqual(errors_for([p]), [])
+
+    def test_video_pin_needs_mp4(self):
+        p = pin("A", "Student Planner", 1, media="video", video_file="a.mov")
+        self.assertTrue(any(".mp4" in e for e in errors_for([p])))
+
+    def test_video_file_without_media_refused(self):
+        p = pin("A", "Student Planner", 1, video_file="a.mp4")
+        self.assertTrue(any("media is not" in e for e in errors_for([p])))
 
     def test_duplicate_ids(self):
         errs = errors_for([pin("A", "Student Planner", 1), pin("A", "In Session", 3)])
@@ -301,9 +313,106 @@ class Publisher(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.run_publisher("--pin", "DUE")
 
+    def make_due_video(self):
+        with open(self.paths["pins_export.json"]) as fh:
+            pins = json.load(fh)
+        pins[0].update(media="video", video_file="due.mp4")
+        with open(self.paths["pins_export.json"], "w") as fh:
+            json.dump(pins, fh)
+        pins_dir = os.path.join(self.tmp, "pins")
+        os.makedirs(pins_dir, exist_ok=True)
+        with open(os.path.join(pins_dir, "due.mp4"), "wb") as fh:
+            fh.write(b"not really a video")
+        return mock.patch.object(pinterest_publish, "REPO_PINS_DIR", pins_dir)
+
+    def test_video_pin_uploads_then_posts_with_cover(self):
+        with self.make_due_video(), \
+             mock.patch.object(pinterest_publish, "upload_video", return_value="m123") as up:
+            self.assertEqual(self.run_publisher(), 0)
+        up.assert_called_once()
+        source = self.sent[0]["media_source"]
+        self.assertEqual(source, {"source_type": "video_id", "media_id": "m123",
+                                  "cover_image_url": "https://raw.example/due.png"})
+        with open(self.paths["posted_ids.json"]) as fh:
+            self.assertEqual(json.load(fh)[0]["media"], "video")
+
+    def test_video_refused_posts_cover_as_image(self):
+        refused = pinterest_publish.VideoRefused("HTTP 403")
+        with self.make_due_video(), \
+             mock.patch.object(pinterest_publish, "upload_video", side_effect=refused):
+            self.assertEqual(self.run_publisher(), 0)
+        self.assertEqual(self.sent[0]["media_source"],
+                         {"source_type": "image_url", "url": "https://raw.example/due.png"})
+
+    def test_video_upload_unfinished_is_retried_not_recorded(self):
+        failed = pinterest_publish.VideoFailed("still processing")
+        with self.make_due_video(), \
+             mock.patch.object(pinterest_publish, "upload_video", side_effect=failed):
+            self.assertEqual(self.run_publisher(), 1)
+        self.assertEqual(self.sent, [])
+        self.assertFalse(os.path.exists(self.paths["posted_ids.json"]))
+
+    def test_video_dry_run_uploads_nothing(self):
+        with self.make_due_video(), mock.patch.object(pinterest_publish, "upload_video") as up:
+            self.assertEqual(self.run_publisher("--dry-run"), 0)
+        up.assert_not_called()
+        self.assertEqual(self.sent, [])
+
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class VideoUpload(unittest.TestCase):
+    """pinterest_video.upload_video against a fake Pinterest: register, upload, poll."""
+
+    def setUp(self):
+        import pinterest_video
+        self.pv = pinterest_video
+        fd, self.path = tempfile.mkstemp(suffix=".mp4")
+        os.write(fd, b"fake")
+        os.close(fd)
+
+    def fake(self, register_status=201, statuses=("processing", "succeeded")):
+        calls = {"posts": [], "gets": 0}
+        statuses = list(statuses)
+
+        def post(url, **kw):
+            calls["posts"].append(url)
+            if url.endswith("/media"):
+                r = mock.Mock(status_code=register_status)
+                r.json.return_value = {"media_id": "m1", "upload_url": "https://upload.example/",
+                                       "upload_parameters": {"key": "k"}}
+                return r
+            return mock.Mock(status_code=204)
+
+        def get(url, **kw):
+            calls["gets"] += 1
+            r = mock.Mock(status_code=200)
+            r.json.return_value = {"status": statuses.pop(0)}
+            return r
+        return calls, post, get
+
+    def test_three_steps_then_media_id(self):
+        calls, post, get = self.fake()
+        with mock.patch.object(self.pv.requests, "post", side_effect=post), \
+             mock.patch.object(self.pv.requests, "get", side_effect=get):
+            self.assertEqual(self.pv.upload_video(self.path, {}, sleep=lambda s: None), "m1")
+        self.assertEqual(calls["posts"], [self.pv.MEDIA_ENDPOINT, "https://upload.example/"])
+        self.assertEqual(calls["gets"], 2)
+
+    def test_access_refused(self):
+        _, post, get = self.fake(register_status=403)
+        with mock.patch.object(self.pv.requests, "post", side_effect=post):
+            with self.assertRaises(self.pv.VideoRefused):
+                self.pv.upload_video(self.path, {}, sleep=lambda s: None)
+
+    def test_processing_failed(self):
+        _, post, get = self.fake(statuses=("failed",))
+        with mock.patch.object(self.pv.requests, "post", side_effect=post), \
+             mock.patch.object(self.pv.requests, "get", side_effect=get):
+            with self.assertRaises(self.pv.VideoFailed):
+                self.pv.upload_video(self.path, {}, sleep=lambda s: None)
 
 
 class BoardResolution(unittest.TestCase):

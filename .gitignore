@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# Listing videos are deliverables to upload to Etsy/Payhip, not repo content.
+listing-videos/

@@ -33,7 +33,10 @@ on-brand pins — copy written by you, tiles rendered here and checked by eye.
 ```bash
 git clone --depth 1 https://github.com/slimdevils/obenpaper-pins && cd obenpaper-pins
 pip install -r pinterest-api/requirements.txt
+npm ci --prefix pin-studio/video        # for video pins; needs Node 18+
 ```
+
+If Node is not available, make image pins only and say so in the report.
 
 If the Obenpaper project-context md is available to you (the Obenpaper Project
 on claude.ai), read it first: if it shows a product went live, was retired or
@@ -95,6 +98,15 @@ Write a `batch.json` (outside the repo or deleted afterwards) — a list of:
   tablet frame. `type`: site pages and tools (no product imagery) — also set
   `card_title`, `card_text` and optionally `badge`; keep the headline and the
   card title different.
+- `video` (products only): **3–5 pages of one edition**, in the order they
+  should play — e.g. `["tablet/01.jpg", "tablet/03.jpg", "tablet/05.jpg",
+  "tablet/06.jpg"]`. It becomes an 11–13 s flip-through: the same kicker,
+  headline and subline as a tile, tablet pages sliding in a tablet frame or
+  print pages changing on a sheet, the obenpaper footer. Open on the cover or
+  the page that shows the angle, then the pages that prove the headline.
+  **About one product pin in three should be a video**, never two videos in
+  a row, and never a video for a site page or tool (they have no pages).
+  Same copy rules; the alt text describes what the video shows.
 - Title ≠ headline: the title is the search phrase, the headline is the hook.
 - Pinterest reads the on-image text: the headline should contain the subject's
   core keyword where it reads naturally.
@@ -113,12 +125,21 @@ cramped or cut, pages clearly visible and relevant to the headline, nothing
 misleading. To fix one, edit its `tile` in `pinterest-api/pins_export.json`
 and run `python pin-studio/render_tile.py --pin <id>`.
 
+For a **video pin**, the PNG is its cover: look at it, then look at three
+moments of the video too:
+
+```bash
+python pin-studio/video_spec.py frames pins/<id>.mp4     # prints three PNG paths to open
+```
+
+Check that each page is the one you meant and that nothing is cut off.
+
 ## 6. Ship
 
 ```bash
 python -m unittest discover -s pinterest-api/tests
 python pinterest-api/validate_queue.py
-git add pinterest-api/pins_export.json pins/
+git add pinterest-api/pins_export.json pins/   # .png tiles and covers, .mp4 videos
 git commit -m "Queue pins <first date> → <last date>"
 git pull --rebase origin main && git push origin HEAD:main
 ```

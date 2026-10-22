@@ -15,7 +15,11 @@ Order of operations, every run:
   3. Cap at max_posts_per_run (1 in the cloud, so a backlog cannot burst).
   4. Fill image_url from pins/<image_file> in this repo if it is empty, and
      check Pinterest could fetch it anonymously.
-  5. POST, then record the pin in posted_ids.json immediately.
+  5. A video pin (media "video") uploads pins/<video_file> first and uses the
+     image as its cover. If Pinterest refuses video uploads outright (the
+     app's access level), it posts as an image pin with that cover instead,
+     and says so — the slot is not lost.
+  6. POST, then record the pin in posted_ids.json immediately.
 
 Safe to re-run: posted pin IDs are recorded and skipped. No token or secret
 is ever printed.
@@ -32,6 +36,7 @@ import requests
 from obenpaper_rules import BOARDS, LIMITS, TIMEZONE
 from pinterest_boards import resolve_missing
 from pinterest_common import API_BASE, CLOUD, HERE, auth_headers, load_config
+from pinterest_video import VideoFailed, VideoRefused, upload_video
 from validate_queue import POSTED_PATH, load_json, load_queue, parse_when, validate
 
 PINS_ENDPOINT = f"{API_BASE}/pins"
@@ -73,13 +78,17 @@ def image_reachable(url):
     return resp.status_code == 200 and resp.headers.get("Content-Type", "").startswith("image/")
 
 
-def build_payload(pin, board_map, image_url):
+def build_payload(pin, board_map, image_url, media_id=None):
+    if media_id:
+        media_source = {"source_type": "video_id", "media_id": media_id, "cover_image_url": image_url}
+    else:
+        media_source = {"source_type": "image_url", "url": image_url}
     payload = {
         "board_id": board_map[pin["category"]],
         "title": pin["title"],
         "description": pin["description"],
         "alt_text": pin["alt_text"],
-        "media_source": {"source_type": "image_url", "url": image_url},
+        "media_source": media_source,
     }
     link = pin.get("link", "").strip()
     if link:
@@ -112,6 +121,7 @@ def publish(pin, payload, headers, dry_run):
               "while it is within its 24 h window.")
         return False
 
+    is_video = payload["media_source"]["source_type"] == "video_id"
     record_posted({
         "pin": pin["id"],
         "product": pin["product"],
@@ -119,10 +129,31 @@ def publish(pin, payload, headers, dry_run):
         "pinterest_pin_id": body.get("id"),
         "scheduled_at": pin["scheduled_at"],
         "image": pin.get("image_file", ""),
+        "media": "video" if is_video else "image",
+        **({"video": pin.get("video_file", "")} if is_video else {}),
         "posted_at": datetime.now(TIMEZONE).isoformat(timespec="seconds"),
     })
     print(f"OK — Pinterest pin {body.get('id')} recorded in posted_ids.json")
     return True
+
+
+def video_media_id(pin, headers, dry_run):
+    """Return (media_id or None, problem). None with no problem = post the cover as an image."""
+    path = os.path.join(REPO_PINS_DIR, pin.get("video_file", ""))
+    if not os.path.isfile(path):
+        return None, f"pins/{pin.get('video_file')} is not committed"
+    if dry_run:
+        return "<media_id after upload>", None
+    try:
+        media_id = upload_video(path, headers)
+        print(f"Video uploaded for {pin['id']}.")
+        return media_id, None
+    except VideoRefused as exc:
+        print(f"NOTE {pin['id']}: Pinterest refused the video upload ({exc}). "
+              "Posting it as an image pin with its cover instead.")
+        return None, None
+    except VideoFailed as exc:
+        return None, f"video upload did not finish ({exc}); retried next run within its 24 h window"
 
 
 def main():
@@ -195,7 +226,14 @@ def main():
             print(f"\nSKIP {pin['id']} — image not publicly fetchable: {image_url}")
             failed += 1
             continue
-        if not publish(pin, build_payload(pin, board_map, image_url), headers, args.dry_run):
+        media_id = None
+        if pin.get("media") == "video":
+            media_id, problem = video_media_id(pin, headers, args.dry_run)
+            if problem:
+                print(f"\nSKIP {pin['id']} — {problem}")
+                failed += 1
+                continue
+        if not publish(pin, build_payload(pin, board_map, image_url, media_id), headers, args.dry_run):
             failed += 1
 
     return 1 if failed else 0

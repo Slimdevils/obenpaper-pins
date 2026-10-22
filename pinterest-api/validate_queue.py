@@ -19,7 +19,8 @@ Per pin:
     is an error anywhere; a headline-watch term is an error in the title and a
     warning elsewhere
   - title / description / alt text within Pinterest's limits
-  - image is a PNG/JPG (video pins are not supported by this publisher)
+  - image is a PNG/JPG; a video pin (media "video") also names an .mp4
+    video_file in pins/, and its image is the cover
 
 Across the whole planned schedule (posted, upcoming and missed alike):
   - never the same product twice in a row
@@ -176,7 +177,17 @@ def check_pin(pin, board_map, require_boards=True):
     if not image:
         errors.append("no image_file or image_url")
     elif not image.lower().endswith(IMAGE_EXTENSIONS):
-        errors.append("image must be .png or .jpg (video pins are not supported by this publisher)")
+        errors.append("image must be .png or .jpg — a video goes in video_file, with media \"video\"")
+
+    media = pin.get("media", "image")
+    if media not in ("image", "video"):
+        errors.append(f"media must be 'image' or 'video', got '{media}'")
+    elif media == "video":
+        video = pin.get("video_file") or ""
+        if not video.lower().endswith(".mp4"):
+            errors.append("a video pin needs video_file ending in .mp4 (its image_file is the cover)")
+    elif pin.get("video_file"):
+        errors.append("video_file is set but media is not 'video'")
 
     try:
         parse_when(pin["scheduled_at"])
