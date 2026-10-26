@@ -194,5 +194,82 @@
       "badge": "Free, no sign-up"
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-05-solo-travel-planner",
+    "subject": "solo-travel-planner",
+    "product": "Solo Travel Planner",
+    "category": "travel",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/rMuU1",
+    "image_file": "a-2026-11-05-solo-travel-planner.png",
+    "image_url": "",
+    "title": "Solo Travel Planner — Before You Go Checklist for Travelling Alone",
+    "description": "The Solo Travel Planner holds trip templates and packing lists for travelling on your own, for tablet, A4 and US Letter. This pin shows the 'Before you go' page, next to the trip overview, packing list and solo safety pages inside. Instant digital download.",
+    "alt_text": "A tablet on a soft clay background showing a page titled 'Before you go': a countdown checklist with tick boxes on the left and a bookings table on the right.",
+    "scheduled_at": "2026-11-05T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Solo Travel Planner",
+      "headline": "Everything sorted before you go solo",
+      "subline": "Trip templates and packing lists · tablet, A4, Letter",
+      "pages": [
+        "tablet/04.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-07-focus",
+    "subject": "focus",
+    "product": "Focus Timer",
+    "category": "free_tools",
+    "guardrail": "general",
+    "link": "https://obenpaper.com/focus",
+    "image_file": "a-2026-11-07-focus.png",
+    "image_url": "",
+    "title": "Free Online Focus Timer — Quiet, No Download, No Sign-Up",
+    "description": "A quiet focus timer that runs in your browser. Nothing to download and no sign-up: open the page and start.",
+    "alt_text": "A white card on a cream background titled 'A quiet focus timer', with a short line saying it runs in the browser and a badge reading 'Free · no sign-up'.",
+    "scheduled_at": "2026-11-07T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · focus timer",
+      "headline": "A calm timer for focused work",
+      "subline": "Open it in the browser and start",
+      "card_title": "A quiet focus timer",
+      "card_text": "Free in the browser. Nothing to download, no sign-up.",
+      "badge": "Free · no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-09-travel-journal",
+    "subject": "travel-journal",
+    "product": "Travel Journal & Planner",
+    "category": "travel",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/dJRvG",
+    "image_file": "a-2026-11-09-travel-journal.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-11-09-travel-journal.mp4",
+    "title": "Printable Travel Journal — Bucket List, Year of Travel & Trip Overview",
+    "description": "The Travel Journal & Planner is a printable travel journal for A4 and US Letter. This pin flips through the travel bucket list, the 'My year of travel' page and the trip overview. Instant digital download.",
+    "alt_text": "A short flip-through of printable travel journal pages on a sheet: the cover 'The Travel Journal', a travel bucket list with tick boxes, a 'My year of travel' table, and a trip overview page.",
+    "scheduled_at": "2026-11-09T19:00:00",
+    "tile": {
+      "layout": "video",
+      "kicker": "Travel Journal & Planner",
+      "headline": "A travel journal for the year ahead",
+      "subline": "Printable · A4 and US Letter",
+      "pages": [
+        "print/01.jpg",
+        "print/05.jpg",
+        "print/04.jpg",
+        "print/07.jpg"
+      ]
+    },
+    "made_by": "claude"
   }
 ]
