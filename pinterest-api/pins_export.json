@@ -271,5 +271,77 @@
       ]
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-11-student-planner",
+    "subject": "student-planner",
+    "product": "Student Planner",
+    "category": "student_planner",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/YpUmC",
+    "image_file": "a-2026-11-11-student-planner.png",
+    "image_url": "",
+    "title": "Student Planner 2026–27 — Weekly Class Timetable for Tablet, A4 and Letter",
+    "description": "The Student Planner 2026–27 comes with dated and undated editions in one download, for tablet apps like GoodNotes and Notability, A4 and US Letter. This pin shows the weekly timetable page, where your recurring classes sit by day and time, one tap from the dashboard. Instant digital download.",
+    "alt_text": "A tablet showing the Weekly timetable page of a lilac student planner: a grid with days across the top and times down the side, with dashboard tabs along the top and side.",
+    "scheduled_at": "2026-11-11T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Student Planner · timetable",
+      "headline": "Your whole week of classes, one page",
+      "subline": "Tablet · A4 · US Letter",
+      "pages": [
+        "tablet/06.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-13-tool-books-per-year",
+    "subject": "tool-books-per-year",
+    "product": "Books a Year Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/books-per-year",
+    "image_file": "a-2026-11-13-tool-books-per-year.png",
+    "image_url": "",
+    "title": "How Many Books a Year? Free Reading Time Calculator",
+    "description": "A free calculator for readers: put in your minutes of reading a day and see what that adds up to over the year. Twenty minutes a day is more books than most people expect. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a soft terracotta background titled 'Minutes a day, books a year', explaining that you enter your daily reading minutes and see the year, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-13T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · books a year",
+      "headline": "How many books is twenty minutes a day?",
+      "subline": "Your reading minutes in, your year of books out",
+      "card_title": "Minutes a day, books a year",
+      "card_text": "Put in how many minutes you read a day and see the year. It is usually more books than people expect.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-15-in-check",
+    "subject": "in-check",
+    "product": "In Check",
+    "category": "self_care",
+    "guardrail": "in_check",
+    "link": "https://shop.obenpaper.com/b/97gJi",
+    "image_file": "a-2026-11-15-in-check.png",
+    "image_url": "",
+    "title": "Mindful Drinking Journal — Notice, Pause, Swap, Reflect",
+    "description": "In Check is a mindful-drinking and alcohol-free journal for tablet, A4 and US Letter, for going fully alcohol-free or simply drinking less at your own pace. This pin shows the how-to page and its four steps: notice, pause, swap, reflect. No streaks to break: a slip is a data point, not a failure.",
+    "alt_text": "A tablet showing the 'How to use this journal' page of a mint-green journal: four boxes reading Notice, Pause, Swap and Reflect, and a short 'Before you start' checklist, with section tabs along the top.",
+    "scheduled_at": "2026-11-15T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "In Check · how it works",
+      "headline": "Notice, pause, swap, reflect",
+      "subline": "A mindful drinking journal · Tablet · A4 · US Letter",
+      "pages": [
+        "tablet/03.jpg"
+      ]
+    },
+    "made_by": "claude"
   }
 ]
