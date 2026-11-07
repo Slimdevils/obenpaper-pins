@@ -115,6 +115,60 @@
       ]
     },
     {
+      "key": "well-dreamt",
+      "product": "Well Dreamt",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/ouQVi",
+      "guardrail": "general",
+      "accent": {
+        "main": "#C9A9C9",
+        "dark": "#8A6890",
+        "bg": "#F3ECF3"
+      },
+      "previews": "previews/well-dreamt",
+      "facts": [
+        "Well Dreamt — an undated dream journal",
+        "Write it down before it fades; notice what keeps coming back",
+        "Morning entry pages: what you remember, people, places and feelings to circle, how clear it felt",
+        "A symbol index you keep month by month — no dream dictionary: your symbols mean what they mean to you",
+        "Monthly patterns: feelings grid, themes tally, monthly review, year at a glance",
+        "Reflection prompts, dream to waking, dreams worth keeping",
+        "21 pages; formats: tablet (landscape, hyperlinked, for apps like GoodNotes and Notability), A4 and US Letter",
+        "Instant digital download",
+        "A personal journal — never dream interpretation, sleep advice or lucid-dreaming techniques",
+        "Pages shown in the previews: cover, how to use, contents, before you begin, morning entry, sketch entry, fragments"
+      ]
+    },
+    {
+      "key": "kept-close",
+      "product": "Kept Close",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/wvjnP",
+      "guardrail": "general",
+      "accent": {
+        "main": "#9C7D77",
+        "dark": "#6D5853",
+        "bg": "#F2E8E5"
+      },
+      "previews": "previews/kept-close",
+      "facts": [
+        "Kept Close — an undated grief and remembrance journal",
+        "For the ones we carry with us",
+        "Room to remember them, write to them, and notice how the days are — at your own pace",
+        "No order, no timeline: start anywhere",
+        "The weather this week: calm, heavy, tearful or came in waves — not a mood score",
+        "Letter pages with gentle ways to begin",
+        "Dates that matter, the firsts, and a page for anniversaries",
+        "Made for any loss — a parent, a partner, a friend, a child, a pet",
+        "22 pages; formats: tablet (landscape, hyperlinked, for apps like GoodNotes and Notability), A4 and US Letter",
+        "Instant digital download",
+        "A personal journal for remembrance — not a substitute for professional support; never healing, stages or therapy language",
+        "Pages shown in the previews: cover, how to use, contents, remembering you, your story, things you used to say, memories to keep"
+      ]
+    },
+    {
       "key": "solo-travel-planner",
       "product": "Solo Travel Planner",
       "kind": "product",
