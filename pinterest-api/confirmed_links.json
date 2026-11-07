@@ -1,6 +1,6 @@
 {
   "_rule": "A pin may only link to a URL in this file. Shop slugs are copied verbatim from obenpaper-site lib/products.json, whose slugs were read off the live store or stated by Luc off the live page (its _source and _verified fields). Site routes are the confirmed list from lib/tools.json (17 Aug 2026). Destination URLs lock permanently on publish, so a URL is never guessed: a new product's link is added here only from those same sources.",
-  "_source": "obenpaper-site lib/products.json @ 4912b7d, read 1 Oct 2026",
+  "_source": "obenpaper-site lib/products.json @ 4912b7d, read 1 Oct 2026 · Well Dreamt ouQVi + Kept Close wvjnP added 8 Nov 2026, read off the live pages (site PR launch/well-dreamt-kept-close)",
   "shop": {
     "https://shop.obenpaper.com/b/Tza97": "30-Day Fitness Challenges",
     "https://shop.obenpaper.com/b/jhmNM": "Budget Planner",
@@ -16,6 +16,7 @@
     "https://shop.obenpaper.com/b/G1jT8": "In Order",
     "https://shop.obenpaper.com/b/XFteK": "In Session",
     "https://shop.obenpaper.com/b/fOJe0": "In Tune",
+    "https://shop.obenpaper.com/b/wvjnP": "Kept Close",
     "https://shop.obenpaper.com/b/yfLHF": "Manga Reading Journal",
     "https://shop.obenpaper.com/b/tpmW2": "Recipe Book & Meal Planner",
     "https://shop.obenpaper.com/b/g12H8": "Self-Care Journal",
@@ -25,6 +26,7 @@
     "https://shop.obenpaper.com/b/TYo9K": "The Wellness Library",
     "https://shop.obenpaper.com/b/dJRvG": "Travel Journal & Planner",
     "https://shop.obenpaper.com/b/YDASl": "Travel Pair",
+    "https://shop.obenpaper.com/b/ouQVi": "Well Dreamt",
     "https://shop.obenpaper.com/b/im6kN": "Well Dressed",
     "https://shop.obenpaper.com/b/xkSZr": "Well Noted",
     "https://shop.obenpaper.com/b/fsAZw": "Well Read",
