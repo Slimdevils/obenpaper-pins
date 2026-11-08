@@ -108,5 +108,57 @@ class Video(unittest.TestCase):
         self.assertGreater(os.path.getsize(os.path.join(out, "v.png")), 10_000)
 
 
+class Promo(unittest.TestCase):
+    """Promo video pins: the config rules are checked everywhere; the render
+    runs only where ffmpeg is installed."""
+
+    def test_every_config_is_clean(self):
+        import studio
+        from motion_promo import FORMATS, PROMO_DIR, Promo as Engine, load_config
+        cat = load_catalogue()
+        for name in os.listdir(PROMO_DIR):
+            key = name[:-5]
+            with self.subTest(key):
+                self.assertIn(key, cat, "a promo config must match a catalogue subject")
+                self.assertEqual(studio.promo_problems({"id": key}, cat[key]), [])
+                for fmt in FORMATS:
+                    Engine(load_config(cat[key]), fmt).check_fits()
+
+    def test_price_and_bad_words_refused(self):
+        import studio
+        from unittest import mock
+        import motion_promo
+        subject = load_catalogue()["well-dreamt"]
+        real = motion_promo.load_config
+        for field, value in [("sell2", "ONLY €6.99"), ("hook", "Free dream journal"),
+                             ("inside_line", "It will cure bad sleep")]:
+            with self.subTest(field):
+                def fake(s, field=field, value=value):
+                    cfg = real(s)
+                    cfg[field] = value
+                    return cfg
+                with mock.patch.object(motion_promo, "load_config", fake):
+                    self.assertNotEqual(studio.promo_problems({"id": "x"}, subject), [])
+
+    def test_no_config_refused(self):
+        import studio
+        self.assertTrue(studio.promo_problems({"id": "x"}, load_catalogue()["quiz"]))
+
+    def test_pin_never_shows_price(self):
+        from motion_promo import Promo as Engine, SCENE_DURATIONS, load_config
+        cfg = load_config(load_catalogue()["well-dreamt"])
+        cfg["price"] = None  # the pin format must never read it
+        Engine(cfg, "pin").frame(5, SCENE_DURATIONS["pin"][5] - 0.1, SCENE_DURATIONS["pin"])
+
+    @unittest.skipUnless(__import__("shutil").which("ffmpeg"), "ffmpeg not installed")
+    def test_render_promo_pin(self):
+        from motion_promo import render_pin_promo
+        out = tempfile.mkdtemp()
+        render_pin_promo(load_catalogue()["well-dreamt"], os.path.join(out, "p.mp4"), os.path.join(out, "p.png"))
+        self.assertGreater(os.path.getsize(os.path.join(out, "p.mp4")), 200_000)
+        from PIL import Image
+        self.assertEqual(Image.open(os.path.join(out, "p.png")).size, (1000, 1500))
+
+
 if __name__ == "__main__":
     unittest.main()

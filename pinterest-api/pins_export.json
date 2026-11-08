@@ -343,5 +343,25 @@
       ]
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-17-well-dreamt",
+    "subject": "well-dreamt",
+    "product": "Well Dreamt",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/ouQVi",
+    "image_file": "a-2026-11-17-well-dreamt.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-11-17-well-dreamt.mp4",
+    "title": "Dream Journal Printable and Digital — Undated, for Tablet, A4 and US Letter",
+    "description": "Well Dreamt is an undated dream journal for tablet (hyperlinked, for apps like GoodNotes and Notability), A4 and US Letter. Write a dream down before it fades, circle the people, places and feelings, and keep your own symbol index to notice what keeps coming back. Instant download.",
+    "alt_text": "Short video of the Well Dreamt dream journal: a crescent moon on a night sky, the lilac cover, a sketch entry page being filled in, the people, places and feelings page with words circled, the tablet, A4 and US Letter formats, and the cover with the product name and obenpaper.com.",
+    "scheduled_at": "2026-11-17T19:00:00",
+    "tile": {
+      "layout": "promo"
+    },
+    "made_by": "claude"
   }
 ]

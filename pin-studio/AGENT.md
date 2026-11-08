@@ -107,6 +107,16 @@ Write a `batch.json` (outside the repo or deleted afterwards) — a list of:
   **About one product pin in three should be a video**, never two videos in
   a row, and never a video for a site page or tool (they have no pages).
   Same copy rules; the alt text describes what the video shows.
+- `promo` (products only, since 8 Nov 2026): the product's **motion promo** —
+  the same 6-scene video as its Etsy listing video (hook, cover reveal, pages,
+  the differentiator, formats, cover + name), rendered 1000×1500, silent, about
+  15 s, **without price or "shop now"**. The tile is just `{"layout": "promo"}`:
+  all on-screen text comes from `pin-studio/promo/<subject>.json` and is linted.
+  Only subjects with a config (`studio.py status` lists them), **once per
+  product, ever** (enforced). When a promo is available and not yet pinned,
+  prefer it for that product's next video slot. It counts as a video: never
+  next to another video pin. Needs ffmpeg, not Node. You never write or edit a
+  promo config in this run — they are made in a session with Luc.
 - Title ≠ headline: the title is the search phrase, the headline is the hook.
 - Pinterest reads the on-image text: the headline should contain the subject's
   core keyword where it reads naturally.
@@ -132,7 +142,9 @@ moments of the video too:
 python pin-studio/video_spec.py frames pins/<id>.mp4     # prints three PNG paths to open
 ```
 
-Check that each page is the one you meant and that nothing is cut off.
+Check that each page is the one you meant and that nothing is cut off. For a
+promo, use `frames pins/<id>.mp4 1 5 9 13` (four scenes) and check the cover
+shows no price.
 
 ## 6. Ship
 

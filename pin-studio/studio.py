@@ -19,6 +19,11 @@ A tile with "layout": "video" (3–5 pages of one edition) becomes a video
 pin: an 11–13 s MP4 flip-through plus its PNG cover, both in pins/. It needs
 Node and `npm ci --prefix pin-studio/video` (see video_spec.py).
 
+A tile with "layout": "promo" (no other tile fields) becomes the product's
+motion promo — the same 6-scene video as its Etsy listing video, rendered at
+1000×1500 without price (motion_promo.py, config in pin-studio/promo/). Only
+for subjects with a promo config, once per subject, ever.
+
 `add` fills product, category (board), link and guardrail from the
 catalogue, gives each pin an id and an image file, renders the tile, then
 validates the WHOLE queue with the publisher's own rules. If anything fails,
@@ -27,10 +32,16 @@ nothing is written and the tile files it rendered are removed.
 House rules enforced here on top of the publisher's:
   - a subject is pinned at most once every SUBJECT_GAP_DAYS days
   - a tile never reuses the exact page(s) of an earlier tile for that subject
+  - never two video pins (video or promo) in a row
+  - a promo pin: config exists, posted once per subject, every on-screen line
+    passes the guardrail lint and shows no price
 """
 
+import contextlib
+import io
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta
 
@@ -49,6 +60,40 @@ HORIZON_DAYS = 14
 CADENCE_DAYS = 2           # one pin every two days (1–2 day spacing rule)
 POST_TIME = "19:00:00"     # Zurich, evening
 SUBJECT_GAP_DAYS = 6
+VIDEO_LAYOUTS = {"video", "promo"}
+PRICE = re.compile(r"[€$£]|\bCHF\b|\bEUR\b|\bUSD\b|\d+[.,]\d{2}\b|\bfree\b", re.I)
+
+
+def is_video(pin):
+    return pin.get("media") == "video" or pin.get("tile", {}).get("layout") in VIDEO_LAYOUTS
+
+
+def promo_problems(pin, subject):
+    """Why a promo pin cannot be queued for this subject ([] if it can)."""
+    from guardrail_lint import lint
+    from motion_promo import TEXT_FIELDS, get, load_config
+    try:
+        cfg = load_config(subject)
+    except (FileNotFoundError, KeyError) as exc:
+        return [f"{pin['id']}: promo — {exc}"]
+    if subject.get("kind") != "product":
+        return [f"{pin['id']}: promo videos are for products only"]
+    problems = []
+    texts = [get(cfg, f) or "" for f in TEXT_FIELDS]
+    for t in texts:
+        if PRICE.search(t):
+            problems.append(f"{pin['id']}: promo text shows a price or 'free' — '{t}'")
+    with contextlib.redirect_stdout(io.StringIO()):
+        clean = lint(subject["guardrail"], "\n".join(texts))
+    if not clean:
+        problems.append(f"{pin['id']}: promo text fails the {subject['guardrail']} guardrail lint "
+                        f"(python pinterest-api/guardrail_lint.py {subject['guardrail']} -)")
+    facts = " ".join(subject.get("facts", []))
+    if f"{cfg.get('pages_count')} pages" not in facts:
+        problems.append(f"{pin['id']}: promo says {cfg.get('pages_count')} pages — not in the catalogue facts")
+    if not all(f in facts for f in ("tablet", "A4", "US Letter")):
+        problems.append(f"{pin['id']}: promo shows tablet + A4 + US Letter — not all in the catalogue facts")
+    return problems
 
 
 def now():
@@ -79,6 +124,10 @@ def status():
         print(f"  {key:<24} {when.strftime('%Y-%m-%d') if when else 'never'}")
     used = sorted({f"{p.get('subject')}:{'+'.join(p.get('tile', {}).get('pages', []))}"
                    for p in pins if p.get("tile", {}).get("pages")})
+    promos = sorted(p["subject"] for p in pins if p.get("tile", {}).get("layout") == "promo")
+    from motion_promo import PROMO_DIR
+    ready = sorted(f[:-5] for f in os.listdir(PROMO_DIR) if f.endswith(".json"))
+    print(f"\nPromo videos — config ready: {', '.join(ready) or 'none'} · already pinned: {', '.join(promos) or 'none'}")
     print(f"\nPages already used ({len(used)}):")
     for u in used:
         print(f"  {u}")
@@ -135,7 +184,7 @@ def add(batch_path):
             "image_file": f"{pid.lower()}.png",
             "image_url": "",
             **({"media": "video", "video_file": f"{pid.lower()}.mp4"}
-               if d.get("tile", {}).get("layout") == "video" else {}),
+               if d.get("tile", {}).get("layout") in VIDEO_LAYOUTS else {}),
             "title": d["title"].strip(),
             "description": " ".join(d["description"].split()),
             "alt_text": " ".join(d["alt_text"].split()),
@@ -145,8 +194,20 @@ def add(batch_path):
         }
         new.append(pin)
 
-    # House rules: subject spacing and no reused pages.
+    # House rules: subject spacing, no reused pages, no two videos in a row, promos.
     everything = pins + new
+    ordered = sorted(everything, key=lambda p: p["scheduled_at"])
+    for pin in new:
+        i = ordered.index(pin)
+        for other in ordered[max(0, i - 1):i] + ordered[i + 1:i + 2]:
+            if is_video(pin) and is_video(other):
+                problems.append(f"{pin['id']}: video right next to video {other['id']} — make one an image pin")
+        if pin["tile"].get("layout") == "promo":
+            problems.extend(promo_problems(pin, catalogue[pin["subject"]]))
+            for other in everything:
+                if other is not pin and other.get("subject") == pin["subject"] \
+                        and other.get("tile", {}).get("layout") == "promo":
+                    problems.append(f"{pin['id']}: {pin['subject']} already has its promo pin ({other['id']}) — once per product")
     for pin in new:
         when = parse_when(pin["scheduled_at"])
         for other in everything:
@@ -164,7 +225,13 @@ def add(batch_path):
         for pin in new:
             out = os.path.join(PINS_DIR, pin["image_file"])
             try:
-                if pin.get("media") == "video":
+                if pin["tile"].get("layout") == "promo":
+                    from motion_promo import render_pin_promo  # Pillow + ffmpeg, no Node
+                    video = os.path.join(PINS_DIR, pin["video_file"])
+                    rendered.append(video)
+                    rendered.append(out)
+                    render_pin_promo(catalogue[pin["subject"]], video, out)
+                elif pin.get("media") == "video":
                     from video_spec import render_pin_video  # needs Node; image pins never import it
                     video = os.path.join(PINS_DIR, pin["video_file"])
                     rendered.append(video)

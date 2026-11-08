@@ -1,0 +1,36 @@
+{
+  "_note": "Promo video config (motion_promo.py). Text = on-screen lines, restating catalogue facts only; linted by studio.py add. Pages are relative to the subject's previews; colours come from the catalogue. 'price' and 'shop_line' are used only by the Etsy/TikTok formats — a pin never shows them.",
+  "name": "Well Dreamt",
+  "motif": "moon",
+  "pages_count": 21,
+  "hook": "Do you remember your dreams?",
+  "hook_split": 3,
+  "inside_line": "Record every little detail.",
+  "sketch": {"page": 2, "star_at": [272, 624], "hand_at": [575, 700], "handwriting": "flying over the lake. mum was there."},
+  "diff": {
+    "line1": "Notice your recurring",
+    "line2": "dream symbols.",
+    "page": "tablet/05.jpg",
+    "crop": [700, 200, 1150, 460],
+    "circle": [[721, 243, 804, 265], [907, 300, 963, 323], [991, 422, 1067, 441]],
+    "symbols": ["moon", "cloud", "star", "key", "door", "wave"]
+  },
+  "sell1": "YOUR DREAMS",
+  "sell2": "DESERVE A PLACE.",
+  "price": "€6.99",
+  "shop_line": "SHOP NOW — OBENPAPER",
+  "pages": {
+    "cover_print": "print/01.jpg",
+    "second_print": "print/02.jpg",
+    "cover_tablet": "tablet/01.jpg",
+    "inside": ["tablet/07.jpg", "tablet/05.jpg", "tablet/06.jpg"]
+  },
+  "voiceover": [
+    "Wait... do you actually remember your dreams?",
+    "Meet Well Dreamt, your new dream journal.",
+    "Capture your dreams, little fragments, feelings, and sketches.",
+    "Spot recurring symbols and patterns, and look back on your dreams over time.",
+    "Twenty-one pages, available for tablet and printable formats.",
+    "Start keeping your dreams close. Find Well Dreamt at Obenpaper."
+  ]
+}
