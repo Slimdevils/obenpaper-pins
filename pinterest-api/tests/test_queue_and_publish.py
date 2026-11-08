@@ -66,8 +66,16 @@ class LinkRules(unittest.TestCase):
         self.assertTrue(any("query string" in e for e in errors_for([p])))
 
     def test_foreign_host_refused(self):
-        p = pin("A", "Student Planner", 1, link="https://www.etsy.com/listing/123")
+        p = pin("A", "Student Planner", 1, link="https://www.amazon.com/dp/123")
         self.assertTrue(any("host" in e for e in errors_for([p])))
+
+    def test_unconfirmed_etsy_link_refused(self):
+        p = pin("A", "Student Planner", 1, link="https://www.etsy.com/listing/123")
+        self.assertTrue(any("Etsy link" in e for e in errors_for([p])))
+
+    def test_confirmed_etsy_link_ok(self):
+        p = pin("A", "Student Planner", 1, link="https://www.etsy.com/listing/4520206351")
+        self.assertFalse(any("link" in e.lower() for e in errors_for([p])))
 
     def test_link_not_in_registry_refused(self):
         p = pin("A", "Student Planner", 1, link="https://shop.obenpaper.com/b/Guess1")
@@ -199,10 +207,15 @@ class Pacing(unittest.TestCase):
         errs = errors_for([pin("A", "Student Planner", 1), pin("B", "Student Planner", 2)])
         self.assertTrue(any("same product" in e for e in errs))
 
-    def test_two_on_one_day_refused(self):
+    def test_too_close_refused(self):
         a = pin("A", "Student Planner", 1)
         b = pin("B", "In Session", 1, scheduled_at=(NOW + timedelta(days=1, hours=3)).replace(tzinfo=None).isoformat())
-        self.assertTrue(any("one pin per day" in e for e in errors_for([a, b])))
+        self.assertTrue(any("space pins out" in e for e in errors_for([a, b])))
+
+    def test_two_a_day_ok(self):
+        a = pin("A", "Student Planner", 1)
+        b = pin("B", "In Session", 1, scheduled_at=(NOW + timedelta(days=1, hours=6)).replace(tzinfo=None).isoformat())
+        self.assertFalse(any("space pins out" in e or "pins on" in e for e in errors_for([a, b])))
 
     def test_alternating_daily_ok(self):
         pins = [pin("A", "Student Planner", 1), pin("B", "In Session", 2), pin("C", "Student Planner", 4)]

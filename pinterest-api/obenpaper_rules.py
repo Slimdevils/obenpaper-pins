@@ -62,6 +62,8 @@ SITE_BOARD_ROUTES = {
 }
 
 # --- Pacing -----------------------------------------------------------------
+MAX_PER_DAY = 3             # audit 8 Nov 2026: up to 3 pins a day
+MIN_HOURS_APART = 4
 MAX_GAP_DAYS = 2            # 1–2 day spacing; a longer gap is only a warning
 MISSED_AFTER_HOURS = 24     # a pin this late is skipped, never posted late
 

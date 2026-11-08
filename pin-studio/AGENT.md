@@ -57,6 +57,18 @@ Also read `pinterest-api/posted_ids.json` and the workflow's latest runs if you
 can: if pins are **not** being posted (the publisher is not configured yet, or
 runs fail), still fill the queue, and report the problem in one line.
 
+## 2b. Cadence and Etsy links (audit, 8 Nov 2026)
+
+- `slots` now offers **two times a day** (12:00 and 19:00 Zurich) for the next
+  7 days, and fills gaps around pins already queued. Fill every slot.
+  The validator allows up to 3 pins a day, at least 4 h apart.
+- Etsy needs outside clicks to rank. For subjects that have an `etsy_link` in
+  `catalogue.json`, send **about half** of their pins to Etsy by adding
+  `"link_to": "etsy"` to the draft; the rest keep the store link. Website
+  boards never link to Etsy (enforced). Etsy URLs come only from the `etsy`
+  block of `confirmed_links.json`.
+- Favour product pins over site/tool pins: products carry the sales.
+
 ## 3. Plan the batch
 
 One pin per slot. Choose subjects so that:
