@@ -51,14 +51,13 @@ API = os.path.join(ROOT, "pinterest-api")
 sys.path.insert(0, API)
 sys.path.insert(0, STUDIO)
 
-from obenpaper_rules import TIMEZONE  # noqa: E402
+from obenpaper_rules import MIN_HOURS_APART, TIMEZONE  # noqa: E402
 from render_tile import PINS_DIR, load_catalogue, render  # noqa: E402
 from validate_queue import (MAP_PATH, PINS_PATH, POSTED_PATH, load_json,  # noqa: E402
                             parse_when, validate)
 
-HORIZON_DAYS = 14
-CADENCE_DAYS = 2           # one pin every two days (1–2 day spacing rule)
-POST_TIME = "19:00:00"     # Zurich, evening
+HORIZON_DAYS = 7           # 8 Nov 2026 audit: weekly run fills one week ahead
+POST_TIMES = ["12:00:00", "19:00:00"]   # Zurich — two pins a day (audit, 8 Nov 2026)
 SUBJECT_GAP_DAYS = 6
 VIDEO_LAYOUTS = {"video", "promo"}
 PRICE = re.compile(r"[€$£]|\bCHF\b|\bEUR\b|\bUSD\b|\d+[.,]\d{2}\b|\bfree\b", re.I)
@@ -134,16 +133,24 @@ def status():
 
 
 def open_slots():
+    """Every free slot in the next HORIZON_DAYS: POST_TIMES each day, skipping any
+    time within MIN_HOURS_APART of a pin already queued (gaps get filled too)."""
     pins, _ = load_state()
-    dated = sorted(parse_when(p["scheduled_at"]) for p in pins)
-    start = now() + timedelta(hours=12)
-    last = dated[-1] if dated else None
-    day = (last + timedelta(days=CADENCE_DAYS)).date() if last and last > start else start.date()
+    taken = [parse_when(p["scheduled_at"]).replace(tzinfo=None) for p in pins]
+    start = (now() + timedelta(hours=12)).replace(tzinfo=None)
+    day = start.date()
     end = (now() + timedelta(days=HORIZON_DAYS)).date()
     slots = []
     while day <= end:
-        slots.append(f"{day.isoformat()}T{POST_TIME}")
-        day += timedelta(days=CADENCE_DAYS)
+        for t in POST_TIMES:
+            slot = f"{day.isoformat()}T{t}"
+            when = parse_when(slot).replace(tzinfo=None)
+            if when <= start:
+                continue
+            if any(abs((when - x).total_seconds()) < MIN_HOURS_APART * 3600 for x in taken):
+                continue
+            slots.append(slot)
+        day += timedelta(days=1)
     return slots
 
 
@@ -180,7 +187,7 @@ def add(batch_path):
             "product": subject["product"],
             "category": subject["board"],
             "guardrail": subject["guardrail"],
-            "link": subject["link"],
+            "link": (subject.get("etsy_link") if d.get("link_to") == "etsy" else subject["link"]) or subject["link"],
             "image_file": f"{pid.lower()}.png",
             "image_url": "",
             **({"media": "video", "video_file": f"{pid.lower()}.mp4"}

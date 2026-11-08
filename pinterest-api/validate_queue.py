@@ -41,6 +41,8 @@ from obenpaper_rules import (
     LIMITS,
     MAX_GAP_DAYS,
     MISSED_AFTER_HOURS,
+    MAX_PER_DAY,
+    MIN_HOURS_APART,
     NEVER_PIN_SLUGS,
     SHOP_HOST,
     SITE_BOARD_ROUTES,
@@ -56,6 +58,11 @@ PINS_PATH = os.path.join(HERE, "pins_export.json")
 MAP_PATH = os.path.join(HERE, "board_map.json")
 POSTED_PATH = os.path.join(HERE, "posted_ids.json")
 LINKS_PATH = os.path.join(HERE, "confirmed_links.json")
+
+
+def confirmed_etsy_links():
+    with open(LINKS_PATH, "r", encoding="utf-8") as fh:
+        return set(json.load(fh).get("etsy", {}))
 
 
 def confirmed_shop_links():
@@ -116,8 +123,13 @@ def check_link(pin, category):
         rule = SITE_BOARD_ROUTES.get(category)
         if rule and not rule(path):
             problems.append(f"{path} does not belong on the {BOARDS[category]} board")
+    elif host == "www.etsy.com":
+        if link not in confirmed_etsy_links():
+            problems.append("Etsy link is not in confirmed_links.json — never guessed")
+        if category in SITE_BOARD_ROUTES:
+            problems.append("a website board pin must link to obenpaper.com, not to Etsy")
     else:
-        problems.append(f"link host must be {SITE_HOST} or {SHOP_HOST}, got '{host}'")
+        problems.append(f"link host must be {SITE_HOST}, {SHOP_HOST} or www.etsy.com, got '{host}'")
 
     raw = pin.get("link") or ""
     if raw != raw.strip() or (parts.path.endswith("/") and parts.path != "/"):
@@ -244,9 +256,14 @@ def validate(pins, board_map, posted_ids, now=None, require_boards=True):
             errors.append(
                 f"{pin.get('id')}: same product as the pin before it ({prev.get('id')}) — alternate products"
             )
-        if prev_when.date() == when.date():
+        same_day = [w for w, _ in dated if w.date() == when.date()]
+        if (when - prev_when).total_seconds() < MIN_HOURS_APART * 3600:
             errors.append(
-                f"{pin.get('id')}: same day as {prev.get('id')} ({when:%a %d %b}) — one pin per day"
+                f"{pin.get('id')}: less than {MIN_HOURS_APART} h after {prev.get('id')} — space pins out"
+            )
+        elif len(same_day) > MAX_PER_DAY and when == same_day[-1]:
+            errors.append(
+                f"{pin.get('id')}: more than {MAX_PER_DAY} pins on {when:%a %d %b}"
             )
         elif (when.date() - prev_when.date()).days > MAX_GAP_DAYS:
             warnings.append(
