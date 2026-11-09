@@ -363,5 +363,282 @@
       "layout": "promo"
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-10-in-session",
+    "subject": "in-session",
+    "product": "In Session",
+    "category": "teacher_planner",
+    "guardrail": "general",
+    "link": "https://www.etsy.com/listing/4527350097",
+    "image_file": "a-2026-11-10-in-session.png",
+    "image_url": "",
+    "title": "Teacher Planner with Class Roster and Seating Chart — Undated, Tablet, A4 and Letter",
+    "description": "In Session is an undated teacher planner and lesson plan book for tablet, A4 and US Letter: start any week of any year and reuse it term after term. This pin shows the class roster and the seating chart pages from its class section. Instant digital download.",
+    "alt_text": "Two printable teacher planner pages fanned on a warm background: a numbered class roster with columns for student name and contact, and a seating chart grid of desks.",
+    "scheduled_at": "2026-11-10T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "In Session · teacher planner",
+      "headline": "Class rosters and seating charts",
+      "subline": "Undated · tablet, A4, US Letter",
+      "pages": [
+        "print/07.jpg",
+        "print/09.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-10-tool-week-hours",
+    "subject": "tool-week-hours",
+    "product": "Week Hours Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/week-hours",
+    "image_file": "a-2026-11-10-tool-week-hours.png",
+    "image_url": "",
+    "title": "Where Does the Week Go? Free 168-Hour Week Calculator",
+    "description": "A free calculator for the week: a week is 168 hours. Put in what already has a claim on them and see what is left. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a soft sage background titled '168 hours in a week', explaining that you enter what already has a claim on your hours and see what is left, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-10T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · week hours",
+      "headline": "Where does your week actually go?",
+      "subline": "Your fixed hours in, what is left out",
+      "card_title": "168 hours in a week",
+      "card_text": "Put in what already has a claim on them and see what is left.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-11-kept-close",
+    "subject": "kept-close",
+    "product": "Kept Close",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/wvjnP",
+    "image_file": "a-2026-11-11-kept-close.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-11-11-kept-close.mp4",
+    "title": "Grief Journal — Undated Remembrance Journal for Tablet, A4 and US Letter",
+    "description": "Kept Close is an undated grief and remembrance journal for tablet (hyperlinked, for apps like GoodNotes and Notability), A4 and US Letter. Room to remember them, write to them and notice how the days are, at your own pace. This pin flips through the remembering you, things you used to say and memories to keep pages.",
+    "alt_text": "A short flip-through of a soft rose journal on a tablet: the Kept Close cover reading 'for the ones we carry with us', a 'Remembering you' page with a photo box, a 'Things you used to say' page of quote boxes, and a 'Memories to keep' page.",
+    "scheduled_at": "2026-11-11T12:00:00",
+    "tile": {
+      "layout": "video",
+      "kicker": "Kept Close · grief journal",
+      "headline": "A grief journal, at your own pace",
+      "subline": "Undated · tablet, A4, US Letter",
+      "pages": [
+        "tablet/01.jpg",
+        "tablet/04.jpg",
+        "tablet/06.jpg",
+        "tablet/07.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-12-travel-pair",
+    "subject": "travel-pair",
+    "product": "Travel Pair",
+    "category": "travel",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/YDASl",
+    "image_file": "a-2026-11-12-travel-pair.png",
+    "image_url": "",
+    "title": "Solo Travel Planner and Travel Journal Bundle — Plan the Trip, Then Keep the Journal",
+    "description": "Travel Pair puts the Solo Travel Planner and the Travel Journal & Planner together in one bundle: five PDFs in one download. Plan the trip with one, then keep the journal with the other. This pin shows the Solo Travel Planner cover and the journal's trip overview page.",
+    "alt_text": "Two travel pages fanned on a warm background: the terracotta Solo Travel Planner cover, and a blue-accented trip overview page from the travel journal with fields for destination, dates and who you are travelling with.",
+    "scheduled_at": "2026-11-12T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Travel Pair · bundle",
+      "headline": "Plan the trip, then keep the journal",
+      "subline": "Two travel journals, five PDFs",
+      "pages": [
+        "print/01.jpg",
+        "print/07.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-12-tool-scale-recipe",
+    "subject": "tool-scale-recipe",
+    "product": "Recipe Scaler Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/scale-recipe",
+    "image_file": "a-2026-11-12-tool-scale-recipe.png",
+    "image_url": "",
+    "title": "Free Recipe Scaler — Resize Any Ingredient List for More or Fewer Servings",
+    "description": "A free tool for the kitchen: paste an ingredient list, say how many it serves and how many you need, and every quantity is rescaled. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a soft pink background titled 'Scale a recipe', explaining that you paste an ingredient list and set the servings to rescale every quantity, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-12T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · recipe scaler",
+      "headline": "Cooking for more, or for fewer?",
+      "subline": "Paste the ingredients, set the servings",
+      "card_title": "Scale a recipe",
+      "card_text": "Paste an ingredient list, say how many it serves and how many you need. Every quantity is rescaled.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-13-in-tune",
+    "subject": "in-tune",
+    "product": "In Tune",
+    "category": "self_care",
+    "guardrail": "in_tune_en",
+    "link": "https://www.etsy.com/listing/4523690293",
+    "image_file": "a-2026-11-13-in-tune.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-11-13-in-tune.mp4",
+    "title": "Cycle Journal and Period Tracker for Tablet, A4 and US Letter",
+    "description": "In Tune is a cycle and wellness journal for tablet, A4 and US Letter, with cycle and symptom tracking, 28-day grids, and mood and PMS check-ins. This pin flips through the know your normal page, the monthly cycle tracker and the period log.",
+    "alt_text": "A short flip-through of a raspberry and blush journal on a tablet: the In Tune cover, a 'Know your normal' baseline page, a monthly cycle tracker grid, and a period log table.",
+    "scheduled_at": "2026-11-13T12:00:00",
+    "tile": {
+      "layout": "video",
+      "kicker": "In Tune · cycle journal",
+      "headline": "A cycle journal to know your normal",
+      "subline": "Tablet · A4 · US Letter",
+      "pages": [
+        "tablet/01.jpg",
+        "tablet/04.jpg",
+        "tablet/07.jpg",
+        "tablet/08.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-14-solo-travel-planner",
+    "subject": "solo-travel-planner",
+    "product": "Solo Travel Planner",
+    "category": "travel",
+    "guardrail": "general",
+    "link": "https://www.etsy.com/listing/4522798052",
+    "image_file": "a-2026-11-14-solo-travel-planner.png",
+    "image_url": "",
+    "title": "Solo Travel Packing List — Printable and Digital Travel Planner",
+    "description": "The Solo Travel Planner holds trip templates and packing lists for travelling on your own, for tablet, A4 and US Letter. This pin shows the packing list page, sorted into documents and money, tech and power, day bag and safety, and clothes. Instant digital download.",
+    "alt_text": "A tablet showing the packing list page of a terracotta travel planner: four columns of checkboxes headed documents and money, tech and power, day bag and safety, and clothes and rest.",
+    "scheduled_at": "2026-11-14T12:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Solo Travel Planner · packing",
+      "headline": "A packing list for travelling solo",
+      "subline": "Tablet · A4 · US Letter",
+      "pages": [
+        "tablet/05.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-14-tool-cost-per-wear",
+    "subject": "tool-cost-per-wear",
+    "product": "Cost per Wear Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/cost-per-wear",
+    "image_file": "a-2026-11-14-tool-cost-per-wear.png",
+    "image_url": "",
+    "title": "Cost per Wear Calculator — Free Wardrobe Tool",
+    "description": "A free cost per wear calculator: what something cost, divided by how many times you have actually worn it. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a soft brown background titled 'Cost per wear', explaining that it divides what something cost by how many times you have worn it, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-14T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · cost per wear",
+      "headline": "What does each wear really cost?",
+      "subline": "The price, over the times you wore it",
+      "card_title": "Cost per wear",
+      "card_text": "What something cost, divided by how many times you have actually worn it.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-15-quiz",
+    "subject": "quiz",
+    "product": "Planner Quiz",
+    "category": "free_tools",
+    "guardrail": "general",
+    "link": "https://obenpaper.com/quiz",
+    "image_file": "a-2026-11-15-quiz.png",
+    "image_url": "",
+    "title": "Which Planner Is Right for You? Free Planner Quiz",
+    "description": "A free quiz that matches you to a planner. It runs in your browser: nothing to download and no sign-up.",
+    "alt_text": "A white card on a cream background titled 'The planner quiz', saying it matches you to a planner in the browser, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-15T12:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free quiz · planners",
+      "headline": "Find the planner that fits you",
+      "subline": "A short quiz in your browser",
+      "card_title": "The planner quiz",
+      "card_text": "A free quiz that matches you to a planner. Nothing to download.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-16-travel-journal",
+    "subject": "travel-journal",
+    "product": "Travel Journal & Planner",
+    "category": "travel",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/dJRvG",
+    "image_file": "a-2026-11-16-travel-journal.png",
+    "image_url": "",
+    "title": "Printable Travel Journal with Travel Fund Page — A4 and US Letter",
+    "description": "The Travel Journal & Planner is a printable travel journal for A4 and US Letter. This pin shows the travel fund page and the how-to page, which walks through dream, plan, live and look back. Instant digital download.",
+    "alt_text": "Two printable travel journal pages fanned on a warm background: a travel fund page with rows for each trip, and a 'How to use this journal' page with numbered steps.",
+    "scheduled_at": "2026-11-16T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Travel Journal · printable",
+      "headline": "Your travel fund, on paper",
+      "subline": "Printable · A4 and US Letter",
+      "pages": [
+        "print/06.jpg",
+        "print/03.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-16-tool-bedtime",
+    "subject": "tool-bedtime",
+    "product": "Bedtime Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/bedtime",
+    "image_file": "a-2026-11-16-tool-bedtime.png",
+    "image_url": "",
+    "title": "Bedtime Calculator — Work Back from Your Wake-Up Time",
+    "description": "A free bedtime calculator: set the time you have to be up and the hours you want, and it counts back, including how long you take to drop off. Plain clock arithmetic. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a pale blue-grey background titled 'Work back to bedtime', explaining that you set your wake-up time and the hours you want and it counts back, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-16T19:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · bedtime",
+      "headline": "Up at seven? Count back from there",
+      "subline": "Clock arithmetic, nothing more",
+      "card_title": "Work back to bedtime",
+      "card_text": "Set the time you have to be up and the hours you want. It counts back, including how long you take to drop off.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
   }
 ]
