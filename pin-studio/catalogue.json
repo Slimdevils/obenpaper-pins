@@ -1,6 +1,6 @@
 {
   "_rule": "The ONLY subjects the weekly pin agent may pin, and the only facts it may state about them. Every fact is copied from the project-context md (§01 accents, §02 catalogue), the pinterest-pins skill's boards.md, or obenpaper-site lib/products.json and lib/tools.json. Copy may rephrase a fact; it may never add one (no page counts, features, prices or claims that are not listed here). A product with no Pinterest board is not here: it gets pinned once its board exists. In Tune FR stays out until its listing is live (§07a gating).",
-  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json)",
+  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json) · 9 Nov 2026: the two Payhip bundles added (lib/products.json subs; bundles have no pages of their own, so their preview folders are real pages copied from their member journals' previews)",
   "subjects": [
     {
       "key": "student-planner",
@@ -617,6 +617,50 @@
         "Instant digital download",
         "General fitness only, not medical advice — never weight-loss, fat-loss or body-change promises; page names like 'Slim Thighs' or 'Flat Abs' are never a headline",
         "Pages shown in the previews: cover with all 18 challenges, how it works, push-up, squat, plank, wall sit and burpee challenges"
+      ]
+    },
+    {
+      "key": "self-care-collection",
+      "product": "The Self-Care Collection",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/SL3mD",
+      "guardrail": "in_tune_en",
+      "accent": {
+        "main": "#C68B8B",
+        "dark": "#A86A6A",
+        "bg": "#EFE4DE"
+      },
+      "previews": "previews/self-care-collection",
+      "facts": [
+        "The Self-Care Collection — a four-journal set: Self-Care Journal, In Tune, Well Noted and Well Rested",
+        "Mood and wellness check-ins, cycle tracking, symptom and health notes, sleep and rest — four journals in one download",
+        "Undated; each journal comes in tablet, A4 and US Letter",
+        "Instant digital download",
+        "Wellness framing only — never therapy, treatment, diagnosis, medical advice or sleep advice; In Tune is awareness only, never contraception or fertility",
+        "Pages shown in the previews (taken from the four journals): the four covers, Self-Care daily check-in, In Tune monthly cycle tracker, Well Noted daily check-in, Well Rested 'how did I sleep?'"
+      ]
+    },
+    {
+      "key": "wellness-library",
+      "product": "The Wellness Library",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/TYo9K",
+      "guardrail": "in_tune_en",
+      "accent": {
+        "main": "#C68B8B",
+        "dark": "#A86A6A",
+        "bg": "#EFE4DE"
+      },
+      "previews": "previews/wellness-library",
+      "facts": [
+        "The Wellness Library — a six-journal set: Self-Care Journal, In Tune, Well Noted, Well Rested, In Mind and Clear Head",
+        "Mood and wellness check-ins, cycle tracking, symptom and health notes, sleep and rest, a mental health journal and a brain dump journal",
+        "Undated; each journal comes in tablet, A4 and US Letter (18 PDFs)",
+        "Instant digital download",
+        "Wellness framing only — never therapy, treatment, diagnosis, medical advice or sleep advice; In Tune is awareness only, never contraception or fertility",
+        "Pages shown in the previews (taken from the six journals): the six covers, Self-Care daily check-in, In Tune monthly cycle tracker, In Mind daily check-in, Clear Head sort your dump"
       ]
     },
     {
