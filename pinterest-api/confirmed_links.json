@@ -1,6 +1,6 @@
 {
   "_rule": "A pin may only link to a URL in this file. Shop slugs are copied verbatim from obenpaper-site lib/products.json, whose slugs were read off the live store or stated by Luc off the live page (its _source and _verified fields). Site routes are the confirmed list from lib/tools.json (17 Aug 2026). Destination URLs lock permanently on publish, so a URL is never guessed: a new product's link is added here only from those same sources.",
-  "_source": "obenpaper-site lib/products.json @ 4912b7d, read 1 Oct 2026 · Well Dreamt ouQVi + Kept Close wvjnP added 8 Nov 2026, read off the live pages (site PR launch/well-dreamt-kept-close) · etsy: listing ids read from the Etsy API snapshot (obenpaper-etsy data/latest.json, 1 Nov 2026) and the v105 launch URLs, added 8 Nov 2026 (audit)",
+  "_source": "obenpaper-site lib/products.json @ 4912b7d, read 1 Oct 2026 · Well Dreamt ouQVi + Kept Close wvjnP added 8 Nov 2026, read off the live pages (site PR launch/well-dreamt-kept-close) · etsy: listing ids read from the Etsy API snapshot (obenpaper-etsy data/latest.json, 1 Nov 2026) and the v105 launch URLs, added 8 Nov 2026 (audit) · 9 Nov 2026: Etsy ids of Manga, Recipe Book, Clear Head (Brain Dump) and Digital Planner from the audit doc (hero listings, titles applied and read back via the Etsy API on 8–9 Nov 2026)",
   "shop": {
     "https://shop.obenpaper.com/b/Tza97": "30-Day Fitness Challenges",
     "https://shop.obenpaper.com/b/jhmNM": "Budget Planner",
@@ -41,6 +41,10 @@
     "https://www.etsy.com/listing/4612243856": "Well Dreamt",
     "https://www.etsy.com/listing/4612245118": "Kept Close",
     "https://www.etsy.com/listing/4522798052": "Solo Travel Planner",
-    "https://www.etsy.com/listing/4519761642": "Travel Journal & Planner"
+    "https://www.etsy.com/listing/4519761642": "Travel Journal & Planner",
+    "https://www.etsy.com/listing/4520754254": "Manga Reading Journal",
+    "https://www.etsy.com/listing/4520097623": "Recipe Book & Meal Planner",
+    "https://www.etsy.com/listing/4528403829": "Clear Head",
+    "https://www.etsy.com/listing/4520049405": "Digital Planner 2026–27"
   }
 }

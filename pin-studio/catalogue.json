@@ -1,6 +1,6 @@
 {
   "_rule": "The ONLY subjects the weekly pin agent may pin, and the only facts it may state about them. Every fact is copied from the project-context md (§01 accents, §02 catalogue), the pinterest-pins skill's boards.md, or obenpaper-site lib/products.json and lib/tools.json. Copy may rephrase a fact; it may never add one (no page counts, features, prices or claims that are not listed here). A product with no Pinterest board is not here: it gets pinned once its board exists. In Tune FR stays out until its listing is live (§07a gating).",
-  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json)",
+  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json)",
   "subjects": [
     {
       "key": "student-planner",
@@ -215,6 +215,409 @@
         "Pages shown in the previews: how to use this journal (dream, plan, live, look back), my year of travel, travel bucket list, travel fund, trip overview"
       ],
       "etsy_link": "https://www.etsy.com/listing/4519761642"
+    },
+    {
+      "key": "manga-reading-journal",
+      "product": "Manga Reading Journal",
+      "kind": "product",
+      "board": "hobbies",
+      "link": "https://shop.obenpaper.com/b/yfLHF",
+      "guardrail": "general",
+      "accent": {
+        "main": "#5B5BD6",
+        "dark": "#4646B8",
+        "bg": "#E3E1F5"
+      },
+      "previews": "previews/manga-reading-journal",
+      "facts": [
+        "Manga Reading Journal — a reading journal for manga, manhwa and manhua",
+        "Track every series you read, rate it out of ten, and remember why you loved it",
+        "Library, currently reading, to-read pile, reviews, reading log, favourites, challenges, year in reading",
+        "Separate indexes for manga, manhwa and manhua; an upcoming-releases page for new chapters, volumes and seasons",
+        "269 pages; formats: tablet (landscape, hyperlinked), A4 and US Letter",
+        "Instant digital download",
+        "No real series titles, covers or characters on any page — never name or show one in a pin",
+        "Pages shown in the previews: cover, name page, My Reading dashboard, library, manga / manhwa / manhua overviews, currently reading, to-read list, upcoming releases"
+      ],
+      "etsy_link": "https://www.etsy.com/listing/4520754254"
+    },
+    {
+      "key": "recipe-book",
+      "product": "Recipe Book & Meal Planner",
+      "kind": "product",
+      "board": "home",
+      "link": "https://shop.obenpaper.com/b/tpmW2",
+      "guardrail": "general",
+      "accent": {
+        "main": "#BE3A68",
+        "dark": "#9C2C52",
+        "bg": "#F1DEE5"
+      },
+      "previews": "previews/recipe-book",
+      "facts": [
+        "My Recipe Book & Meal Planner — a blank cookbook with a meal planner",
+        "Collect your favourite recipes, plan your week, and shop from one list — a whole kitchen in one place",
+        "Recipe pages sorted by section: breakfast, mains, sides & salads, sweets, drinks",
+        "Each recipe page: serves, prep time, cook time, oven temperature, ingredients, method, notes, a photo space and a rating",
+        "Weekly and monthly meal planners, grocery list, pantry, fridge and freezer inventory",
+        "39 pages; formats: tablet (landscape, hyperlinked), A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: cover, name page, how to use this kit, My Kitchen index, breakfast and mains dividers, recipe pages"
+      ],
+      "etsy_link": "https://www.etsy.com/listing/4520097623"
+    },
+    {
+      "key": "clear-head",
+      "product": "Clear Head",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/Ajk2r",
+      "guardrail": "general",
+      "accent": {
+        "main": "#A24FB8",
+        "dark": "#7A3A8C",
+        "bg": "#EFE0F2"
+      },
+      "previews": "previews/clear-head",
+      "facts": [
+        "Clear Head — a brain dump journal",
+        "Empty your mind, sort what matters, let the rest go",
+        "Three moves: dump, sort, act",
+        "Open brain dump pages, a dump by life area (work, home, people, money, health, ideas), and a sort page: do now, do soon, schedule, ask or delegate, keep as idea, let it go",
+        "A self-organisation and reflection tool — never therapy or medical advice",
+        "20 pages; formats: tablet (landscape, hyperlinked), A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: cover, how to use this journal, why emptying your head helps, brain dump, brain dump — more space, dump by life area, sort your dump"
+      ],
+      "etsy_link": "https://www.etsy.com/listing/4528403829"
+    },
+    {
+      "key": "digital-planner",
+      "product": "Digital Planner 2026–27",
+      "kind": "product",
+      "board": "planners",
+      "link": "https://shop.obenpaper.com/b/dER8t",
+      "guardrail": "general",
+      "accent": {
+        "main": "#8FAE7A",
+        "dark": "#6E9159",
+        "bg": "#EDE7D8"
+      },
+      "previews": "previews/digital-planner",
+      "facts": [
+        "Digital Planner — dated June 2026 to June 2027",
+        "Yearly, monthly, weekly and daily pages, fully hyperlinked",
+        "Dashboard, year at a glance, goals and focus, a monthly calendar for every month with monthly goals and notes, daily page, habit tracker",
+        "78 pages; formats: tablet (landscape, hyperlinked), A4 and US Letter; print it or use it on any tablet",
+        "Instant digital download",
+        "Pages shown in the previews: cover, dashboard, June 2026 – June 2027 year view, goals & focus, monthly calendars June to November 2026"
+      ],
+      "etsy_link": "https://www.etsy.com/listing/4520049405"
+    },
+    {
+      "key": "self-care-journal",
+      "product": "Self-Care Journal",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/g12H8",
+      "guardrail": "general",
+      "accent": {
+        "main": "#C68B8B",
+        "dark": "#A86A6A",
+        "bg": "#EFE4DE"
+      },
+      "previews": "previews/self-care-journal",
+      "facts": [
+        "Self-Care Journal — come home to yourself",
+        "Mood, mental health and wellness check-in",
+        "Undated and reusable; no streaks, no guilt, skip pages, come back when you can",
+        "Foundations: what self-care means to me, wheel of wellbeing, my self-care menu (by the energy you actually have), what drains me and what fills me",
+        "Daily check-in, morning pages, evening wind-down, weekly reflection",
+        "30 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "Wellness framing only — never therapy, treatment or medical advice",
+        "Pages shown in the previews: cover, self-care isn't selfish, what self-care means to me, wheel of wellbeing, self-care menu, what drains me · what fills me, daily check-in, morning pages, evening wind-down, weekly reflection"
+      ]
+    },
+    {
+      "key": "well-noted",
+      "product": "Well Noted",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/xkSZr",
+      "guardrail": "general",
+      "accent": {
+        "main": "#3D93A8",
+        "dark": "#2A6E7C",
+        "bg": "#E5F1F3"
+      },
+      "previews": "previews/well-noted",
+      "facts": [
+        "Well Noted — a symptom and health tracker, undated",
+        "Track how you really feel — symptoms, energy, sleep, pain and medications — and bring clear notes to every appointment",
+        "Health snapshot, a one-minute daily check-in, food, water and intake log, symptom log with likely triggers and what helped",
+        "24 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "A personal record to share with your doctor — never a diagnosis, medical advice or treatment",
+        "Pages shown in the previews: cover, how to use this tracker, my health snapshot, daily check-in, food, water & intake, symptom log"
+      ]
+    },
+    {
+      "key": "in-mind",
+      "product": "In Mind",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/M01fR",
+      "guardrail": "general",
+      "accent": {
+        "main": "#6C72A8",
+        "dark": "#4E5388",
+        "bg": "#E7E8F2"
+      },
+      "previews": "previews/in-mind",
+      "facts": [
+        "In Mind — a mental health journal",
+        "Check in, catch the thought, come back to steady",
+        "Daily check-in, naming what you feel, a month-at-a-glance mood and energy grid, catch the thought and find a kinder one",
+        "Made to be kind to you: no streaks, skip what you can't",
+        "22 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "Wellness and reflection framing only — never therapy, treatment, diagnosis or a cure",
+        "Pages shown in the previews: cover, how to use this journal, my snapshot, naming what you feel, daily check-in, a month at a glance, catch the thought"
+      ]
+    },
+    {
+      "key": "well-rested",
+      "product": "Well Rested",
+      "kind": "product",
+      "board": "self_care",
+      "link": "https://shop.obenpaper.com/b/hzISQ",
+      "guardrail": "general",
+      "accent": {
+        "main": "#3F4C81",
+        "dark": "#2D3861",
+        "bg": "#EDEEF4"
+      },
+      "previews": "previews/well-rested",
+      "facts": [
+        "Well Rested — a sleep and rest journal, undated",
+        "Track how you sleep — bedtime, rest, dreams, energy and the small things that shape your nights — and notice your own pattern",
+        "Sections: start, log, patterns, ritual, dreams, reflect",
+        "Know your normal, what better rest looks like, a quick sleep log, a nightly 'how did I sleep?' page",
+        "No streaks, no pressure",
+        "25 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "A personal journal — never sleep advice, treatment or a promise to fix sleep",
+        "Pages shown in the previews: cover, contents, how to use this journal, your sleep gently, know your normal, what better rest looks like, sleep log, how did I sleep?"
+      ]
+    },
+    {
+      "key": "habit-tracker",
+      "product": "Habit Tracker",
+      "kind": "product",
+      "board": "planners",
+      "link": "https://shop.obenpaper.com/b/Lxi3K",
+      "guardrail": "general",
+      "accent": {
+        "main": "#2E8B7D",
+        "dark": "#1F6E62",
+        "bg": "#DCEAE4"
+      },
+      "previews": "previews/habit-tracker",
+      "facts": [
+        "Habit Tracker — build the days you want, one square at a time",
+        "Undated daily, weekly and monthly; reuse it any month, any year",
+        "Habit foundations (each habit, why it matters, target days), monthly habit grid, weekly focus, daily routines, a 30-day challenge, reflect",
+        "One rule: consistency beats intensity",
+        "18 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: cover, your habits at a glance, how to use this tracker, habit foundations, monthly habit grid"
+      ]
+    },
+    {
+      "key": "clocked-in",
+      "product": "Clocked In",
+      "kind": "product",
+      "board": "planners",
+      "link": "https://shop.obenpaper.com/b/u3Fqn",
+      "guardrail": "general",
+      "accent": {
+        "main": "#2F5FB0",
+        "dark": "#21458A",
+        "bg": "#E2E8F4"
+      },
+      "previews": "previews/clocked-in",
+      "facts": [
+        "Clocked In — a work-from-home and hybrid planner, undated",
+        "Structure your day, protect your focus, and actually clock off",
+        "Three steps: clock in, block the day, clock off",
+        "Workspace & boundaries, your hybrid week (home days and office days), month at a glance, plan your week, a time-blocked daily plan",
+        "20 pages; formats: tablet (landscape), A4 and US Letter (portrait)",
+        "Instant digital download",
+        "Pages shown in the previews: cover, how to use this planner, your workspace & boundaries, your hybrid week, month at a glance, plan your week, daily plan"
+      ]
+    },
+    {
+      "key": "budget-planner",
+      "product": "Budget Planner",
+      "kind": "product",
+      "board": "work_finance",
+      "link": "https://shop.obenpaper.com/b/jhmNM",
+      "guardrail": "finance",
+      "accent": {
+        "main": "#BD872C",
+        "dark": "#9C6E1F",
+        "bg": "#EFE2C8"
+      },
+      "previews": "previews/budget-planner",
+      "facts": [
+        "Budget Planner — plan, save, track; undated",
+        "An annual overview, monthly budgets, bills, spending, savings goals, sinking funds, debt payoff and net worth, all in one planner",
+        "Dashboard, monthly budget (planned vs actual), paycheck budget, bill tracker, subscriptions, spending log, weekly and monthly review",
+        "17 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "A place to plan your own money — never financial advice",
+        "Pages shown in the previews: cover, name page, My Money dashboard, net worth, annual overview, monthly budget"
+      ]
+    },
+    {
+      "key": "well-spent",
+      "product": "Well Spent",
+      "kind": "product",
+      "board": "work_finance",
+      "link": "https://shop.obenpaper.com/b/DBHKb",
+      "guardrail": "finance",
+      "accent": {
+        "main": "#0E5F7E",
+        "dark": "#0A4459",
+        "bg": "#DDEAF0"
+      },
+      "previews": "previews/well-spent",
+      "facts": [
+        "Well Spent — a personal finance journal: pay it down, roll it over, watch it grow",
+        "Undated; reuse every year",
+        "Debt inventory, snowball or avalanche (you pick one), a debt page per account, the rollover, sinking funds and savings",
+        "One product with three editions: a 33-page PDF journal (tablet, A4 and US Letter), a 10-tab spreadsheet (Excel and Google Sheets) and a 16-card A6 challenge set",
+        "Instant digital download",
+        "A place to plan your own money — never financial advice, and neither method is promised to be faster",
+        "Pages shown in the previews: cover, what's inside, how to use this journal, my why, where I stand now, debt inventory, snowball or avalanche, debt pages"
+      ]
+    },
+    {
+      "key": "in-order",
+      "product": "In Order",
+      "kind": "product",
+      "board": "work_finance",
+      "link": "https://shop.obenpaper.com/b/G1jT8",
+      "guardrail": "finance",
+      "accent": {
+        "main": "#1B7A4B",
+        "dark": "#125537",
+        "bg": "#DDEBE2"
+      },
+      "previews": "previews/in-order",
+      "facts": [
+        "In Order — a small-business and digital-shop toolkit, undated",
+        "Plan it, list it, sell it, grow it — one calm place to run your shop, from first listing to year-in-review",
+        "Five sections: start, shop, sales, grow, review",
+        "Business snapshot, goals & targets, product catalogue, listing tracker, idea pipeline & roadmap, pricing & margin worksheet, monthly income log",
+        "27 pages; formats: tablet, A4 and US Letter; a spreadsheet edition is sold too",
+        "Instant digital download",
+        "An organising tool only — never financial or tax advice",
+        "Pages shown in the previews: cover, how to use this toolkit, business snapshot, goals & targets, product catalogue, listing tracker, idea pipeline & roadmap, pricing & margin worksheet, monthly income log"
+      ]
+    },
+    {
+      "key": "in-bloom",
+      "product": "In Bloom",
+      "kind": "product",
+      "board": "home",
+      "link": "https://shop.obenpaper.com/b/iX2VI",
+      "guardrail": "general",
+      "accent": {
+        "main": "#5C8A3C",
+        "dark": "#43662A",
+        "bg": "#E7EFDC"
+      },
+      "previews": "previews/in-bloom",
+      "facts": [
+        "In Bloom — an all-in-one garden journal, undated",
+        "Plan your year, log every sowing, and watch your garden grow — one gentle page at a time",
+        "Plan, grow, track, review: my garden at a glance, the growing year by season, sowing & planting calendar, wishlist & seed inventory, garden layout & beds, plant profiles",
+        "23 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: cover, how to use this journal, my garden at a glance, the growing year, sowing & planting calendar, wishlist & seed inventory, garden layout & beds, plant profile"
+      ]
+    },
+    {
+      "key": "well-read",
+      "product": "Well Read",
+      "kind": "product",
+      "board": "hobbies",
+      "link": "https://shop.obenpaper.com/b/fsAZw",
+      "guardrail": "general",
+      "accent": {
+        "main": "#A94E28",
+        "dark": "#7C371C",
+        "bg": "#F3E0D7"
+      },
+      "previews": "previews/well-read",
+      "facts": [
+        "Well Read — a reading journal, undated",
+        "For every book you finish, start, love — or quietly put down",
+        "Set the shelf, keep a pile you'll use, log light: colour one spine on the year shelf every time you finish a book",
+        "Your reading year (goals), fill the shelf (fifty spines), the to-be-read pile",
+        "Tablet edition: 17 hyperlinked landscape spreads; print companion: 18 pages, A4 and US Letter",
+        "Instant digital download",
+        "No real book titles, covers or authors in a pin",
+        "Pages shown in the previews: cover, start here, your reading year, fill the shelf, the pile"
+      ]
+    },
+    {
+      "key": "well-dressed",
+      "product": "Well Dressed",
+      "kind": "product",
+      "board": "home",
+      "link": "https://shop.obenpaper.com/b/im6kN",
+      "guardrail": "general",
+      "accent": {
+        "main": "#7E5640",
+        "dark": "#5A3C2C",
+        "bg": "#ECE3DA"
+      },
+      "previews": "previews/well-dressed",
+      "facts": [
+        "Well Dressed — a capsule wardrobe and closet planner, undated",
+        "Edit your closet, build your capsule, wear it all well",
+        "The capsule method in four moves: edit, define, build, wear",
+        "Your style in your words, a wardrobe palette, where your clothes actually live, closet audit, keep / mend / let go",
+        "23 pages; formats: tablet, A4 and US Letter",
+        "Instant digital download",
+        "Pages shown in the previews: cover, the capsule method, your style in your words, a wardrobe that matches itself, where your clothes actually live, closet audit, keep, mend or let go"
+      ]
+    },
+    {
+      "key": "workout-challenges",
+      "product": "30-Day Fitness Challenges",
+      "kind": "product",
+      "board": "home",
+      "link": "https://shop.obenpaper.com/b/Tza97",
+      "guardrail": "fitness",
+      "accent": {
+        "main": "#9A8C7C",
+        "dark": "#3B302B",
+        "bg": "#FDF8F2"
+      },
+      "previews": "previews/workout-challenges",
+      "facts": [
+        "30-Day Fitness Challenges — 18 printable one-page challenges",
+        "One for every body part, mood and moment: pick a card, follow the numbers, tick the days",
+        "Each challenge builds a little every day, with rest days built in on days 7, 14, 21 and 28",
+        "21 pages; formats: A4 and tablet",
+        "Instant digital download",
+        "General fitness only, not medical advice — never weight-loss, fat-loss or body-change promises; page names like 'Slim Thighs' or 'Flat Abs' are never a headline",
+        "Pages shown in the previews: cover with all 18 challenges, how it works, push-up, squat, plank, wall sit and burpee challenges"
+      ]
     },
     {
       "key": "quiz",
