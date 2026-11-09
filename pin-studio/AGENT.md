@@ -68,6 +68,12 @@ runs fail), still fill the queue, and report the problem in one line.
   boards never link to Etsy (enforced). Etsy URLs come only from the `etsy`
   block of `confirmed_links.json`.
 - Favour product pins over site/tool pins: products carry the sales.
+- **18 Nov → 14 Dec 2026 (audit, 9 Nov 2026, proposal 5):** the 19:00 slot of
+  every day already holds a motion-promo **video** pin (the product's Etsy
+  listing video, re-cut 1000×1500 without price), linked to its Etsy listing.
+  `slots` will offer only the 12:00 slots: fill them with **image** pins
+  (never a video — it would sit next to a promo), and link them to the
+  **store**, not Etsy — that day's promo already sends its click to Etsy.
 
 ## 3. Plan the batch
 

@@ -1,6 +1,6 @@
 {
   "_rule": "A pin may only link to a URL in this file. Shop slugs are copied verbatim from obenpaper-site lib/products.json, whose slugs were read off the live store or stated by Luc off the live page (its _source and _verified fields). Site routes are the confirmed list from lib/tools.json (17 Aug 2026). Destination URLs lock permanently on publish, so a URL is never guessed: a new product's link is added here only from those same sources.",
-  "_source": "obenpaper-site lib/products.json @ 4912b7d, read 1 Oct 2026 · Well Dreamt ouQVi + Kept Close wvjnP added 8 Nov 2026, read off the live pages (site PR launch/well-dreamt-kept-close) · etsy: listing ids read from the Etsy API snapshot (obenpaper-etsy data/latest.json, 1 Nov 2026) and the v105 launch URLs, added 8 Nov 2026 (audit) · 9 Nov 2026: Etsy ids of Manga, Recipe Book, Clear Head (Brain Dump) and Digital Planner from the audit doc (hero listings, titles applied and read back via the Etsy API on 8–9 Nov 2026)",
+  "_source": "obenpaper-site lib/products.json @ 4912b7d, read 1 Oct 2026 · Well Dreamt ouQVi + Kept Close wvjnP added 8 Nov 2026, read off the live pages (site PR launch/well-dreamt-kept-close) · etsy: listing ids read from the Etsy API snapshot (obenpaper-etsy data/latest.json, 1 Nov 2026) and the v105 launch URLs, added 8 Nov 2026 (audit) · 9 Nov 2026: Etsy ids of Manga, Recipe Book, Clear Head (Brain Dump) and Digital Planner from the audit doc (hero listings, titles applied and read back via the Etsy API on 8–9 Nov 2026) · 9 Nov 2026: Etsy ids of the 16 remaining pinned products from the Etsy API snapshot (obenpaper-etsy data/latest.json, 8 Nov 2026), for the motion-promo video pins (audit proposal 5)",
   "shop": {
     "https://shop.obenpaper.com/b/Tza97": "30-Day Fitness Challenges",
     "https://shop.obenpaper.com/b/jhmNM": "Budget Planner",
@@ -45,6 +45,22 @@
     "https://www.etsy.com/listing/4520754254": "Manga Reading Journal",
     "https://www.etsy.com/listing/4520097623": "Recipe Book & Meal Planner",
     "https://www.etsy.com/listing/4528403829": "Clear Head",
-    "https://www.etsy.com/listing/4520049405": "Digital Planner 2026–27"
+    "https://www.etsy.com/listing/4520049405": "Digital Planner 2026–27",
+    "https://www.etsy.com/listing/4556782640": "Well Spent",
+    "https://www.etsy.com/listing/4528396719": "In Mind",
+    "https://www.etsy.com/listing/4523421793": "Gaming Tracker",
+    "https://www.etsy.com/listing/4523972859": "Well Noted",
+    "https://www.etsy.com/listing/4527319283": "In Order",
+    "https://www.etsy.com/listing/4531401698": "The Self-Care Collection",
+    "https://www.etsy.com/listing/4527186945": "In Bloom",
+    "https://www.etsy.com/listing/4521775292": "Budget Planner",
+    "https://www.etsy.com/listing/4526636547": "Well Rested",
+    "https://www.etsy.com/listing/4553192834": "Well Read",
+    "https://www.etsy.com/listing/4522271837": "Habit Tracker",
+    "https://www.etsy.com/listing/4522879722": "Self-Care Journal",
+    "https://www.etsy.com/listing/4530975308": "Clocked In",
+    "https://www.etsy.com/listing/4531387207": "The Wellness Library",
+    "https://www.etsy.com/listing/4527188846": "Well Dressed",
+    "https://www.etsy.com/listing/4519616831": "30-Day Fitness Challenges"
   }
 }

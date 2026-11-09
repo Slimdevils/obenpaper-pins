@@ -1,6 +1,6 @@
 {
   "_rule": "The ONLY subjects the weekly pin agent may pin, and the only facts it may state about them. Every fact is copied from the project-context md (§01 accents, §02 catalogue), the pinterest-pins skill's boards.md, or obenpaper-site lib/products.json and lib/tools.json. Copy may rephrase a fact; it may never add one (no page counts, features, prices or claims that are not listed here). A product with no Pinterest board is not here: it gets pinned once its board exists. In Tune FR stays out until its listing is live (§07a gating).",
-  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json) · 9 Nov 2026: the two Payhip bundles added (lib/products.json subs; bundles have no pages of their own, so their preview folders are real pages copied from their member journals' previews) · 9 Nov 2026: Gaming Tracker added (md v107 §02; previews rendered clean from Downloads/_pdf_sources Gaming Tracker A4 + TABLET); Student Planner tablet previews re-rendered clean from Downloads/Obenpaper-StudentPlanner-2026-27-Landscape.pdf",
+  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json) · 9 Nov 2026: the two Payhip bundles added (lib/products.json subs; bundles have no pages of their own, so their preview folders are real pages copied from their member journals' previews) · 9 Nov 2026: Gaming Tracker added (md v107 §02; previews rendered clean from Downloads/_pdf_sources Gaming Tracker A4 + TABLET); Student Planner tablet previews re-rendered clean from Downloads/Obenpaper-StudentPlanner-2026-27-Landscape.pdf · 9 Nov 2026 (audit proposal 5): etsy_link added for 16 subjects from the Etsy API snapshot listing ids (obenpaper-etsy data/latest.json, 8 Nov 2026); the two bundles matched by members (Self-Care Bundle 4531401698 = the four journals of the Self-Care Collection, Wellness Library 4531387207 = the six)",
   "subjects": [
     {
       "key": "student-planner",
@@ -321,6 +321,7 @@
       "kind": "product",
       "board": "self_care",
       "link": "https://shop.obenpaper.com/b/g12H8",
+      "etsy_link": "https://www.etsy.com/listing/4522879722",
       "guardrail": "general",
       "accent": {
         "main": "#C68B8B",
@@ -346,6 +347,7 @@
       "kind": "product",
       "board": "self_care",
       "link": "https://shop.obenpaper.com/b/xkSZr",
+      "etsy_link": "https://www.etsy.com/listing/4523972859",
       "guardrail": "general",
       "accent": {
         "main": "#3D93A8",
@@ -369,6 +371,7 @@
       "kind": "product",
       "board": "self_care",
       "link": "https://shop.obenpaper.com/b/M01fR",
+      "etsy_link": "https://www.etsy.com/listing/4528396719",
       "guardrail": "general",
       "accent": {
         "main": "#6C72A8",
@@ -393,6 +396,7 @@
       "kind": "product",
       "board": "self_care",
       "link": "https://shop.obenpaper.com/b/hzISQ",
+      "etsy_link": "https://www.etsy.com/listing/4526636547",
       "guardrail": "general",
       "accent": {
         "main": "#3F4C81",
@@ -418,6 +422,7 @@
       "kind": "product",
       "board": "planners",
       "link": "https://shop.obenpaper.com/b/Lxi3K",
+      "etsy_link": "https://www.etsy.com/listing/4522271837",
       "guardrail": "general",
       "accent": {
         "main": "#2E8B7D",
@@ -441,6 +446,7 @@
       "kind": "product",
       "board": "planners",
       "link": "https://shop.obenpaper.com/b/u3Fqn",
+      "etsy_link": "https://www.etsy.com/listing/4530975308",
       "guardrail": "general",
       "accent": {
         "main": "#2F5FB0",
@@ -464,6 +470,7 @@
       "kind": "product",
       "board": "work_finance",
       "link": "https://shop.obenpaper.com/b/jhmNM",
+      "etsy_link": "https://www.etsy.com/listing/4521775292",
       "guardrail": "finance",
       "accent": {
         "main": "#BD872C",
@@ -487,6 +494,7 @@
       "kind": "product",
       "board": "work_finance",
       "link": "https://shop.obenpaper.com/b/DBHKb",
+      "etsy_link": "https://www.etsy.com/listing/4556782640",
       "guardrail": "finance",
       "accent": {
         "main": "#0E5F7E",
@@ -510,6 +518,7 @@
       "kind": "product",
       "board": "work_finance",
       "link": "https://shop.obenpaper.com/b/G1jT8",
+      "etsy_link": "https://www.etsy.com/listing/4527319283",
       "guardrail": "finance",
       "accent": {
         "main": "#1B7A4B",
@@ -534,6 +543,7 @@
       "kind": "product",
       "board": "home",
       "link": "https://shop.obenpaper.com/b/iX2VI",
+      "etsy_link": "https://www.etsy.com/listing/4527186945",
       "guardrail": "general",
       "accent": {
         "main": "#5C8A3C",
@@ -556,6 +566,7 @@
       "kind": "product",
       "board": "hobbies",
       "link": "https://shop.obenpaper.com/b/fsAZw",
+      "etsy_link": "https://www.etsy.com/listing/4553192834",
       "guardrail": "general",
       "accent": {
         "main": "#A94E28",
@@ -580,6 +591,7 @@
       "kind": "product",
       "board": "home",
       "link": "https://shop.obenpaper.com/b/im6kN",
+      "etsy_link": "https://www.etsy.com/listing/4527188846",
       "guardrail": "general",
       "accent": {
         "main": "#7E5640",
@@ -603,6 +615,7 @@
       "kind": "product",
       "board": "home",
       "link": "https://shop.obenpaper.com/b/Tza97",
+      "etsy_link": "https://www.etsy.com/listing/4519616831",
       "guardrail": "fitness",
       "accent": {
         "main": "#9A8C7C",
@@ -626,6 +639,7 @@
       "kind": "product",
       "board": "self_care",
       "link": "https://shop.obenpaper.com/b/SL3mD",
+      "etsy_link": "https://www.etsy.com/listing/4531401698",
       "guardrail": "in_tune_en",
       "accent": {
         "main": "#C68B8B",
@@ -648,6 +662,7 @@
       "kind": "product",
       "board": "self_care",
       "link": "https://shop.obenpaper.com/b/TYo9K",
+      "etsy_link": "https://www.etsy.com/listing/4531387207",
       "guardrail": "in_tune_en",
       "accent": {
         "main": "#C68B8B",
@@ -670,6 +685,7 @@
       "kind": "product",
       "board": "hobbies",
       "link": "https://shop.obenpaper.com/b/jKUYT",
+      "etsy_link": "https://www.etsy.com/listing/4523421793",
       "guardrail": "general",
       "accent": {
         "main": "#5A4FCF",
