@@ -1,6 +1,6 @@
 {
   "_rule": "The ONLY subjects the weekly pin agent may pin, and the only facts it may state about them. Every fact is copied from the project-context md (§01 accents, §02 catalogue), the pinterest-pins skill's boards.md, or obenpaper-site lib/products.json and lib/tools.json. Copy may rephrase a fact; it may never add one (no page counts, features, prices or claims that are not listed here). A product with no Pinterest board is not here: it gets pinned once its board exists. In Tune FR stays out until its listing is live (§07a gating).",
-  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json) · 9 Nov 2026: the two Payhip bundles added (lib/products.json subs; bundles have no pages of their own, so their preview folders are real pages copied from their member journals' previews)",
+  "_sources": "md v101 (26 Aug 2026) · boards.md (18 Aug 2026) · obenpaper-site @ 4912b7d (lib/products.json, lib/tools.json) · 9 Nov 2026: 17 products added from md v107 §02, obenpaper-site @ 3ebd68e (lib/products.json collections → boards, app/globals.css accents, lib/previews.json page totals, public/previews/*) and the text on their own preview pages; Etsy ids for the four heroes from claude/Audit-2026-11-08-changes.md (applied and read back via the Etsy API, obenpaper-etsy changes/applied/2026-11-08-2311.json) · 9 Nov 2026: the two Payhip bundles added (lib/products.json subs; bundles have no pages of their own, so their preview folders are real pages copied from their member journals' previews) · 9 Nov 2026: Gaming Tracker added (md v107 §02; previews rendered clean from Downloads/_pdf_sources Gaming Tracker A4 + TABLET); Student Planner tablet previews re-rendered clean from Downloads/Obenpaper-StudentPlanner-2026-27-Landscape.pdf",
   "subjects": [
     {
       "key": "student-planner",
@@ -22,7 +22,8 @@
         "Formats: tablet (hyperlinked, for apps like GoodNotes and Notability), A4 and US Letter",
         "Dashboard pages: year at a glance, courses, timetable, goals and focus, monthly, weekly, exams and study, grades",
         "Instant digital download",
-        "Pages shown in the previews: My Year dashboard, year at a glance, courses, weekly timetable, goals & focus, exams & study plan, grade tracker, monthly calendar"
+        "Pages shown in the previews: My Year dashboard, year at a glance, courses, weekly timetable, goals & focus, exams & study plan, grade tracker, monthly calendar",
+        "Previews: the tablet pages (tablet/01–10) are clean renders from the dated tablet PDF (9 Nov 2026); the print pages still carry the old obenpaper.com watermark — use tablet pages only (layout tablet or video), never the print pages"
       ],
       "etsy_link": "https://www.etsy.com/listing/4520206351"
     },
@@ -661,6 +662,31 @@
         "Instant digital download",
         "Wellness framing only — never therapy, treatment, diagnosis, medical advice or sleep advice; In Tune is awareness only, never contraception or fertility",
         "Pages shown in the previews (taken from the six journals): the six covers, Self-Care daily check-in, In Tune monthly cycle tracker, In Mind daily check-in, Clear Head sort your dump"
+      ]
+    },
+    {
+      "key": "gaming-tracker",
+      "product": "Gaming Tracker",
+      "kind": "product",
+      "board": "hobbies",
+      "link": "https://shop.obenpaper.com/b/jKUYT",
+      "guardrail": "general",
+      "accent": {
+        "main": "#5A4FCF",
+        "dark": "#3F37A6",
+        "bg": "#E6E3F5"
+      },
+      "previews": "previews/gaming-tracker",
+      "facts": [
+        "Gaming Tracker — beat your backlog; a game log, backlog and playtime tracker",
+        "One product with two editions: a 13-tab spreadsheet (Excel and Google Sheets) and a 30-page PDF journal (tablet, A4 and US Letter)",
+        "Undated; reuse any year",
+        "Journal pages: my gamer profile, now playing, game library log, the backlog, a backlog picker (roll a die or pick at random), wishlist & upcoming, playthroughs, reviews, a hall of fame",
+        "Spreadsheet: dashboard, game library, now playing, backlog picker, wishlist, reviews, achievements, spending, year in games",
+        "Fictional placeholder titles only — no real game titles, box art, consoles' logos or characters in a pin",
+        "Instant digital download",
+        "The previews show the PDF journal only, not the spreadsheet — say 'journal' when a pin shows these pages",
+        "Pages shown in the previews: cover, how to use this tracker, my gamer profile, now playing, game library log, the backlog, backlog picker, wishlist & upcoming"
       ]
     },
     {
