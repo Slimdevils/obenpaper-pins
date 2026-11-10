@@ -1207,5 +1207,29 @@
       "source": "Etsy listing video 4519761642, pin cut 1000x1500 without price (obenpapers-assets generators/motion-promo, 9 Nov 2026)"
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-17-student-planner",
+    "subject": "student-planner",
+    "product": "Student Planner",
+    "category": "student_planner",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/YpUmC",
+    "image_file": "a-2026-11-17-student-planner.png",
+    "image_url": "",
+    "title": "Student Planner 2026–27 — Exams & Study Plan Page",
+    "description": "A student planner for 2026–27 with dated and undated editions in one download, for tablet or printed on A4 and US Letter. This pin shows the exams and study plan page, so every test and its revision sits in one place. Instant download.",
+    "alt_text": "A planner page in a tablet frame on a soft plum background: an exams and study plan table with columns for subject, date, time, room, topics to revise and done.",
+    "scheduled_at": "2026-11-17T12:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Student Planner · exams",
+      "headline": "Every exam and revision plan in one place",
+      "subline": "Dated + undated · tablet, A4 and US Letter",
+      "pages": [
+        "tablet/08.jpg"
+      ]
+    },
+    "made_by": "claude"
   }
 ]
