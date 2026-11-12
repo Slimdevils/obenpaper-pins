@@ -102,6 +102,13 @@ def badge(img, name, line, accent, alpha=1.0):
     img.alpha_composite(layer)
 
 
+def find_us(img, product, t):
+    """Last 1–2 s: how to find it — the bio link is not clickable yet."""
+    a = ease((t - 0.3) / 0.3)
+    text_block(img, f"{product} · by Obenpaper", "bold", 52, INK, 1370, alpha=a)
+    text_block(img, "search ObenPaper on Etsy", "sans", 44, MUTED, 1445, alpha=a)
+
+
 def page_flash(img, path, t, accent):
     """The real inside page slides up on a tablet-ish frame (~1 s)."""
     pg = Image.open(path).convert("RGB")
@@ -146,11 +153,11 @@ def story_one_more_chapter():
     page = os.path.join(STUDIO, "previews", "well-read", "tablet", "06.jpg")
     times = ["10:00 PM", "11:30 PM", "1:00 AM", "3:14 AM"]
     pages = [12, 96, 188, 340]
-    lines = ["Ten p.m. Just one more chapter.",
-             "Eleven thirty. Okay, one more.",
-             "One a.m. This is the last one.",
-             "Three fourteen a.m. Okay. One. More.",
-             "Log every book you couldn't put down, in Well Read."]
+    lines = ["It's ten p.m.... just one more chapter.",
+             "Eleven thirty? Okay, okay. One more.",
+             "One a.m. This is the last one. I promise.",
+             "Three fourteen a.m.... okay. One. More.",
+             "Every book you couldn't put down? Keep it in Well Read."]
 
     def scene(i):
         def draw(img, t, dur):
@@ -166,6 +173,7 @@ def story_one_more_chapter():
     def end(img, t, dur):
         page_flash(img, page, t, acc)
         text_block(img, "every book you couldn't put down", "italic", 64, INK, 420, alpha=ease(t / 0.3))
+        find_us(img, "Well Read", t)
     return dict(slug="one-more-chapter", product="Well Read", tag="reading journal", accent=acc,
                 scenes=[(lines[i], scene(i)) for i in range(4)] + [(lines[4], end)])
 
@@ -177,11 +185,11 @@ def story_me_at_9am():
              ("12pm:", "it's just a coffee."),
              ("4pm:", "I deserve a little treat."),
              ("11pm:", "where did it all go??")]
-    lines = ["Me at nine a.m.: this month, I'm saving.",
-             "Twelve p.m.: it's just a coffee.",
-             "Four p.m.: I deserve a little treat.",
-             "Eleven p.m.: where did it all go?",
-             "Write down where you stand. Well Spent."]
+    lines = ["Me, at nine a.m.? This month, I'm saving.",
+             "Twelve p.m.... it's just a coffee!",
+             "Four p.m.? Honestly... I deserve a little treat.",
+             "Eleven p.m.... wait. Where did it all go?",
+             "So, write down where you stand. With Well Spent."]
 
     def scene(i):
         def draw(img, t, dur):
@@ -196,6 +204,7 @@ def story_me_at_9am():
     def end(img, t, dur):
         page_flash(img, page, t, acc)
         text_block(img, "write down where you stand", "italic", 66, INK, 420, alpha=ease(t / 0.3))
+        find_us(img, "Well Spent", t)
     return dict(slug="me-at-9am", product="Well Spent", tag="money journal", accent=acc,
                 scenes=[(lines[i], scene(i)) for i in range(4)] + [(lines[4], end)])
 
@@ -204,9 +213,9 @@ def story_tbr_pile():
     acc = hexrgb("#A94E28")
     page = os.path.join(STUDIO, "previews", "well-read", "tablet", "04.jpg")
     lines = ["Books I bought this year...",
-             "...versus books I actually read.",
-             "Be honest.",
-             "Next year, read the pile. Keep it in Well Read."]
+             "and the ones I actually read.",
+             "Be honest!",
+             "Next year? Read the pile. With Well Read."]
     hook = "my TBR pile vs what I actually read"
 
     def stacks(img, t, bought, read, label_alpha=1.0):
@@ -235,6 +244,7 @@ def story_tbr_pile():
     def end(img, t, dur):
         page_flash(img, page, t, acc)
         text_block(img, "next year: read the pile", "italic", 70, INK, 420, alpha=ease(t / 0.3))
+        find_us(img, "Well Read", t)
     return dict(slug="tbr-pile", product="Well Read", tag="reading journal", accent=acc,
                 scenes=list(zip(lines, [s1, s2, s3, end])))
 
@@ -244,12 +254,25 @@ STORIES = {"one-more-chapter": story_one_more_chapter, "me-at-9am": story_me_at_
 
 # ---------------------------------------------------------------- render
 
-def make_vo(lines, model_dir, outdir, voice="af_heart", speed=1.1):
+# Kokoro takes its intonation from punctuation ("?", "...", "!"), so the lines
+# above are written to be SPOKEN. Speed varies a little per line (a flat rate
+# is what makes TTS sound read-out), and the voice is a light blend of two
+# American voices so it is less of a stock preset (Luc, 12 Nov 2026: "more
+# human, with intonation").
+SPEEDS = [1.0, 1.06, 0.97, 0.92, 1.0]
+
+
+def make_vo(lines, model_dir, outdir, blend=(("af_heart", 0.7), ("af_bella", 0.3))):
     import soundfile as sf
     from kokoro_onnx import Kokoro
     kk = Kokoro(os.path.join(model_dir, "kokoro.onnx"), os.path.join(model_dir, "voices.bin"))
+    try:
+        voice = sum(kk.get_voice_style(v) * w for v, w in blend)
+    except Exception:  # older kokoro-onnx: no blending
+        voice = blend[0][0]
     paths, durs = [], []
     for i, ln in enumerate(lines):
+        speed = SPEEDS[i % len(SPEEDS)]
         s, sr = kk.create(ln, voice=voice, speed=speed, lang="en-us")
         raw, p = f"{outdir}/raw{i}.wav", f"{outdir}/vo{i}.wav"
         sf.write(raw, s, sr)
@@ -272,7 +295,7 @@ def render(story, out, model_dir=None, keys=None):
     else:
         vo, vd = None, [len(ln.split()) / 2.7 for ln in lines]
     durs = [max(1.3, d + 0.35) for d in vd]
-    durs[-1] = max(durs[-1], 1.6)
+    durs[-1] = max(durs[-1], 2.4)
     starts = [sum(durs[:i]) for i in range(len(durs))]
     total = sum(durs)
 
