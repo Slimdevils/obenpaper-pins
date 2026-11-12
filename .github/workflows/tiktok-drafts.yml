@@ -1,0 +1,72 @@
+name: TikTok drafts
+
+# Sends queued videos to @obenpaper's TikTok INBOX as drafts (Luc, Nov 2026).
+# Luc adds the sound + caption and publishes by hand; nothing posts from here.
+# One video per run. Runs when the queue changes on main (so merging a queue
+# PR sends the next draft), three mornings a week, or by hand.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tiktok/queue.json"
+  schedule:
+    - cron: "41 6 * * 1,3,5"     # Mon/Wed/Fri, ~07:41 Zurich
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to run"
+        type: choice
+        default: dry-run
+        options: [dry-run, send]
+
+# Never two runs at once: a refresh token can only be spent once.
+concurrency:
+  group: tiktok-drafts
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  drafts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests cryptography
+
+      - name: Tests
+        run: python -m unittest discover -s tiktok-api/tests -v
+
+      - name: Dry run
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'dry-run'
+        run: python tiktok-api/tiktok_drafts.py --dry-run
+
+      - name: Send the next draft
+        if: github.event_name != 'workflow_dispatch' || inputs.mode == 'send'
+        env:
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          PINTEREST_KEY: ${{ secrets.PINTEREST_KEY }}
+        run: python tiktok-api/tiktok_drafts.py
+
+      # Runs even if the upload failed: the refreshed token must never be lost,
+      # and a draft that DID land must never be sent twice.
+      - name: Record token and sent drafts
+        if: always()
+        run: |
+          git config user.name "obenpaper-publisher"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tiktok/uploaded.json tiktok-api/state/ 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nothing to record."; exit 0; fi
+          git commit -m "Record TikTok draft upload [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          echo "::error::Could not push the TikTok token/record — fix before the next run."
+          exit 1
