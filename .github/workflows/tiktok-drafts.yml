@@ -2,8 +2,9 @@ name: TikTok drafts
 
 # Sends queued videos to @obenpaper's TikTok INBOX as drafts (Luc, Nov 2026).
 # Luc adds the sound + caption and publishes by hand; nothing posts from here.
-# One video per run. Runs when the queue changes on main (so merging a queue
-# PR sends the next draft), three mornings a week, or by hand.
+# One draft per run, Mon/Wed/Fri mornings (or by hand). A queue change on
+# main only DRY-RUNS — it checks the queue but sends nothing, so drafts keep
+# the Mon/Wed/Fri rhythm (Luc, 12 Nov 2026).
 
 on:
   push:
@@ -42,11 +43,11 @@ jobs:
         run: python -m unittest discover -s tiktok-api/tests -v
 
       - name: Dry run
-        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'dry-run'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'dry-run')
         run: python tiktok-api/tiktok_drafts.py --dry-run
 
       - name: Send the next draft
-        if: github.event_name != 'workflow_dispatch' || inputs.mode == 'send'
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'send')
         env:
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}

@@ -52,5 +52,17 @@ class Queue(unittest.TestCase):
         self.assertTrue(any("not found" in p for p in problems))
 
 
+class Photos(unittest.TestCase):
+    def test_good_carousel_passes(self):
+        e = [{"id": "c", "type": "photo", "images": ["https://obenpaper.com/tiktok/a.jpg"]}]
+        self.assertEqual(td.validate_queue(e), [])
+
+    def test_png_and_foreign_domain_refused(self):
+        e = [{"id": "c", "type": "photo", "images": ["https://example.com/a.png"]}]
+        problems = td.validate_queue(e)
+        self.assertTrue(any("verified" in p for p in problems))
+        self.assertTrue(any("PNG" in p for p in problems))
+
+
 if __name__ == "__main__":
     unittest.main()

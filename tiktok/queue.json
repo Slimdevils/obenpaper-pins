@@ -2,7 +2,39 @@
   {
     "id": "T-2026-11-12-pipeline-test",
     "file": "tiktok/videos/test-well-dreamt.mp4",
-    "note": "PIPELINE TEST ONLY — the Well Dreamt promo cut, ad-style, shows a price. Check it lands in the inbox, then delete the draft; do not publish.",
+    "note": "PIPELINE TEST ONLY — already sent 12 Nov; delete the draft, do not publish.",
     "caption": ""
+  },
+  {
+    "id": "T-2026-11-13-one-more-chapter",
+    "file": "tiktok/videos/one-more-chapter.mp4",
+    "note": "Fri 13 Nov. Voice-over is the sound — add NO music. Approved by Luc 12 Nov.",
+    "caption": "it's never just one more chapter 📖 #booktok #reading #readingjournal #bookworm #onemorechapter"
+  },
+  {
+    "id": "T-2026-11-16-me-at-9am",
+    "file": "tiktok/videos/me-at-9am.mp4",
+    "note": "Mon 16 Nov. Voice-over is the sound — add NO music. Approved by Luc 12 Nov.",
+    "caption": "the 9am vs 11pm budget is real 😅 #moneytok #budgeting #relatable #moneyjournal"
+  },
+  {
+    "id": "T-2026-11-18-well-read-tbr-carousel",
+    "type": "photo",
+    "images": [
+      "https://obenpaper.com/tiktok/well-read-tbr-01.jpg",
+      "https://obenpaper.com/tiktok/well-read-tbr-02.jpg",
+      "https://obenpaper.com/tiktok/well-read-tbr-03.jpg",
+      "https://obenpaper.com/tiktok/well-read-tbr-04.jpg",
+      "https://obenpaper.com/tiktok/well-read-tbr-05.jpg",
+      "https://obenpaper.com/tiktok/well-read-tbr-06.jpg"
+    ],
+    "note": "Wed 18 Nov. SOUND: 'original sound - ahdo_c' (Ahdo) — Luc's pick for this week only. Approved by Luc 12 Nov.",
+    "caption": "how I'm finally reading my TBR pile next year 📚 save this for January #booktok #tbr #readingjournal #readinggoals"
+  },
+  {
+    "id": "T-2026-11-20-tbr-pile",
+    "file": "tiktok/videos/tbr-pile.mp4",
+    "note": "Fri 20 Nov. Voice-over is the sound — add NO music. Approved by Luc 12 Nov.",
+    "caption": "be honest 👀 #booktok #tbr #tbrpile #readingjournal #bookish"
   }
 ]
