@@ -1231,5 +1231,35 @@
       ]
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-30-advent",
+    "subject": "advent",
+    "product": "Advent Calendar",
+    "category": "free_tools",
+    "guardrail": "general",
+    "link": "https://obenpaper.com/advent",
+    "image_file": "a-2026-11-30-advent.png",
+    "image_url": "",
+    "title": "Free Printable Advent Calendar: 20 Planner Pages to Print in December",
+    "description": "Open one door a day from 1 December. Twenty of the 25 doors hold a free printable page taken from an Obenpaper planner or journal, in A4 and US Letter, and the 25th is a whole undated New Year planner. Each door stays open once it has opened. No sign-up and nothing to join.",
+    "alt_text": "A cream card on a soft red background showing 25 numbered advent doors, the last one a gold star, with a button reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-30T12:00:00",
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-13-advent",
+    "subject": "advent",
+    "product": "Advent Calendar",
+    "category": "free_tools",
+    "guardrail": "general",
+    "link": "https://obenpaper.com/advent",
+    "image_file": "a-2026-12-13-advent.png",
+    "image_url": "",
+    "title": "Free Undated New Year Planner, Door 25 of a Printable Advent Calendar",
+    "description": "Thirteen doors of the Obenpaper advent calendar are open: a month at a glance, a gift list, gift tags, a recipe card, a packing list and more, all free to print on A4 and US Letter. Each one stays open, and door 25 is New Leaf, an undated New Year planner.",
+    "alt_text": "An advent door grid with doors 1 to 13 filled in red next to the cover of the New Leaf planner, and a button reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-12-13T12:00:00",
+    "made_by": "claude"
   }
 ]
