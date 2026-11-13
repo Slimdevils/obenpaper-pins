@@ -56,7 +56,7 @@ NEVER_PIN_SLUGS = {"macro-split"}
 
 # Website-only boards and the routes they accept (boards.md).
 SITE_BOARD_ROUTES = {
-    "free_tools": lambda path: path in {"/quiz", "/tools", "/focus"}
+    "free_tools": lambda path: path in {"/quiz", "/tools", "/focus", "/advent"}
     or path.startswith("/tools/"),
     "custom_planners": lambda path: path == "/made-to-order",
 }
