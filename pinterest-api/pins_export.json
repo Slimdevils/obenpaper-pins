@@ -1261,5 +1261,155 @@
     "alt_text": "An advent door grid with doors 1 to 13 filled in red next to the cover of the New Leaf planner, and a button reading 'Free, no sign-up'.",
     "scheduled_at": "2026-12-13T12:00:00",
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-18-in-session",
+    "subject": "in-session",
+    "product": "In Session",
+    "category": "teacher_planner",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/XFteK",
+    "image_file": "a-2026-11-18-in-session.png",
+    "image_url": "",
+    "title": "Teacher Planner Undated — Class Timetable & Teaching Year Pages",
+    "description": "In Session is an undated teacher planner and lesson plan book for tablet, A4 and US Letter. This pin shows the teaching year page and the weekly timetable, so your classes, rooms and key dates sit on one spread. Reuse it term after term. Instant download.",
+    "alt_text": "Two planner pages fanned on a warm orange background: a my teaching year page with school details and a class list, and a weekly timetable grid.",
+    "scheduled_at": "2026-11-18T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "In Session · teacher planner",
+      "headline": "Your teaching year and timetable, set up once",
+      "subline": "Undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/03.jpg",
+        "print/04.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-19-self-care-journal",
+    "subject": "self-care-journal",
+    "product": "Self-Care Journal",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/g12H8",
+    "image_file": "a-2026-11-19-self-care-journal.png",
+    "image_url": "",
+    "title": "Self-Care Journal Undated — Self-Care Menu & What Drains Me Pages",
+    "description": "The Self-Care Journal is an undated wellness check-in journal for tablet, A4 and US Letter. This pin shows the self-care menu, sorted by the energy you actually have, and the what drains me and what fills me page. No streaks, no guilt. Instant download.",
+    "alt_text": "Two journal pages fanned on a soft rose background: a self-care menu with three columns for low, some and full energy, and a page split into what drains me and what fills me.",
+    "scheduled_at": "2026-11-19T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Self-Care Journal",
+      "headline": "A self-care menu for the energy you have",
+      "subline": "Undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/05.jpg",
+        "print/06.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-20-habit-tracker",
+    "subject": "habit-tracker",
+    "product": "Habit Tracker",
+    "category": "planners",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/Lxi3K",
+    "image_file": "a-2026-11-20-habit-tracker.png",
+    "image_url": "",
+    "title": "Habit Tracker Printable Undated — Monthly Habit Grid & Habit Planner",
+    "description": "The Habit Tracker is an undated daily, weekly and monthly tracker for tablet, A4 and US Letter. This pin shows habit foundations, where each habit gets its reason and target days, and the monthly grid where you colour one square a day. Instant download.",
+    "alt_text": "Two tracker pages fanned on a pale teal background: a habit foundations page with six habit boxes and target-day circles, and a monthly habit grid with a square for each day.",
+    "scheduled_at": "2026-11-20T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Habit Tracker",
+      "headline": "Build a habit one square at a time",
+      "subline": "Undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/04.jpg",
+        "print/05.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-21-well-read",
+    "subject": "well-read",
+    "product": "Well Read",
+    "category": "hobbies",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/fsAZw",
+    "image_file": "a-2026-11-21-well-read.png",
+    "image_url": "",
+    "title": "Reading Journal Undated — Book Tracker Shelf & Reading Goals",
+    "description": "Well Read is an undated reading journal, with a hyperlinked tablet edition and a print companion in A4 and US Letter. This pin shows the year shelf, where you colour one spine for every book you finish, and your reading year goals page. Instant download.",
+    "alt_text": "Two reading journal pages fanned on a terracotta background: rows of empty book spines to colour in, and a reading year page with goals and what I'm reading for.",
+    "scheduled_at": "2026-11-21T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Well Read · reading journal",
+      "headline": "Colour one spine for every book you finish",
+      "subline": "Tablet + A4 and US Letter print companion",
+      "pages": [
+        "print/04.jpg",
+        "print/03.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-22-kept-close",
+    "subject": "kept-close",
+    "product": "Kept Close",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/wvjnP",
+    "image_file": "a-2026-11-22-kept-close.png",
+    "image_url": "",
+    "title": "Grief Journal Undated — Remembrance Journal for Memories to Keep",
+    "description": "Kept Close is an undated grief and remembrance journal for tablet, A4 and US Letter, made for any loss. This pin shows two pages for remembering them: things you used to say, and memories to keep. No order, no timeline: start anywhere. Instant download.",
+    "alt_text": "Two journal pages fanned on a soft mauve background: a things you used to say page with quote boxes, and a memories to keep page with boxes for each memory.",
+    "scheduled_at": "2026-11-22T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Kept Close · remembrance journal",
+      "headline": "Keep the things they used to say",
+      "subline": "Undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/06.jpg",
+        "print/07.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-23-clocked-in",
+    "subject": "clocked-in",
+    "product": "Clocked In",
+    "category": "planners",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/u3Fqn",
+    "image_file": "a-2026-11-23-clocked-in.png",
+    "image_url": "",
+    "title": "Work From Home Planner Undated — Hybrid Week & Time-Blocked Daily Plan",
+    "description": "Clocked In is an undated work-from-home and hybrid planner for tablet, A4 and US Letter. This pin shows your hybrid week, with home days and office days, and the time-blocked daily plan that ends with clocking off. Instant download.",
+    "alt_text": "Two planner pages fanned on a pale blue background: a hybrid week page splitting home days and office days, and a daily plan with a time-blocked column.",
+    "scheduled_at": "2026-11-23T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Clocked In · WFH planner",
+      "headline": "Plan home days and office days",
+      "subline": "Undated · tablet, A4 and US Letter",
+      "pages": [
+        "print/04.jpg",
+        "print/07.jpg"
+      ]
+    },
+    "made_by": "claude"
   }
 ]
