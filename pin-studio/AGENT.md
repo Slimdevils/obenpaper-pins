@@ -135,6 +135,13 @@ Write a `batch.json` (outside the repo or deleted afterwards) — a list of:
   prefer it for that product's next video slot. It counts as a video: never
   next to another video pin. Needs ffmpeg, not Node. You never write or edit a
   promo config in this run — they are made in a session with Luc.
+- `clip` (since 15 Nov 2026, Luc): a ready-made 1000×1500 MP4 in
+  `pin-studio/clips/` (the Remotion tool animations, with their baked-in
+  sound) posted as is: `{"layout": "clip", "file": "<name>.mp4"}`. Its cover
+  is the clip's last frame. Unlike `video`, a clip may be a **tool** pin. It
+  still counts as a video: never next to another video pin. Clips are made in
+  a session with Luc; this run only queues a clip that is already in
+  `clips/` and not yet pinned.
 - Title ≠ headline: the title is the search phrase, the headline is the hook.
 - Pinterest reads the on-image text: the headline should contain the subject's
   core keyword where it reads naturally.

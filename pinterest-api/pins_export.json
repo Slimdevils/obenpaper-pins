@@ -1411,5 +1411,95 @@
       ]
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-15-habit-tracker",
+    "subject": "habit-tracker",
+    "product": "Habit Tracker",
+    "category": "planners",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/Lxi3K",
+    "image_file": "a-2026-12-15-habit-tracker.png",
+    "image_url": "",
+    "title": "Undated Habit Tracker for Tablet — Daily, Weekly & Monthly Habit Planner",
+    "description": "The Habit Tracker is an undated daily, weekly and monthly tracker for tablet, A4 and US Letter. This pin shows the habits-at-a-glance page: your habits, the monthly grid, weekly focus, daily routines, reflect and a 30-day challenge, all in one place. Instant download.",
+    "alt_text": "A tablet showing a habit tracker home page titled 'Your habits, at a glance', with six cards: set your habits, monthly grid, weekly focus, daily routines, reflect and 30-day challenge.",
+    "scheduled_at": "2026-12-15T12:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Habit Tracker",
+      "headline": "All your habits at a glance",
+      "subline": "Undated · tablet, A4 and US Letter",
+      "pages": [
+        "tablet/02.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-15-tool-cost-per-wear",
+    "subject": "tool-cost-per-wear",
+    "product": "Cost per Wear Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/cost-per-wear",
+    "image_file": "a-2026-12-15-tool-cost-per-wear.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-12-15-tool-cost-per-wear.mp4",
+    "title": "Cost per Wear Calculator — Watch the Price per Wear Drop",
+    "description": "A free cost per wear calculator: what something cost, divided by how many times you have actually worn it. This short video counts the wears up one by one and shows the number falling each time. Free in the browser, no sign-up.",
+    "alt_text": "A short animation of the cost per wear calculator: the price is typed in, the times worn count up from one to thirty with a tally mark for each, and the cost per wear falls with every wear.",
+    "scheduled_at": "2026-12-15T19:00:00",
+    "tile": {
+      "layout": "clip",
+      "file": "cost-per-wear.mp4"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-16-well-read",
+    "subject": "well-read",
+    "product": "Well Read",
+    "category": "hobbies",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/fsAZw",
+    "image_file": "a-2026-12-16-well-read.png",
+    "image_url": "",
+    "title": "Reading Journal for Tablet — To Be Read Pile & What to Read Next",
+    "description": "Well Read is an undated reading journal, with a hyperlinked tablet edition and a print companion in A4 and US Letter. This pin shows the to-be-read pile page, for choosing what comes off the pile next. Instant download.",
+    "alt_text": "A tablet showing a reading journal page titled 'The picker', with a short checklist of what kind of book you want right now and space to shortlist three and pick one.",
+    "scheduled_at": "2026-12-16T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Well Read · reading journal",
+      "headline": "Choose the next book off the pile",
+      "subline": "Tablet + A4 and US Letter print companion",
+      "pages": [
+        "tablet/05.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-17-tool-books-per-year",
+    "subject": "tool-books-per-year",
+    "product": "Books a Year Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/books-per-year",
+    "image_file": "a-2026-12-17-tool-books-per-year.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-12-17-tool-books-per-year.mp4",
+    "title": "How Many Books a Year? Twenty Minutes a Day, Shown on a Shelf",
+    "description": "A free calculator for readers: put in your minutes of reading a day and see the year. This short video fills a shelf one book at a time over a year of reading twenty minutes a day. It is more books than most people expect. Free in the browser, no sign-up.",
+    "alt_text": "A short 3D animation of a wooden shelf filling with colourful books as a day counter runs from day 1 to day 365, ending on fourteen books and the words 'Twenty minutes a day'.",
+    "scheduled_at": "2026-12-17T19:00:00",
+    "tile": {
+      "layout": "clip",
+      "file": "books-per-year.mp4"
+    },
+    "made_by": "claude"
   }
 ]

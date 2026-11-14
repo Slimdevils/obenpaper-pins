@@ -24,6 +24,11 @@ motion promo — the same 6-scene video as its Etsy listing video, rendered at
 1000×1500 without price (motion_promo.py, config in pin-studio/promo/). Only
 for subjects with a promo config, once per subject, ever.
 
+A tile with "layout": "clip" and "file": "<name>.mp4" posts a ready-made
+1000x1500 video from pin-studio/clips/ as is (e.g. the Remotion tool
+animations, Luc 15 Nov 2026, with their baked-in sound). Its cover is the
+clip's last frame. Allowed for tools too; still never next to another video.
+
 `add` fills product, category (board), link and guardrail from the
 catalogue, gives each pin an id and an image file, renders the tile, then
 validates the WHOLE queue with the publisher's own rules. If anything fails,
@@ -59,12 +64,31 @@ from validate_queue import (MAP_PATH, PINS_PATH, POSTED_PATH, load_json,  # noqa
 HORIZON_DAYS = 7           # 8 Nov 2026 audit: weekly run fills one week ahead
 POST_TIMES = ["12:00:00", "19:00:00"]   # Zurich — two pins a day (audit, 8 Nov 2026)
 SUBJECT_GAP_DAYS = 6
-VIDEO_LAYOUTS = {"video", "promo"}
+VIDEO_LAYOUTS = {"video", "promo", "clip"}
+CLIPS_DIR = os.path.join(STUDIO, "clips")
 PRICE = re.compile(r"[€$£]|\bCHF\b|\bEUR\b|\bUSD\b|\d+[.,]\d{2}\b|\bfree\b", re.I)
 
 
 def is_video(pin):
     return pin.get("media") == "video" or pin.get("tile", {}).get("layout") in VIDEO_LAYOUTS
+
+
+def render_clip(tile, video_out, cover_out):
+    """Copy a ready-made clip into pins/ and take its last frame as the cover."""
+    import shutil
+    import subprocess
+    name = tile.get("file") or ""
+    src = os.path.join(CLIPS_DIR, os.path.basename(name))
+    if not name.lower().endswith(".mp4") or not os.path.exists(src):
+        raise FileNotFoundError(f"clip layout needs \"file\": an .mp4 in pin-studio/clips/ (got '{name}')")
+    probe = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                            "stream=width,height", "-of", "csv=p=0", src],
+                           capture_output=True, text=True, check=True).stdout.strip()
+    if probe != "1000,1500":
+        raise ValueError(f"clip must be 1000x1500, {name} is {probe}")
+    shutil.copyfile(src, video_out)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-sseof", "-0.4", "-i", src,
+                    "-frames:v", "1", cover_out], check=True)
 
 
 def promo_problems(pin, subject):
@@ -232,7 +256,12 @@ def add(batch_path):
         for pin in new:
             out = os.path.join(PINS_DIR, pin["image_file"])
             try:
-                if pin["tile"].get("layout") == "promo":
+                if pin["tile"].get("layout") == "clip":
+                    video = os.path.join(PINS_DIR, pin["video_file"])
+                    rendered.append(video)
+                    rendered.append(out)
+                    render_clip(pin["tile"], video, out)
+                elif pin["tile"].get("layout") == "promo":
                     from motion_promo import render_pin_promo  # Pillow + ffmpeg, no Node
                     video = os.path.join(PINS_DIR, pin["video_file"])
                     rendered.append(video)
