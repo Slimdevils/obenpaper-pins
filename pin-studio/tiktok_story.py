@@ -1,6 +1,6 @@
 """TikTok story videos — 1080×1920, voice-over, NO music (Luc, 12 Nov 2026).
 
-Three stories, rebuilt from the 8 Nov concepts with the reviewer's fixes:
+Stories (three from 12 Nov, two added 15 Nov), rebuilt from the 8 Nov concepts with the reviewer's fixes:
   * the WHOLE hook is on screen from frame 1 (no word-by-word build-up)
   * no end card longer than ~1 s — a small product badge instead
   * a ~1 s flash of a REAL inside page, so the product is actually seen
@@ -249,7 +249,93 @@ def story_tbr_pile():
                 scenes=list(zip(lines, [s1, s2, s3, end])))
 
 
-STORIES = {"one-more-chapter": story_one_more_chapter, "me-at-9am": story_me_at_9am, "tbr-pile": story_tbr_pile}
+def tabs(img, labels, n, accent, alpha=1.0):
+    """Browser-tab pills piling up, inside the safe zone."""
+    layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    f = font("sans", 40)
+    for i in range(int(n)):
+        lab = labels[i % len(labels)]
+        x = 120 + (i * 137) % 420
+        y = 640 + i * 68
+        if y > 1380:
+            break
+        w = int(d.textlength(lab, font=f)) + 110
+        x = min(x, SAFE_R - w)
+        d.rounded_rectangle((x, y, x + w, y + 56), 14, fill=(255, 255, 255, int(255 * alpha)),
+                            outline=accent + (int(255 * alpha),), width=3)
+        d.text((x + 24, y + 28), lab, font=f, fill=INK + (int(255 * alpha),), anchor="lm")
+        d.text((x + w - 34, y + 28), "×", font=f, fill=MUTED + (int(255 * alpha),), anchor="mm")
+    img.alpha_composite(layer)
+
+
+def story_brain_tabs():
+    acc = hexrgb("#A24FB8")
+    page = os.path.join(STUDIO, "previews", "clear-head", "tablet", "07.jpg")
+    labels = ["reply to Sam??", "buy oat milk", "that email", "what's for dinner", "renew the thing",
+              "call mum back", "that thing from 2019", "birthday gift", "is the oven off", "pay the bill"]
+    lines = ["Eleven p.m. My brain? Forty-seven tabs open.",
+             "Did I reply to that email? What's for dinner tomorrow?",
+             "Oh... and that thing from twenty nineteen.",
+             "So I closed them all. On paper.",
+             "Dump it, sort it, act on it. With Clear Head."]
+    counts = [(0, 4), (4, 8), (8, 10)]
+
+    def scene(i):
+        def draw(img, t, dur):
+            text_block(img, "my brain at 11pm", "italic", 92, INK, 420)
+            text_block(img, "47 tabs open", "hand", 84, acc, 540)
+            a, b = counts[i]
+            tabs(img, labels, a + (b - a) * ease(t / max(0.5, dur * 0.7)), acc)
+        return draw
+
+    def close(img, t, dur):
+        text_block(img, "my brain at 11pm", "italic", 92, INK, 420)
+        k = ease(t / max(0.5, dur * 0.6))
+        tabs(img, labels, 10, acc, alpha=1 - k)
+        text_block(img, "closed. on paper.", "serif", 96, acc, 1000, alpha=k, scale=pop(t / 0.5))
+
+    def end(img, t, dur):
+        page_flash(img, page, t, acc)
+        text_block(img, "dump it. sort it. act on it.", "italic", 64, INK, 420, alpha=ease(t / 0.3))
+        find_us(img, "Clear Head", t)
+    return dict(slug="brain-tabs", product="Clear Head", tag="brain dump journal", accent=acc,
+                scenes=[(lines[i], scene(i)) for i in range(3)] + [(lines[3], close), (lines[4], end)])
+
+
+def story_whats_for_dinner():
+    acc = hexrgb("#BE3A68")
+    page = os.path.join(STUDIO, "previews", "recipe-book", "tablet", "04.jpg")
+    days = ["monday", "tuesday", "wednesday", "thursday"]
+    answers = ["what's for dinner?", "what's for dinner??", "pasta. again.", "not answering that."]
+    lines = ["Monday. What's for dinner?",
+             "Tuesday... what's for dinner?",
+             "Wednesday? Pasta. Again.",
+             "Thursday. I'm not answering that question.",
+             "Plan the week once, shop from one list. With the Recipe Book."]
+
+    def scene(i):
+        def draw(img, t, dur):
+            text_block(img, "the daily question", "italic", 92, INK, 420)
+            for j in range(i + 1):
+                faded = j < i
+                y = 700 + j * 210
+                text_block(img, days[j], "bold", 54, MUTED if faded else acc, y,
+                           alpha=0.45 if faded else ease(t / 0.2))
+                text_block(img, answers[j], "serif" if j < 3 else "hand", 64 if faded else 86, INK, y + 90,
+                           alpha=0.45 if faded else ease(t / 0.25), scale=1.0 if faded else pop(t / 0.4))
+        return draw
+
+    def end(img, t, dur):
+        page_flash(img, page, t, acc)
+        text_block(img, "plan the week once", "italic", 70, INK, 420, alpha=ease(t / 0.3))
+        find_us(img, "Recipe Book", t)
+    return dict(slug="whats-for-dinner", product="Recipe Book", tag="meal planner", accent=acc,
+                scenes=[(lines[i], scene(i)) for i in range(4)] + [(lines[4], end)])
+
+
+STORIES = {"one-more-chapter": story_one_more_chapter, "me-at-9am": story_me_at_9am, "tbr-pile": story_tbr_pile,
+           "brain-tabs": story_brain_tabs, "whats-for-dinner": story_whats_for_dinner}
 
 
 # ---------------------------------------------------------------- render
