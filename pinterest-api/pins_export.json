@@ -1591,5 +1591,95 @@
       "file": "planner-dive.mp4"
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-22-well-dreamt",
+    "subject": "well-dreamt",
+    "product": "Well Dreamt",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://www.etsy.com/listing/4612243856",
+    "image_file": "a-2026-12-22-well-dreamt.png",
+    "image_url": "",
+    "title": "Dream Journal Morning Page — Write It Before It Fades",
+    "description": "Well Dreamt is an undated dream journal for tablet, A4 and US Letter. This pin shows the morning entry: what you remember, then people, places and feelings to circle and how clear it felt, so a dream lands on the page before it slips away. A personal journal, not dream interpretation. Instant download.",
+    "alt_text": "A tablet showing a journal page titled Morning entry, with lines for what you remember on the left and small boxes on the right to circle people, places and feelings and to mark how clear the dream felt.",
+    "scheduled_at": "2026-12-22T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Well Dreamt · dream journal",
+      "headline": "Write it down before it fades",
+      "subline": "Tablet + A4 and US Letter print editions",
+      "pages": [
+        "tablet/05.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-23-clear-head",
+    "subject": "clear-head",
+    "product": "Clear Head",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/Ajk2r",
+    "image_file": "a-2026-12-23-clear-head.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-12-23-clear-head.mp4",
+    "title": "Brain Dump Journal — Dump It, Sort It, Act on It",
+    "description": "Clear Head is a brain dump journal built on three moves: dump, sort, act. This short video starts with forty-seven open tabs in your head, tips them into one pile, sorts them into do now, schedule and let it go, then ends on the real sort page. Tablet, A4 and US Letter. Instant download.",
+    "alt_text": "A short animation of small browser-tab cards raining down around a folded-paper mascot, gathering into one pile, then sorting into three columns headed do now, schedule and let it go; the do now cards are crossed off, the let it go column drifts away, and it ends on a journal page titled Sort your dump.",
+    "scheduled_at": "2026-12-23T19:00:00",
+    "tile": {
+      "layout": "clip",
+      "file": "brain-tabs.mp4"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-24-student-planner",
+    "subject": "student-planner",
+    "product": "Student Planner",
+    "category": "student_planner",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/YpUmC",
+    "image_file": "a-2026-12-24-student-planner.png",
+    "image_url": "",
+    "title": "Student Planner Grade Tracker — Every Mark in One Place",
+    "description": "The Student Planner 2026–27 has dashboard pages for the year, courses, timetable, goals, exams and grades. This pin shows the grade tracker: each subject and assessment with its weight, grade and target, so the term's marks sit on one page. Dated and undated editions, tablet, A4 and US Letter. Instant download.",
+    "alt_text": "A tablet showing a planner page titled Grade tracker, a table with columns for subject, assessment, weight, grade, target and on track.",
+    "scheduled_at": "2026-12-24T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Student Planner · 2026–27",
+      "headline": "Every mark of the year on one page",
+      "subline": "Dated + undated · tablet, A4 and US Letter",
+      "pages": [
+        "tablet/09.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-25-recipe-book",
+    "subject": "recipe-book",
+    "product": "Recipe Book & Meal Planner",
+    "category": "home",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/tpmW2",
+    "image_file": "a-2026-12-25-recipe-book.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-12-25-recipe-book.mp4",
+    "title": "Meal Planner and Recipe Book — Plan the Week Once",
+    "description": "My Recipe Book & Meal Planner is a blank cookbook with a meal planner: collect your recipes, plan your week and shop from one list. This short video asks what's for dinner four nights running, then plans the whole week at once and ticks off one grocery list. Tablet, A4 and US Letter. Instant download.",
+    "alt_text": "A short animation of a folded-paper mascot under four cards asking what's for dinner on Monday to Thursday; the cards fall away, seven day cards flip in with a meal each, a grocery list is ticked off, and it ends on the planner's My Kitchen page.",
+    "scheduled_at": "2026-12-25T19:00:00",
+    "tile": {
+      "layout": "clip",
+      "file": "whats-for-dinner.mp4"
+    },
+    "made_by": "claude"
   }
 ]
