@@ -84,7 +84,7 @@ def render(key, outdir):
                 for sx, sy, r in ((720, 1040, 9), (770, 1110, 6), (690, 1180, 5)):
                     d.ellipse((sx - r, sy - r, sx + r, sy + r), fill=acc + (255,))
             else:
-                books(img, 390, 1420, 11, acc, seed=2)
+                books(img, 390, 1430, 9, acc, seed=2)
             text_block(img, "swipe for the system", "bold", 48, MUTED, 1500)
         elif s[0] == "step":
             step(img, s[1], s[2], s[3], acc)
