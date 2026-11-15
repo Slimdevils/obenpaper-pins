@@ -26,7 +26,7 @@ def page(img, path, y, width=840):
     pg = pg.resize((width, h))
     frame = Image.new("RGBA", (width + 36, h + 36), (40, 34, 31, 255))
     frame.paste(pg, (18, 18))
-    img.alpha_composite(frame, ((W - frame.width) // 2, y))
+    img.alpha_composite(frame, (494 - frame.width // 2, y))  # centred on the safe zone (x 48–940)
     return y + frame.height
 
 
