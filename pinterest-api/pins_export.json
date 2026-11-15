@@ -1501,5 +1501,50 @@
       "file": "books-per-year.mp4"
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-18-budget-planner",
+    "subject": "budget-planner",
+    "product": "Budget Planner",
+    "category": "work_finance",
+    "guardrail": "finance",
+    "link": "https://shop.obenpaper.com/b/jhmNM",
+    "image_file": "a-2026-12-18-budget-planner.png",
+    "image_url": "",
+    "title": "Monthly Budget Planner for Tablet — Planned vs Actual Spending",
+    "description": "Budget Planner is an undated planner for tablet, with A4 and US Letter print editions. This pin shows the monthly budget page: income and expenses side by side, planned against actual, with what is left for each category. Instant download.",
+    "alt_text": "A tablet showing a monthly budget page with an income table and an expense table, each with planned and actual columns, a 'left' column for expenses and a monthly summary box.",
+    "scheduled_at": "2026-12-18T19:00:00",
+    "tile": {
+      "layout": "tablet",
+      "kicker": "Budget Planner · plan, save, track",
+      "headline": "Your monthly budget, planned against actual",
+      "subline": "Tablet + A4 and US Letter print editions",
+      "pages": [
+        "tablet/06.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-12-19-tool-trip-spend",
+    "subject": "tool-trip-spend",
+    "product": "Trip Spend Tool",
+    "category": "travel",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/trip-spend",
+    "image_file": "a-2026-12-19-tool-trip-spend.png",
+    "image_url": "",
+    "media": "video",
+    "video_file": "a-2026-12-19-tool-trip-spend.mp4",
+    "title": "Travel Budget Calculator — What a Trip Leaves You a Day",
+    "description": "A free travel budget calculator: take the flights and the beds off the top first, then divide what remains by the days. This short video does it on a suitcase, one fixed cost at a time, and ends on the real daily spend. Free in the browser, no sign-up.",
+    "alt_text": "A short animation of a suitcase showing a trip budget of 1,500 for 10 days; three luggage tags pop out for getting there, nine nights of beds and an amount held back, the total falls to 430 and is divided by ten days to 43.00 a day.",
+    "scheduled_at": "2026-12-19T19:00:00",
+    "tile": {
+      "layout": "clip",
+      "file": "trip-spend.mp4"
+    },
+    "made_by": "claude"
   }
 ]
