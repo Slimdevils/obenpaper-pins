@@ -20,7 +20,7 @@ STUDIO = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(STUDIO)
 
 
-def page(img, path, y, width=940):
+def page(img, path, y, width=840):
     pg = Image.open(path).convert("RGB")
     h = int(pg.height * width / pg.width)
     pg = pg.resize((width, h))
