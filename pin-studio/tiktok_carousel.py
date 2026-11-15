@@ -48,14 +48,28 @@ CAROUSELS = {
             ("step", 3, "Goals, not streaks", "Goals for the year, on one page.", "02.jpg"),
             ("step", 4, "Log it lightly", "One line per book. That's it.", "06.jpg"),
             ("end",),
-        ]),
+        ],
+        end=["tablet: 17 linked spreads", "print: A4 + US Letter"]),
+    # 15 Nov 2026 — Thursday 19/26 Nov slot. Facts: catalogue "well-dreamt" only.
+    # The light moonstone accent is too pale for text on cream: the dark shade is used.
+    "well-dreamt-remember": dict(
+        product="Well Dreamt", tag="dream journal", accent="#8A6890", previews="well-dreamt", hook_art="moon",
+        slides=[
+            ("hook", "how I finally remember my dreams", "write it before it fades"),
+            ("step", 1, "Before your phone", "A morning entry: what you remember, people, places, feelings.", "05.jpg"),
+            ("step", 2, "Draw what won't fit", "Some dreams are easier to sketch than to describe.", "06.jpg"),
+            ("step", 3, "Keep the fragments", "Only a bit left? Write the bit. It still counts.", "07.jpg"),
+            ("step", 4, "Your own symbol index", "No dream dictionary: your symbols mean what they mean to you.", "03.jpg"),
+            ("end",),
+        ],
+        end=["undated, 21 pages", "tablet + A4 + US Letter"]),
 }
 
 
 def render(key, outdir):
     c = CAROUSELS[key]
     acc = hexrgb(c["accent"])
-    prev = os.path.join(STUDIO, "previews", key.split("-tbr")[0] if key.startswith("well-read") else key, "tablet")
+    prev = os.path.join(STUDIO, "previews", c.get("previews") or (key.split("-tbr")[0] if key.startswith("well-read") else key), "tablet")
     os.makedirs(outdir, exist_ok=True)
     paths = []
     for i, s in enumerate(c["slides"], 1):
@@ -63,7 +77,14 @@ def render(key, outdir):
         if s[0] == "hook":
             text_block(img, s[1], "italic", 104, INK, 560)
             text_block(img, s[2], "hand", 76, acc, 860)
-            books(img, 390, 1420, 11, acc, seed=2)
+            if c.get("hook_art") == "moon":
+                d = ImageDraw.Draw(img)
+                d.ellipse((400, 1000, 680, 1280), fill=acc + (255,))
+                d.ellipse((470, 960, 750, 1240), fill=CREAM + (255,))
+                for sx, sy, r in ((720, 1040, 9), (770, 1110, 6), (690, 1180, 5)):
+                    d.ellipse((sx - r, sy - r, sx + r, sy + r), fill=acc + (255,))
+            else:
+                books(img, 390, 1420, 11, acc, seed=2)
             text_block(img, "swipe for the system", "bold", 48, MUTED, 1500)
         elif s[0] == "step":
             step(img, s[1], s[2], s[3], acc)
@@ -71,13 +92,13 @@ def render(key, outdir):
         else:
             text_block(img, "the whole system lives in one journal", "italic", 76, INK, 520)
             page(img, os.path.join(prev, "01.jpg"), 660, width=760)
-            text_block(img, f"{c['product']} · by Obenpaper", "bold", 58, INK, 1330)
-            text_block(img, "tablet: 17 linked spreads", "sans", 40, MUTED, 1400)
-            text_block(img, "print: A4 + US Letter", "sans", 40, MUTED, 1450)
+            text_block(img, f"{c['product']} · by Obenpaper", "bold", 58, INK, 1330, maxw=900)
+            text_block(img, c["end"][0], "sans", 40, MUTED, 1400)
+            text_block(img, c["end"][1], "sans", 40, MUTED, 1450)
             text_block(img, "search ObenPaper on Etsy", "bold", 50, acc, 1525)
         badge(img, c["product"], c["tag"], acc)
         p = os.path.join(outdir, f"{key}-{i:02d}.jpg")
-        img.convert("RGB").save(p, quality=90)
+        img.convert("RGB").save(p, quality=84)
         paths.append(p)
     return paths
 
