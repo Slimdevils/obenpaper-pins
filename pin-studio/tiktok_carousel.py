@@ -32,10 +32,10 @@ def page(img, path, y, width=840):
 
 def step(img, n, title, sub, acc):
     d = ImageDraw.Draw(img)
-    d.ellipse((90, 300, 190, 400), fill=acc + (255,))
-    d.text((140, 350), str(n), font=font("bold", 56), fill=(255, 255, 255, 255), anchor="mm")
-    text_block(img, title, "serif", 78, INK, 520)
-    text_block(img, sub, "sans", 44, MUTED, 655, maxw=820)
+    d.ellipse((450, 410, 550, 510), fill=acc + (255,))
+    d.text((500, 460), str(n), font=font("bold", 56), fill=(255, 255, 255, 255), anchor="mm")
+    text_block(img, title, "serif", 76, INK, 590)
+    text_block(img, sub, "sans", 42, MUTED, 705, maxw=780)
 
 
 CAROUSELS = {
@@ -75,8 +75,8 @@ def render(key, outdir):
     for i, s in enumerate(c["slides"], 1):
         img = Image.new("RGBA", (W, H), CREAM + (255,))
         if s[0] == "hook":
-            text_block(img, s[1], "italic", 104, INK, 560)
-            text_block(img, s[2], "hand", 76, acc, 860)
+            text_block(img, s[1], "italic", 104, INK, 620)
+            text_block(img, s[2], "hand", 76, acc, 900)
             if c.get("hook_art") == "moon":
                 d = ImageDraw.Draw(img)
                 d.ellipse((400, 1000, 680, 1280), fill=acc + (255,))
@@ -88,15 +88,17 @@ def render(key, outdir):
             text_block(img, "swipe for the system", "bold", 48, MUTED, 1500)
         elif s[0] == "step":
             step(img, s[1], s[2], s[3], acc)
-            page(img, os.path.join(prev, s[4]), 760)
+            page(img, os.path.join(prev, s[4]), 790)
         else:
-            text_block(img, "the whole system lives in one journal", "italic", 76, INK, 520)
-            page(img, os.path.join(prev, "01.jpg"), 660, width=760)
-            text_block(img, f"{c['product']} · by Obenpaper", "bold", 58, INK, 1330, maxw=900)
-            text_block(img, c["end"][0], "sans", 40, MUTED, 1400)
-            text_block(img, c["end"][1], "sans", 40, MUTED, 1450)
-            text_block(img, "search ObenPaper on Etsy", "bold", 50, acc, 1525)
-        badge(img, c["product"], c["tag"], acc)
+            text_block(img, "the whole system lives in one journal", "italic", 72, INK, 520)
+            page(img, os.path.join(prev, "01.jpg"), 640, width=620)
+            text_block(img, c["product"], "serif", 76, acc, 1250)
+            text_block(img, "by Obenpaper", "sans", 40, MUTED, 1320)
+            text_block(img, c["end"][0] + " · " + c["end"][1], "sans", 36, MUTED, 1390)
+            text_block(img, "search ObenPaper on Etsy", "bold", 48, acc, 1475)
+        # Product kicker inside the safe zone (y >= 320): TikTok's top bar covers a
+        # top-left badge on photo posts (Luc's screenshot, 15 Nov 2026).
+        text_block(img, f"{c['product']} · {c['tag']}".upper(), "bold", 30, acc, 350)
         p = os.path.join(outdir, f"{key}-{i:02d}.jpg")
         img.convert("RGB").save(p, quality=84)
         paths.append(p)
