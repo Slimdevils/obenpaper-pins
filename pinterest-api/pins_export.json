@@ -1681,5 +1681,153 @@
       "file": "whats-for-dinner.mp4"
     },
     "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-24-travel-pair",
+    "subject": "travel-pair",
+    "product": "Travel Pair",
+    "category": "travel",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/YDASl",
+    "image_file": "a-2026-11-24-travel-pair.png",
+    "image_url": "",
+    "title": "Travel Planner Bundle with Packing List and Before-You-Go Checklist, Printable PDF",
+    "description": "Travel Pair brings the Solo Travel Planner and the Travel Journal & Planner together, five PDFs in one download. Shown here: the before-you-go checklist and the packing list from the Solo Travel Planner. Plan the trip, then keep the journal.",
+    "alt_text": "Two printable planner pages fanned on a warm background: a before-you-go countdown checklist with a bookings column, and a packing list split into documents and money, tech and power, day bag and safety, and clothes.",
+    "scheduled_at": "2026-11-24T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Travel Pair · before you go",
+      "headline": "Ready to leave, list by list",
+      "subline": "Two travel planners, five PDFs",
+      "pages": [
+        "print/04.jpg",
+        "print/05.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-25-tool-backlog",
+    "subject": "tool-backlog",
+    "product": "Backlog Tool",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools/backlog",
+    "image_file": "a-2026-11-25-tool-backlog.png",
+    "image_url": "",
+    "title": "Game Backlog Calculator — See When Your Backlog Clears",
+    "description": "A free calculator for games: put in how many hours are sitting unplayed and how many you get in a week, and it gives you the date the backlog clears. Free in the browser, no sign-up.",
+    "alt_text": "A white card on a pale violet background titled 'Your backlog, as a date', explaining that you add the unplayed hours and your hours per week and it gives you the date, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-25T12:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tool · game backlog",
+      "headline": "When does the game backlog clear?",
+      "subline": "Hours in, a date out",
+      "card_title": "Your backlog, as a date",
+      "card_text": "Add the hours sitting unplayed and the hours you get in a week. It gives you the date.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-26-manga-reading-journal",
+    "subject": "manga-reading-journal",
+    "product": "Manga Reading Journal",
+    "category": "hobbies",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/yfLHF",
+    "image_file": "a-2026-11-26-manga-reading-journal.png",
+    "image_url": "",
+    "title": "Manga Reading Journal with Upcoming Releases Tracker, Manhwa and Manhua",
+    "description": "A reading journal for manga, manhwa and manhua, for tablet, A4 and US Letter. Shown here: the currently-reading page and the upcoming-releases page for new chapters, volumes and seasons. Instant digital download.",
+    "alt_text": "Two printable journal pages in lavender and cream: a currently reading table with columns for title, type, up to and next release, and an upcoming releases table for new chapters, volumes and seasons.",
+    "scheduled_at": "2026-11-26T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Manga Reading Journal · new releases",
+      "headline": "Where you left off, and what comes next",
+      "subline": "Manga, manhwa and manhua",
+      "pages": [
+        "print/08.jpg",
+        "print/10.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-27-well-spent",
+    "subject": "well-spent",
+    "product": "Well Spent",
+    "category": "work_finance",
+    "guardrail": "finance",
+    "link": "https://shop.obenpaper.com/b/DBHKb",
+    "image_file": "a-2026-11-27-well-spent.png",
+    "image_url": "",
+    "title": "Debt Inventory and Debt Tracker Pages, Undated Personal Finance Journal Printable",
+    "description": "Well Spent is an undated personal finance journal you can reuse every year. Shown here: the debt inventory, every balance in one place, and the page where you pick snowball or avalanche. A place to plan your own money, in tablet, A4 and US Letter.",
+    "alt_text": "Two printable pages in deep teal and cream: a debt inventory table listing account, type, balance, rate, minimum and due date, and a page comparing the snowball and avalanche methods with a table for each.",
+    "scheduled_at": "2026-11-27T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "Well Spent · debt inventory",
+      "headline": "Snowball or avalanche: you pick one",
+      "subline": "PDF journal, spreadsheet and challenge cards",
+      "pages": [
+        "print/06.jpg",
+        "print/07.jpg"
+      ]
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-28-tools",
+    "subject": "tools",
+    "product": "Free Planner Tools",
+    "category": "free_tools",
+    "guardrail": "tools",
+    "link": "https://obenpaper.com/tools",
+    "image_file": "a-2026-11-28-tools.png",
+    "image_url": "",
+    "title": "Free Planner Calculators for Budgets, Books, Study and Trips",
+    "description": "Small free calculators for budgets, books, wardrobes, study, trips and more. They run in your browser: nothing to download and no sign-up.",
+    "alt_text": "A white card on a cream background titled 'Free planner tools', listing calculators for budgets, books, wardrobes, study and trips, with a badge reading 'Free, no sign-up'.",
+    "scheduled_at": "2026-11-28T12:00:00",
+    "tile": {
+      "layout": "type",
+      "kicker": "Free tools · calculators",
+      "headline": "Small calculators, free in the browser",
+      "subline": "Nothing to download",
+      "card_title": "Free planner tools",
+      "card_text": "Budgets, books, wardrobes, study, trips and more.",
+      "badge": "Free, no sign-up"
+    },
+    "made_by": "claude"
+  },
+  {
+    "id": "A-2026-11-29-in-mind",
+    "subject": "in-mind",
+    "product": "In Mind",
+    "category": "self_care",
+    "guardrail": "general",
+    "link": "https://shop.obenpaper.com/b/M01fR",
+    "image_file": "a-2026-11-29-in-mind.png",
+    "image_url": "",
+    "title": "Mental Health Journal with Feelings Page and Monthly Mood Grid, Printable",
+    "description": "In Mind is a mental health journal for tablet, A4 and US Letter. Shown here: the page for naming what you feel and the month-at-a-glance grid for mood and energy. Made to be kind to you: no streaks, skip what you can't.",
+    "alt_text": "Two printable journal pages in soft periwinkle and cream: a naming what you feel page with five coloured feeling cards, and a month at a glance grid with a row of squares for mood and one for energy.",
+    "scheduled_at": "2026-11-29T12:00:00",
+    "tile": {
+      "layout": "pages",
+      "kicker": "In Mind · check in",
+      "headline": "Name the feeling, then see the month",
+      "subline": "No streaks, skip what you can't",
+      "pages": [
+        "print/04.jpg",
+        "print/06.jpg"
+      ]
+    },
+    "made_by": "claude"
   }
 ]
